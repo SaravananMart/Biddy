@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import {reactLocalStorage} from 'reactjs-localstorage';
 import { Redirect } from 'react-router-dom'
-
-
 import '../App.css'
 
 class Login extends Component {
+    componentWillMount(){
+        if(reactLocalStorage.getObject('var')){
+           window.location.href='http://localhost:3001/products'
+        }
+
+    }
     constructor(props){
         super(props)
         this.state={
@@ -53,6 +57,7 @@ class Login extends Component {
                 username: state['username'],
                 password: state['password']
             }).then(response=>{
+                console.log(response)
                 reactLocalStorage.setObject('var', {'access_token': response.data.access_token});
                 console.log(reactLocalStorage.getObject('var'));
                 if(reactLocalStorage.getObject('var')){
@@ -65,7 +70,7 @@ class Login extends Component {
 
     }
     render() {
-        if (!this.state.redirect) {
+        if (!reactLocalStorage.getObject('var')) {
             return (
                 <div className={'Form'}>
                     <form>
