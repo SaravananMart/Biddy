@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {reactLocalStorage} from 'reactjs-localstorage';
+import { Redirect } from 'react-router-dom'
+
 
 import '../App.css'
 
@@ -12,7 +14,8 @@ class Login extends Component {
                 username:'',
                 password:'',
                  },
-            errors:{}
+            errors:{},
+            redirect:false
         }
     }
 
@@ -52,6 +55,9 @@ class Login extends Component {
             }).then(response=>{
                 reactLocalStorage.setObject('var', {'access_token': response.data.access_token});
                 console.log(reactLocalStorage.getObject('var'));
+                if(reactLocalStorage.getObject('var')){
+                    this.setState({redirect:true})
+                }
             }).catch(function(error){
                 console.log(error)
             })
@@ -59,17 +65,25 @@ class Login extends Component {
 
     }
     render() {
-        return (
-            <div className={'Form'}>
-                <form>
-                    <input type="text" placeholder='Enter Username' name='username' onChange={(e)=>this.handleFormFieldChange(e)}/><br/>
-                    <p>{this.state.errors['username']}</p>
-                    <input type="password" placeholder='Enter Password' name='password' onChange={(e)=>this.handleFormFieldChange(e)}/><br/>
-                    <p>{this.state.errors['password']}</p>
-                    <button type='submit' onClick={e=>(this.handleLogin(e))}>Login</button>
-                </form>
-            </div>
-        );
+        if (!this.state.redirect) {
+            return (
+                <div className={'Form'}>
+                    <form>
+                        <input type="text" placeholder='Enter Username' name='username'
+                               onChange={(e) => this.handleFormFieldChange(e)}/><br/>
+                        <p>{this.state.errors['username']}</p>
+                        <input type="password" placeholder='Enter Password' name='password'
+                               onChange={(e) => this.handleFormFieldChange(e)}/><br/>
+                        <p>{this.state.errors['password']}</p>
+                        <button type='submit' onClick={e => (this.handleLogin(e))}>Login</button>
+                    </form>
+                </div>
+            );
+        }
+        if(this.state.redirect){
+            return <Redirect to={'/products'}/>
+        }
+
     }
 }
 

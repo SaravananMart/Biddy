@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import ProductListPage from './layouts/ProductListPage'
+import RouterClass from './routes'
 class App extends Component {
   render() {
     return (
-      <div className="App">
-          <ProductListPage/>
+      <div>
+          <RouterClass/>
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
 import { Collapse} from 'reactstrap';
 import logo from '../images/myntra-logo.png';
 
@@ -17,7 +16,7 @@ class ProductListPage extends Component{
     }
   }
 
-  getMovieNames = (e) => {  
+  getMovieNames = (e) => {
     if ((this.state.searchValue.length) - 1) {
       this.setState({ collapse: true });
       axios.get('https://api.themoviedb.org/3/search/movie', {
@@ -73,9 +72,9 @@ class ProductListPage extends Component{
 
   render(){
     return(
-      <div className="container" > 
-        <img src={logo} style={image} />  
-      <div className="form-group">      
+      <div className="container" >
+        <img src={logo} style={image} alt={'logo'}/>
+      <div className="form-group">
         <input id="search_submit" type="text" className="form-control" placeholder="Search products..." style={searchBar} onChange={this.handleSearch}  onBlur={this.closeSuggest} value={this.state.searchValue} />
         <Collapse isOpen={this.state.collapse} >
         <ul className="suggestions">
@@ -87,11 +86,11 @@ class ProductListPage extends Component{
           )
         }
         </ul>
-        </Collapse>   
-        </div>         
+        </Collapse>
+        </div>
       </div>
       );
-  } 
+  }
 }
 
 const searchBar ={
