@@ -1,0 +1,77 @@
+.App{
+  margin-top: 30px;
+  background-color: #fff;
+  margin-top: 50px;
+}
+
+.logo{
+  height: 100px;
+
+}
+
+.header{
+  text-align: center;
+}
+
+.search{
+  align-content: center;
+}
+
+.list {
+    height: 25px;
+    position: relative;
+    cursor: pointer;
+    display: block;
+    padding: 3px 6px;
+    margin-bottom: -1px;
+    background-color: #fff;
+}
+
+.suggestions{
+    font-weight: normal;
+    width: 400px;
+    padding-left: 0;
+    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    z-index: 999;
+    position: relative;
+}
+
+.searchBar{
+  width: 200px;
+  height: 100%;
+}
+
+input[type="text"] {
+  height: 40px;
+  font-size: 25px;
+  font-weight: 100;
+  color: #555;
+  padding: 3px;
+  background: none;
+  transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+}
+
+
+/*
+
+
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
+body {
+    background: #DDD;
+    font-size: 15px;
+}
+#wrap {
+  margin: 50px 100px;
+  display: inline-block;
+  position: relative;
+  height: 60px;
+  float: right;
+  padding: 0;
+  position: relative;
+}
+
+
+*/
