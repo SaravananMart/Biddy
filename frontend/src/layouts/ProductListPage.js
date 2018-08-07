@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Collapse} from 'reactstrap';
+// import { Collapse} from 'reactstrap';
 import logo from '../images/myntra-logo.png';
 import { Redirect } from 'react-router-dom'
-
+import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField} from '@material-ui/core'
 
 import  './ProductListPage.css';
 
@@ -11,6 +11,19 @@ class ProductListPage extends Component{
   componentDidMount(){
       if(localStorage.getItem('token')!==null){
           this.setState({redirect:false})
+          axios.get(`http://localhost:3000/products`,
+              {
+                  headers:{
+                      Authorization: localStorage.getItem('token')
+                  }
+              })
+              .then(function (response) {
+                  console.log(response.data)
+                  this.setState({list: response.data});
+              }.bind(this))
+              .catch(function (error) {
+                  console.log(error);
+              })
       }
       if(localStorage.getItem('token')===null) {
           this.setState({redirect:true})
@@ -20,90 +33,100 @@ class ProductListPage extends Component{
     super()
     this.state = {
       collapse: false,
-      collapsed: true,
       searchValue: '',
       list: [],
         redirect:false
     }
   }
 
-    getProductNames = (product) => {
-    if ((this.state.searchValue.length) - 1) {
-      this.setState({ collapse: true });
-      axios.get(`http://localhost:3000/products?q=${product}`,
-          {
-            headers:{
-                  Authorization: localStorage.getItem('token')
-              }
-          })
-      .then(function (response) {
-        console.log(response.data)
-        this.setState({list: response.data});
-      }.bind(this))
-      .catch(function (error) {
-        console.log(error);
-      })
-      .then(function () {
-      });
-    }
-    else
-    {
-      this.setState({ collapse: false });
-    }
-  }
-
-  handleSearch = (e) => {
-    this.setState({ searchValue: e.target.value });
-    this.state.searchValue.length <=2 ? this.setState({ collapse: false }) : this.setState({ collapse: true });
-    if(this.state.searchValue.length >= 2)
-    {
-      this.getProductNames(this.state.searchValue);
-    }
-  }
-
-  closeSuggest = (e) => {
-    this.setState({ collapse: false });
-  }
-
-  handleClick = (e) => {
+  handleChange = (e) => {
+    e.preventDefault()
         this.setState({
-        searchValue: e.currentTarget.dataset.id,
-        collapse: false
+        searchValue: e.target.value,
       });
-    }
+      if(this.state.searchValue.length < 2){
+          axios.get(`http://localhost:3000/products`,
+              {
+                  headers:{
+                      Authorization: localStorage.getItem('token')
+                  }
+              })
+              .then(function (response) {
+                  console.log(response.data)
+                  this.setState({list: response.data});
+              }.bind(this))
+              .catch(function (error) {
+                  console.log(error);
+              })
+      }
+      else {
+          this.getProduct()
+      }
 
-   toggleNavbar = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+    }
+    getProduct(){
+        axios.get(`http://localhost:3000/products?q=${this.state.searchValue}`,
+            {
+                headers:{
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            .then(function (response) {
+                console.log(response.data)
+                this.setState({list: response.data});
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            })
   }
+
+
   handleLogout(e){
     e.preventDefault()
-    console.log("HEre")
     localStorage.removeItem('token')
     this.setState({redirect:true})
   }
 
+  renderTable() {
+      let  list = this.state.list
+        if (list !== undefined) {
+            return (
+                <TableBody>
+                    {
+                        list.map(n => {
+                            return (
+                                <TableRow key={`${n.name}`}>
+                                    <TableCell>{n.name}</TableCell>
+                                    <TableCell><Button>Bid</Button></TableCell>
+                                </TableRow>
+                            );
+                        })
+                    }
+                </TableBody>
+            )
+        }
+    }
 
   render(){
     if(!this.state.redirect){
     return(
       <div className="container" >
         <img src={logo} style={image} alt={'logo'}/>
-      <div className="form-group">
-        <input id="search_submit" type="text" className="form-control" placeholder="Search products..." style={searchBar} onChange={this.handleSearch}  onBlur={this.closeSuggest} value={this.state.searchValue} />
-        <Collapse isOpen={this.state.collapse} >
-        <ul className="suggestions">
-        {
-          this.state.list.slice(0, 10).map((product, index) =>
-              <li  key={index} className="list" onClick={this.handleClick} data-id={product.id} >
-                {product.name}
-              </li>
-          )
-        }
-        </ul>
-        </Collapse>
-        </div>
+<p></p>
+          <TextField name='searchValue' label={'Enter Product'} onChange={(e)=>this.handleChange(e)}/><br/><br/>
+
+          <Paper style={{'width':'50%'}}>
+              <Table >
+                  <TableHead>
+                      <TableRow>
+                          <TableCell><b>PRODUCT</b></TableCell>
+                          <TableCell><b>BID</b></TableCell>
+                      </TableRow>
+                  </TableHead>
+                  {this.renderTable()}
+              </Table>
+          </Paper>
+            <p></p>
         <button onClick={(e)=>this.handleLogout(e)}>Logout</button>
       </div>
       );
@@ -115,9 +138,6 @@ class ProductListPage extends Component{
 
 }
 
-const searchBar ={
-  'width' : '400px'
-}
 
 const image = {
   'height' : '100px',
