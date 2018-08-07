@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import {reactLocalStorage} from 'reactjs-localstorage';
+
 import '../App.css'
+
 class Login extends Component {
     constructor(props){
         super(props)
@@ -47,7 +50,8 @@ class Login extends Component {
                 username: state['username'],
                 password: state['password']
             }).then(response=>{
-                console.log(response)
+                reactLocalStorage.setObject('var', {'access_token': response.data.access_token});
+                console.log(reactLocalStorage.getObject('var'));
             }).catch(function(error){
                 console.log(error)
             })
