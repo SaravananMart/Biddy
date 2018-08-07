@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
+import { Card,CardContent,Typography,TextField } from '@material-ui/core'
 import '../App.css'
 
 class Login extends Component {
@@ -72,19 +73,39 @@ class Login extends Component {
         }
 
     }
-    render() {
-        if (!this.state.redirect) {
-            return (
-                <div className={'Form'}>
+    renderCard() {
+        return (
+        <Card>
+            {/*<CardMedia*/}
+                {/*className={classes.media}*/}
+                {/*image={codingLogo}*/}
+
+            {/*/>*/}
+
+            <CardContent>
+                <Typography  variant="headline" component="h2">
+                   Myntra Login
+                </Typography>
+                <Typography component="div">
                     <form>
-                        <input type="text" placeholder='Enter Username' name='username'
+                        <TextField type="text" label='Enter Username' name='username'
                                onChange={(e) => this.handleFormFieldChange(e)}/><br/>
                         <p>{this.state.errors['username']}</p>
-                        <input type="password" placeholder='Enter Password' name='password'
+                        <TextField type="password" label='Enter Password' name='password'
                                onChange={(e) => this.handleFormFieldChange(e)}/><br/>
                         <p>{this.state.errors['password']}</p>
                         <button type='submit' onClick={e => (this.handleLogin(e))}>Login</button>
                     </form>
+                </Typography>
+            </CardContent>
+        </Card>
+        )
+    }
+    render() {
+        if (!this.state.redirect) {
+            return (
+                <div className={'Form'}>
+                    { this.renderCard()}
                 </div>
             );
         }

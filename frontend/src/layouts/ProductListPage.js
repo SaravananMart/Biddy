@@ -116,7 +116,7 @@ class ProductListPage extends Component{
           <TextField name='searchValue' label={'Enter Product'} onChange={(e)=>this.handleChange(e)}/><br/><br/>
 
           <Paper style={{'width':'50%'}}>
-              <Table >
+              <Table>
                   <TableHead>
                       <TableRow>
                           <TableCell><b>PRODUCT</b></TableCell>
