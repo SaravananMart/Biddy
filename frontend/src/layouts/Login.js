@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {reactLocalStorage} from 'reactjs-localstorage';
 import { Redirect } from 'react-router-dom'
 import '../App.css'
 
 class Login extends Component {
     componentWillMount(){
-        if(reactLocalStorage.getObject('var')){
-           window.location.href='http://localhost:3001/products'
+        console.log(localStorage.getItem('token'))
+        if(localStorage.getItem('token')!==null){
+            this.setState({redirect:true})
         }
+        if(localStorage.getItem('token')===null) {
+            this.setState({redirect:false})
+        }
+
 
     }
     constructor(props){
@@ -19,7 +23,6 @@ class Login extends Component {
                 password:'',
                  },
             errors:{},
-            redirect:false
         }
     }
 
@@ -58,9 +61,9 @@ class Login extends Component {
                 password: state['password']
             }).then(response=>{
                 console.log(response)
-                reactLocalStorage.setObject('var', {'access_token': response.data.access_token});
-                console.log(reactLocalStorage.getObject('var'));
-                if(reactLocalStorage.getObject('var')){
+                localStorage.setItem('token', response.data.access_token)
+                console.log(localStorage.getItem('token'));
+                if(localStorage.getItem('token')){
                     this.setState({redirect:true})
                 }
             }).catch(function(error){
@@ -70,7 +73,7 @@ class Login extends Component {
 
     }
     render() {
-        if (!reactLocalStorage.getObject('var')) {
+        if (!this.state.redirect) {
             return (
                 <div className={'Form'}>
                     <form>

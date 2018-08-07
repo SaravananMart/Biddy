@@ -2,34 +2,43 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Collapse} from 'reactstrap';
 import logo from '../images/myntra-logo.png';
+import { Redirect } from 'react-router-dom'
+
 
 import  './ProductListPage.css';
 
 class ProductListPage extends Component{
+  componentDidMount(){
+      if(localStorage.getItem('token')!==null){
+          this.setState({redirect:false})
+      }
+      if(localStorage.getItem('token')===null) {
+          this.setState({redirect:true})
+      }
+  }
   constructor () {
     super()
     this.state = {
       collapse: false,
       collapsed: true,
       searchValue: '',
-      list: []
+      list: [],
+        redirect:false
     }
   }
 
-  getMovieNames = (e) => {
+    getProductNames = (product) => {
     if ((this.state.searchValue.length) - 1) {
       this.setState({ collapse: true });
-      axios.get('https://api.themoviedb.org/3/search/movie', {
-        params: {
-          api_key:'52ee9d5c12f1a8dba9590b47ffe68904',
-          language:'en-US',
-          query:e,
-          page: 1,
-          include_adult:false
-        }
-      })
+      axios.get(`http://localhost:3000/products?q=${product}`,
+          {
+            headers:{
+                  Authorization: localStorage.getItem('token')
+              }
+          })
       .then(function (response) {
-        this.setState({list: response.data.results});
+        console.log(response.data)
+        this.setState({list: response.data});
       }.bind(this))
       .catch(function (error) {
         console.log(error);
@@ -48,7 +57,7 @@ class ProductListPage extends Component{
     this.state.searchValue.length <=2 ? this.setState({ collapse: false }) : this.setState({ collapse: true });
     if(this.state.searchValue.length >= 2)
     {
-      this.getMovieNames(this.state.searchValue);
+      this.getProductNames(this.state.searchValue);
     }
   }
 
@@ -68,9 +77,16 @@ class ProductListPage extends Component{
       collapsed: !this.state.collapsed
     });
   }
+  handleLogout(e){
+    e.preventDefault()
+    console.log("HEre")
+    localStorage.removeItem('token')
+    this.setState({redirect:true})
+  }
 
 
   render(){
+    if(!this.state.redirect){
     return(
       <div className="container" >
         <img src={logo} style={image} alt={'logo'}/>
@@ -79,18 +95,24 @@ class ProductListPage extends Component{
         <Collapse isOpen={this.state.collapse} >
         <ul className="suggestions">
         {
-          this.state.list.slice(0, 10).map((movie, index) =>
-              <li  key={index} className="list" onClick={this.handleClick} data-id={movie.title} >
-                {movie.title}
+          this.state.list.slice(0, 10).map((product, index) =>
+              <li  key={index} className="list" onClick={this.handleClick} data-id={product.id} >
+                {product.name}
               </li>
           )
         }
         </ul>
         </Collapse>
         </div>
+        <button onClick={(e)=>this.handleLogout(e)}>Logout</button>
       </div>
       );
+    }
+    if(this.state.redirect){
+        return <Redirect to={'/'}/>
+      }
   }
+
 }
 
 const searchBar ={
