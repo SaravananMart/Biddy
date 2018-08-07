@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_request!
   before_action :set_product, only: [:show, :update, :destroy]
   # GET /products
   # GET /products.json
@@ -10,6 +9,12 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+  end
+
+  def search
+    search_key = params[:q]
+    products = Product.where("name LIKE '%#{search_key}%'")
+    render json: products
   end
 
   # POST /products
