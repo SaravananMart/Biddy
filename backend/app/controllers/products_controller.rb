@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  # GET /products/1
+  # GET /products/1.
   # GET /products/1.json
   def show
   end
@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-
+.
     if @product.save
       render :show, status: :created, location: @product
     else

@@ -12,6 +12,11 @@ class BiddingsController < ApplicationController
   def show
   end
 
+  def free_bid_dates
+    dates = BiddingService.get_free_bid_dates
+    render json: dates
+  end
+
   # POST /biddings
   # POST /biddings.json
   def create
