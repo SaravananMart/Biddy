@@ -64,12 +64,15 @@ class ProductListPage extends Component{
             endDate:moment().add(1, 'days')
         },
         product:'',
-        errors:{}
-
+        errors:{},
+        addItemModel: false,
+        itemName: '',
+        nights:1
     }
   }
 
   handleChange = (e) => {
+    console.log(e.target)
     e.preventDefault()
         this.setState({
         searchValue: e.target.value,
@@ -94,6 +97,29 @@ class ProductListPage extends Component{
       }
 
     }
+
+    handleChangeAdd = (e) => {
+      e.preventDefault()
+      this.setState({
+        itemName: e.target.value,
+      });
+
+    }
+
+    addItem = (e) => {
+      axios.post('http://localhost:3000/products', {
+          name: this.state.itemName,
+        })
+        .then(function (response) {
+         if(response.status == 200){
+          this.closeModal();
+         }
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
     getProduct(){
         axios.get(`http://localhost:3000/products?q=${this.state.searchValue}`,
             {
@@ -116,6 +142,7 @@ class ProductListPage extends Component{
     localStorage.removeItem('token')
     this.setState({redirect:true})
     }
+
   renderTable() {
       let  list = this.state.list
         if (list !== undefined) {
@@ -135,11 +162,17 @@ class ProductListPage extends Component{
             )
         }
     }
+
     openModal = (n)=> {
+      if(n =="add_item") {
+        this.setState({addItemModel: true});
+        this.setState({modalIsOpen: true});
+      }
+      else {
         this.setState({modalIsOpen: true});
         this.setState({product:n})
         // console.log(name)
-
+      }
     }
 
     afterOpenModal = () => {
@@ -148,6 +181,8 @@ class ProductListPage extends Component{
 
     closeModal = () => {
         this.setState({modalIsOpen: false});
+        this.setState({addItemModel: false});
+        this.setState({discount:''})
     }
     handleFormFieldChange =(e)=>{
         let state= this.state.fields
@@ -222,6 +257,21 @@ class ProductListPage extends Component{
         </form>
     )
 
+    renderAddItemForm = () =>(
+        <form>
+            <Button variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
+                <Close />
+            </Button>
+            <p></p>
+            <TextField name='searchValue' label={'Enter Product Name'} onChange={(e)=>this.handleChangeAdd(e)} /><br/><br/>
+             <p></p>
+             <div className='center'>
+                <Button color='primary' variant="contained" onClick={(e)=>this.addItem(e)} >Add</Button>
+            </div>
+        </form>
+    )
+
+
     handleValidation() {
         let fields = this.state.fields;
         let errors = {};
@@ -242,25 +292,24 @@ class ProductListPage extends Component{
     handleBid(e){
         e.preventDefault()
         let state= this.state
-        if(this.handleValidation()) {
-            console.log(state.fields,state.product)
-        }
         // if(this.handleValidation()) {
-        //     console.log(state['username'], state['password'])
-        //     axios.post('http://localhost:3000/auth_user', {
-        //         username: state['username'],
-        //         password: state['password']
-        //     }).then(response=>{
-        //         console.log(response)
-        //         localStorage.setItem('token', response.data.access_token)
-        //         console.log(localStorage.getItem('token'));
-        //         if(localStorage.getItem('token')){
-        //             this.setState({redirect:true})
-        //         }
-        //     }).catch(function(error){
-        //         console.log(error)
-        //     })
+        //     console.log(state.fields,state.product)
         // }
+        if(this.handleValidation()) {
+            axios.post('http://localhost:3000/biddings', {
+                from_date:state.fields['startDate'],
+                to_date:state.fields['endDate'],
+                days:state.nights,
+                markup:state.fields['discount'],
+                user_id:localStorage.getItem('user_id'),
+                product_id:state.product.id
+            }).then(response=>{
+                console.log(response)
+                // localStorage.setItem('token', response.data.access_token)
+            }).catch(function(error){
+                console.log(error)
+            })
+        }
 
     }
 
@@ -277,7 +326,8 @@ class ProductListPage extends Component{
                style={customStyles}
                contentLabel="Example Modal"
            >
-               {this.renderBidForm()}
+            {this.state.addItemModel == true ? this.renderAddItemForm() : this.renderBidForm()}
+
            </Modal>
             <Header handleClick={this.handleLogout}/>
         {/*<img src={logo} style={image} alt={'logo'}/>*/}
@@ -287,6 +337,7 @@ class ProductListPage extends Component{
                    <Paper>
                        <TextField name='searchValue' label={'Enter Product'} onChange={(e)=>this.handleChange(e)} fullWidth /><br/><br/>
                    </Paper>
+                   <Button onClick={()=>this.openModal("add_item")}>Add Item</Button>
                </Grid>
                <Grid item xs={9}>
                    <Paper>
