@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get '/products' => 'products#search'
   resources :products
 
+
+  get '/biddings/best' => 'biddings#free_bid_dates'
+  resources :biddings
+
   get "/404" => "error#not_found"
   get "/500" => "error#exception"
 end
