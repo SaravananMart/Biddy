@@ -62,12 +62,15 @@ class ProductListPage extends Component{
             startDate:moment(),
             endDate:moment().add(1, 'days')
         },
-        product:''
+        product:'',
+        addItemModel: false,
+        itemName: ''
 
     }
   }
 
   handleChange = (e) => {
+    console.log(e.target)
     e.preventDefault()
         this.setState({
         searchValue: e.target.value,
@@ -92,6 +95,29 @@ class ProductListPage extends Component{
       }
 
     }
+
+    handleChangeAdd = (e) => {
+      e.preventDefault()
+      this.setState({
+        itemName: e.target.value,
+      });
+
+    }
+
+    addItem = (e) => {
+      axios.post('http://localhost:3000/products', {
+          name: this.state.itemName,
+        })
+        .then(function (response) {
+         if(response.status == 200){
+          this.closeModal();
+         }
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
     getProduct(){
         axios.get(`http://localhost:3000/products?q=${this.state.searchValue}`,
             {
@@ -114,30 +140,38 @@ class ProductListPage extends Component{
     localStorage.removeItem('token')
     this.setState({redirect:true})
     }
+
   renderTable() {
       let  list = this.state.list
         if (list !== undefined) {
-            return (
-                <TableBody>
-                    {
-                        list.map(n => {
-                            return (
-                                <TableRow key={`${n.name}`}>
-                                    <TableCell>{n.name}</TableCell>
-                                    <TableCell><Button onClick={()=>this.openModal(n.name)}>Bid</Button></TableCell>
-                                </TableRow>
-                            );
-                        })
-                    }
-                </TableBody>
+          return (
+            <TableBody>
+                {
+                  list.map(n => {
+                    return (
+                      <TableRow key={`${n.name}`}>
+                        <TableCell>{n.name}</TableCell>
+                        <TableCell>
+                          <Button onClick={()=>this.openModal(n.name)}>Bid</Button>
+                        </TableCell>
+                      </TableRow>
+                      );
+                  })
+                }
+            </TableBody>
             )
         }
     }
     openModal = (name)=> {
+      if(name =="add_item") {
+        this.setState({addItemModel: true});
+        this.setState({modalIsOpen: true});
+      }
+      else {
         this.setState({modalIsOpen: true});
         this.setState({product:name})
         // console.log(name)
-
+      }
     }
 
     afterOpenModal = () => {
@@ -146,6 +180,7 @@ class ProductListPage extends Component{
 
     closeModal = () => {
         this.setState({modalIsOpen: false});
+        this.setState({addItemModel: false});
     }
     handleFormFieldChange =(e)=>{
         let state= this.state.fields
@@ -178,6 +213,21 @@ class ProductListPage extends Component{
             </div>
         </form>
     )
+
+    renderAddItemForm = () =>(
+        <form>
+            <Button variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
+                <Close />
+            </Button>
+            <p></p>
+            <TextField name='searchValue' label={'Enter Product Name'} onChange={(e)=>this.handleChangeAdd(e)} /><br/><br/>
+             <p></p>
+             <div className='center'>
+                <Button color='primary' variant="contained" onClick={(e)=>this.addItem(e)} >Add</Button>
+            </div>
+        </form>
+    )
+
 
     handleValidation() {
         let fields = this.state.fields;
@@ -236,7 +286,8 @@ class ProductListPage extends Component{
                style={customStyles}
                contentLabel="Example Modal"
            >
-               {this.renderBidForm()}
+            {this.state.addItemModel == true ? this.renderAddItemForm() : this.renderBidForm()}
+
            </Modal>
             <Header handleClick={this.handleLogout}/>
         {/*<img src={logo} style={image} alt={'logo'}/>*/}
@@ -246,6 +297,7 @@ class ProductListPage extends Component{
                    <Paper>
                        <TextField name='searchValue' label={'Enter Product'} onChange={(e)=>this.handleChange(e)} fullWidth /><br/><br/>
                    </Paper>
+                   <Button onClick={()=>this.openModal("add_item")}>Add Item</Button>
                </Grid>
                <Grid item xs={9}>
                    <Paper>
