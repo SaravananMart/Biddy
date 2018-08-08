@@ -162,13 +162,13 @@ class ProductListPage extends Component{
             <Typography variant="headline" gutterBottom>{this.state.product}</Typography>
             <DatePicker
                 minDate={moment()}
-                selected={this.state.fields[startDate]}
+                selected={this.state.fields['startDate']}
                 onChange={this.handleStartDate}
                 className="form-control"
             />
             <DatePicker
                 minDate={moment().add(1, 'days')}
-                selected={this.state.fields[endDate]}
+                selected={this.state.fields['endDate']}
                 onChange={this.handleEndDate}
                 className="form-control"
             />
