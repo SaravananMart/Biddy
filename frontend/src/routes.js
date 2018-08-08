@@ -7,8 +7,8 @@ class RouterClass extends Component {
         return (
             <BrowserRouter>
                 <div>
-               <Route exact path = '/' component={Login}/>
-                <Route path='/products' component={ProductListPage}/>
+                    <Route exact path = '/' component={Login}/>
+                    <Route path='/products' component={ProductListPage}/>
                 </div>
             </BrowserRouter>
         )

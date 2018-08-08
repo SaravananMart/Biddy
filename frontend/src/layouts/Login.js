@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {reactLocalStorage} from 'reactjs-localstorage';
 import { Redirect } from 'react-router-dom'
+import { Card,CardContent,Typography,TextField,Button } from '@material-ui/core'
 import '../App.css'
 
 class Login extends Component {
     componentWillMount(){
-        if(reactLocalStorage.getObject('var')){
-           window.location.href='http://localhost:3001/products'
+        console.log(localStorage.getItem('token'))
+        if(localStorage.getItem('token')!==null){
+            this.setState({redirect:true})
         }
+        if(localStorage.getItem('token')===null) {
+            this.setState({redirect:false})
+        }
+
 
     }
     constructor(props){
@@ -19,7 +24,6 @@ class Login extends Component {
                 password:'',
                  },
             errors:{},
-            redirect:false
         }
     }
 
@@ -58,9 +62,9 @@ class Login extends Component {
                 password: state['password']
             }).then(response=>{
                 console.log(response)
-                reactLocalStorage.setObject('var', {'access_token': response.data.access_token});
-                console.log(reactLocalStorage.getObject('var'));
-                if(reactLocalStorage.getObject('var')){
+                localStorage.setItem('token', response.data.access_token)
+                console.log(localStorage.getItem('token'));
+                if(localStorage.getItem('token')){
                     this.setState({redirect:true})
                 }
             }).catch(function(error){
@@ -69,24 +73,50 @@ class Login extends Component {
         }
 
     }
-    render() {
-        if (!reactLocalStorage.getObject('var')) {
-            return (
-                <div className={'Form'}>
+    renderCard() {
+        return (
+        <Card>
+            {/*<CardMedia*/}
+                {/*className={classes.media}*/}
+                {/*image={codingLogo}*/}
+
+            {/*/>*/}
+
+            <CardContent>
+                <Typography  variant="headline" component="h2">
+                    <div className='centerMargin'>
+                   Myntra Login
+                    </div>
+                </Typography>
+                <Typography component="div">
                     <form>
-                        <input type="text" placeholder='Enter Username' name='username'
+                        <TextField type="text" label='Enter Username' name='username'
                                onChange={(e) => this.handleFormFieldChange(e)}/><br/>
                         <p>{this.state.errors['username']}</p>
-                        <input type="password" placeholder='Enter Password' name='password'
+                        <TextField type="password" label='Enter Password' name='password'
                                onChange={(e) => this.handleFormFieldChange(e)}/><br/>
                         <p>{this.state.errors['password']}</p>
-                        <button type='submit' onClick={e => (this.handleLogin(e))}>Login</button>
+                        <div className={'center'}>
+                        <Button type='submit' color={'primary'} variant={'contained'} onClick={e => (this.handleLogin(e))}>Login</Button>
+                        </div>
                     </form>
+                </Typography>
+            </CardContent>
+        </Card>
+        )
+    }
+    render() {
+        if (!this.state.redirect) {
+            return (
+                <div className={'background'}>
+                    <div className={'Form'}>
+                        { this.renderCard()}
+                    </div>
                 </div>
             );
         }
         if(this.state.redirect){
-            return <Redirect to={'/products'}/>
+            return <Redirect to='/products'/>
         }
 
     }
