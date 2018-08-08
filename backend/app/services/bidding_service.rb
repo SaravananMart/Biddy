@@ -50,8 +50,12 @@ class BiddingService
 						end
 						count = 0
 					end
+					best_bid=  []
+					remaining_dates.each_with_index do |date|
+						best_bid << bids.find(date)
+					end
 
-			return dates
+			return {"free_dates" => dates, "best_bid" => best_bid}
 	end
 
 end
