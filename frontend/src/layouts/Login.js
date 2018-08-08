@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Card,CardContent,Typography,TextField } from '@material-ui/core'
+import { Card,CardContent,Typography,TextField,Button } from '@material-ui/core'
 import '../App.css'
 
 class Login extends Component {
@@ -84,7 +84,9 @@ class Login extends Component {
 
             <CardContent>
                 <Typography  variant="headline" component="h2">
+                    <div className='centerMargin'>
                    Myntra Login
+                    </div>
                 </Typography>
                 <Typography component="div">
                     <form>
@@ -94,7 +96,9 @@ class Login extends Component {
                         <TextField type="password" label='Enter Password' name='password'
                                onChange={(e) => this.handleFormFieldChange(e)}/><br/>
                         <p>{this.state.errors['password']}</p>
-                        <button type='submit' onClick={e => (this.handleLogin(e))}>Login</button>
+                        <div className={'center'}>
+                        <Button type='submit' color={'primary'} variant={'contained'} onClick={e => (this.handleLogin(e))}>Login</Button>
+                        </div>
                     </form>
                 </Typography>
             </CardContent>
@@ -104,13 +108,15 @@ class Login extends Component {
     render() {
         if (!this.state.redirect) {
             return (
-                <div className={'Form'}>
-                    { this.renderCard()}
+                <div className={'background'}>
+                    <div className={'Form'}>
+                        { this.renderCard()}
+                    </div>
                 </div>
             );
         }
         if(this.state.redirect){
-            return <Redirect to={'/products'}/>
+            return <Redirect to='/products'/>
         }
 
     }
