@@ -1,7 +1,7 @@
 class BiddingService
 
 
-	def self.get_free_bid_dates
+	def self.get_free_bid_dates(params)
 		bid_values = []
 		remaining_dates = []
 		clashing_dates = {}
@@ -9,7 +9,7 @@ class BiddingService
 		best_bids = {}
 		bid_ids = []
 		dates = []
-		bids = Bidding.all.order("days DESC")
+		bids = Bidding.where(:product_id => params[:pid]).order("days DESC")
 		bids.each_with_index do |bid, index1|
 			bid_ids << bid.id
 			temp_dates = []

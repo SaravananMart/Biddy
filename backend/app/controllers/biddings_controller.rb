@@ -13,7 +13,7 @@ class BiddingsController < ApplicationController
   end
 
   def free_bid_dates
-    dates = BiddingService.get_free_bid_dates
+    dates = BiddingService.get_free_bid_dates(params)
     render json: dates
   end
 

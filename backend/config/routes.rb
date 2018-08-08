@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :products
 
 
-  get '/biddings' => 'biddings#free_bid_dates'
+  get '/biddings/best' => 'biddings#free_bid_dates'
   resources :biddings
 
   get "/404" => "error#not_found"
