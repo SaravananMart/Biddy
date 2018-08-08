@@ -3,10 +3,27 @@ import axios from 'axios';
 // import { Collapse} from 'reactstrap';
 import logo from '../images/myntra-logo.png';
 import { Redirect } from 'react-router-dom'
-import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField,Grid,AppBar,Toolbar,Typography, IconButton,Menu,MenuItem } from '@material-ui/core'
-import { AccountCircle} from '@material-ui/icons';
-
+import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField,Grid,Typography} from '@material-ui/core'
+import Close from '@material-ui/icons/Close';
+import DatePicker from 'react-datepicker';
+import Modal from 'react-modal';
 import  './ProductListPage.css';
+import Header from './Header'
+import moment from 'moment'
+import 'react-datepicker/dist/react-datepicker.css';
+const customStyles = {
+    content : {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        height: '500px', // <-- This sets the height
+        width:'400px'
+        // overflow: 'scroll' // <-- This tells the modal to scrol
+    }
+}
 
 class ProductListPage extends Component{
   componentDidMount(){
@@ -39,6 +56,14 @@ class ProductListPage extends Component{
         redirect:false,
         auth: true,
         anchorEl: null,
+        modalIsOpen: false,
+        fields:{
+            discount:'',
+            startDate:moment(),
+            endDate:moment().add(1, 'days')
+        },
+        product:''
+
     }
   }
 
@@ -84,18 +109,11 @@ class ProductListPage extends Component{
   }
 
 
-  handleLogout(e){
+  handleLogout = (e)=>{
     e.preventDefault()
     localStorage.removeItem('token')
     this.setState({redirect:true})
     }
-  handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
-  }
-
-    handleClose = () => {
-        this.setState({ anchorEl: null });
-    };
   renderTable() {
       let  list = this.state.list
         if (list !== undefined) {
@@ -106,7 +124,7 @@ class ProductListPage extends Component{
                             return (
                                 <TableRow key={`${n.name}`}>
                                     <TableCell>{n.name}</TableCell>
-                                    <TableCell><Button>Bid</Button></TableCell>
+                                    <TableCell><Button onClick={()=>this.openModal(n.name)}>Bid</Button></TableCell>
                                 </TableRow>
                             );
                         })
@@ -115,49 +133,112 @@ class ProductListPage extends Component{
             )
         }
     }
+    openModal = (name)=> {
+        this.setState({modalIsOpen: true});
+        this.setState({product:name})
+        // console.log(name)
 
-  render(){
+    }
+
+    afterOpenModal = () => {
+        // this.subtitle.style.color = 'blue';
+    }
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
+    }
+    handleFormFieldChange =(e)=>{
+        let state= this.state.fields
+        state[e.target.name]=e.target.value
+        this.setState(state)
+    }
+
+    renderBidForm = () =>(
+        <form>
+            <Button variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
+                <Close />
+            </Button>
+            <p></p>
+            <Typography variant="headline" gutterBottom>{this.state.product}</Typography>
+            <DatePicker
+                minDate={moment()}
+                selected={this.state.fields[startDate]}
+                onChange={this.handleStartDate}
+                className="form-control"
+            />
+            <DatePicker
+                minDate={moment().add(1, 'days')}
+                selected={this.state.fields[endDate]}
+                onChange={this.handleEndDate}
+                className="form-control"
+            />
+            <p></p>
+            <div className='center'>
+                <Button color='primary' variant="contained" >BID</Button>
+            </div>
+        </form>
+    )
+
+    handleValidation() {
+        let fields = this.state.fields;
+        let errors = {};
+        let formIsValid = true;
+
+        //Name
+        if (!fields["discount"]) {
+            formIsValid = false;
+            errors["username"] = "Discount is required!";
+        }
+        if (!fields["endDate"]) {
+            formIsValid = false;
+            errors["password"] = "Password is required!";
+        }
+        if (!fields["startDate"]) {
+            formIsValid = false;
+            errors["password"] = "Password is required!";
+        }
+        this.setState({errors:errors})
+        return formIsValid
+    }
+
+    handleLogin(e){
+        e.preventDefault()
+        let state= this.state
+        if(this.handleValidation()) {
+            console.log(state['username'], state['password'])
+            axios.post('http://localhost:3000/auth_user', {
+                username: state['username'],
+                password: state['password']
+            }).then(response=>{
+                console.log(response)
+                localStorage.setItem('token', response.data.access_token)
+                console.log(localStorage.getItem('token'));
+                if(localStorage.getItem('token')){
+                    this.setState({redirect:true})
+                }
+            }).catch(function(error){
+                console.log(error)
+            })
+        }
+
+    }
+
+
+    render(){
     if(!this.state.redirect){
-        const { auth, anchorEl } = this.state;
-        const open = Boolean(anchorEl);
+
         return(
        <div>
-           <AppBar position="static">
-               <Toolbar>
-                   <Typography variant={'headline'} color={'inherit'} style={{flexGrow:1}}>
-                       BiddY
-                   </Typography>
-                   {auth && (
-                       <div>
-                           <IconButton
-                               aria-owns={open ? 'menu-appbar' : null}
-                               aria-haspopup="true"
-                               onClick={this.handleMenu}
-                               color="inherit"
-                           >
-                               <AccountCircle />
-                           </IconButton>
-                           <Menu
-                               id="menu-appbar"
-                               anchorEl={anchorEl}
-                               anchorOrigin={{
-                                   vertical: 'top',
-                                   horizontal: 'right',
-                               }}
-                               transformOrigin={{
-                                   vertical: 'top',
-                                   horizontal: 'right',
-                               }}
-                               open={open}
-                               onClose={this.handleClose}
-                           >
-                               <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                               <MenuItem onClick={this.handleClose}><Button color='inherit' onClick={(e)=>this.handleLogout(e)}>Logout</Button></MenuItem>
-                           </Menu>
-                       </div>
-                   )}
-               </Toolbar>
-           </AppBar>
+           <Modal
+               isOpen={this.state.modalIsOpen}
+               onAfterOpen={this.afterOpenModal}
+               onRequestClose={this.closeModal}
+               style={customStyles}
+               contentLabel="Example Modal"
+           >
+               {this.renderBidForm()}
+           </Modal>
+            <Header handleClick={this.handleLogout}/>
         {/*<img src={logo} style={image} alt={'logo'}/>*/}
         <div className='content'>
            <Grid container spacing={24}>
