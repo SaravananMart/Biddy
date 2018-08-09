@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   end
 
   def search
+    binding.pry
     search_key = params[:q]
     products = Product.where("name LIKE '%#{search_key}%'")
     render json: products

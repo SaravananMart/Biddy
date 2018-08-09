@@ -46,7 +46,6 @@ class BiddingService
 						end
 						if count == 2
 							dates << d
-
 						end
 						count = 0
 					end
@@ -57,5 +56,15 @@ class BiddingService
 
 			return {"free_dates" => dates, "best_bid" => best_bid}
 	end
+
+	def self.get_bid_count
+		dates = Bidding.where("from_date > ? AND to_date < ? ",Date.today.beginning_of_month - 2.month, Date.today.beginning_of_month + 4.month).order("from_date ASC")
+		dates.each do |date|
+			(1..30).each do |d|
+				
+			end
+		end
+	end
+
 
 end
