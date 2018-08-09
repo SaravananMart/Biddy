@@ -10,12 +10,11 @@ class ProductsController < ApplicationController
   end
 
   def search
-    binding.pry
     search_key = params[:q]
+    count = BiddingService.get_bid_count(nil)
     products = Product.where("name LIKE '%#{search_key}%'")
-    render json: products
+    render json: {"products" => products, "count" => count}
   end
-
   
   def create
     @product = Product.new(product_params)

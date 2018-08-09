@@ -57,14 +57,19 @@ class BiddingService
 			return {"free_dates" => dates, "best_bid" => best_bid}
 	end
 
-	def self.get_bid_count
-		dates = Bidding.where("from_date > ? AND to_date < ? ",Date.today.beginning_of_month - 2.month, Date.today.beginning_of_month + 4.month).order("from_date ASC")
-		dates.each do |date|
-			(1..30).each do |d|
-				
+	def self.get_bid_count(params)
+
+		count = {}
+		if params
+			id = params[:uid]
+			Product.where(:id => id).each do |bid|
+				count[bid.id] = Bidding.where(:product_id => bid.id).count
+			end
+		elsif
+			Product.all.each do |bid|
+				count[bid.id] =  Bidding.where(:product_id => bid.id).count
 			end
 		end
+		return count
 	end
-
-
 end
