@@ -8255,3 +8255,154 @@ Completed 200 OK in 61ms (Views: 0.8ms | ActiveRecord: 2.6ms)
   [1m[36mBidding Load (746.1ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` LIMIT 11[0m
   [1m[36mBidding Load (5.8ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` LIMIT 11[0m
   [1m[36mBidding Load (0.7ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` LIMIT 11[0m
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mBidding Load (0.8ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` LIMIT 11[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE (from_date > '2018-05-01' and to_date < '2018-06-01')[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE (from_date > '2018-07-01' and to_date < '2018-07-01')[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE (from_date > '2018-07-31' and to_date < '2018-07-31')[0m
+  [1m[36mBidding Load (1.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date > '2018-08-01' AND to_date < '2018-07-01' ) LIMIT 11[0m
+  [1m[36mBidding Load (1.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date > '2018-08-01' AND to_date < '2018-09-01' ) LIMIT 11[0m
+  [1m[36mBidding Load (1.1ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date > '2018-06-01' AND to_date < '2018-12-01' ) LIMIT 11[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE (from_date > '2018-06-01' AND to_date < '2018-12-01' )[0m
+  [1m[36mBidding Load (1.3ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date > '2018-06-01' AND to_date < '2018-12-01' ) ORDER BY from_date ASC LIMIT 11[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5221015387163053695', 0)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUserProducts (20180809061426)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('5221015387163053695')[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5221015387163053695', 0)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+Migrating to AddRefBiddings (20180807080348)
+  [1m[35m (908.1ms)[0m  [1m[35mALTER TABLE `biddings` DROP COLUMN `product_id`[0m
+  ↳ bin/rails:9
+  [1m[35m (822.8ms)[0m  [1m[35mALTER TABLE `biddings` DROP COLUMN `user_id`[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Destroy (54.9ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20180807080348'[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('5221015387163053695')[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5221015387163053695', 0)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+Migrating to AddRefBiddings (20180807080348)
+  [1m[35m (851.1ms)[0m  [1m[35mALTER TABLE `biddings` ADD `user_id` bigint[0m
+  ↳ db/migrate/20180807080348_add_ref_biddings.rb:3
+  [1m[35m (452.2ms)[0m  [1m[35mCREATE  INDEX `index_biddings_on_user_id`  ON `biddings` (`user_id`) [0m
+  ↳ db/migrate/20180807080348_add_ref_biddings.rb:3
+  [1m[35m (900.9ms)[0m  [1m[35mALTER TABLE `biddings` ADD `product_id` bigint[0m
+  ↳ db/migrate/20180807080348_add_ref_biddings.rb:4
+  [1m[35m (388.5ms)[0m  [1m[35mCREATE  INDEX `index_biddings_on_product_id`  ON `biddings` (`product_id`) [0m
+  ↳ db/migrate/20180807080348_add_ref_biddings.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180807080348')[0m
+  ↳ bin/rails:9
+  [1m[35m (52.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateUserProducts (20180809063801)
+  [1m[35m (388.2ms)[0m  [1m[35mCREATE TABLE `user_products` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20180809063801_create_user_products.rb:3
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180809063801')[0m
+  ↳ bin/rails:9
+  [1m[35m (104.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddReferenceUserProduct (20180809063818)
+  [1m[35m (623.0ms)[0m  [1m[35mALTER TABLE `user_products` ADD `user_id` bigint[0m
+  ↳ db/migrate/20180809063818_add_reference_user_product.rb:3
+  [1m[35m (363.6ms)[0m  [1m[35mCREATE  INDEX `index_user_products_on_user_id`  ON `user_products` (`user_id`) [0m
+  ↳ db/migrate/20180809063818_add_reference_user_product.rb:3
+  [1m[35m (702.5ms)[0m  [1m[35mALTER TABLE `user_products` ADD `product_id` bigint[0m
+  ↳ db/migrate/20180809063818_add_reference_user_product.rb:4
+  [1m[35m (272.8ms)[0m  [1m[35mCREATE  INDEX `index_user_products_on_product_id`  ON `user_products` (`product_id`) [0m
+  ↳ db/migrate/20180809063818_add_reference_user_product.rb:4
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180809063818')[0m
+  ↳ bin/rails:9
+  [1m[35m (65.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('5221015387163053695')[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+  [1m[36mUserProduct Load (1.1ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` LIMIT 11[0m
+  [1m[36mUserProduct Load (0.9ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (0.9ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (1.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`status` = TRUE ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`status` = TRUE ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`status` = TRUE ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` ORDER BY `products`.`id` ASC LIMIT 1[0m
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT  `products`.* FROM `products` ORDER BY `products`.`id` ASC LIMIT 1[0m
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT  `products`.* FROM `products` ORDER BY `products`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`status` = TRUE AND `users`.`product_id` = 1 LIMIT 11[0m
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT  `products`.* FROM `products` ORDER BY `products`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (1.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` LIMIT 11[0m
+  [1m[36mUserProduct Load (0.3ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (1.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (1.1ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (1.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5221015387163053695', 0)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('5221015387163053695')[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` LIMIT 11[0m
+  [1m[36mBidding Load (0.8ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` ORDER BY `biddings`.`id` ASC LIMIT 1[0m
+  [1m[36mBidding Load (1.0ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` ORDER BY `biddings`.`id` ASC LIMIT 1[0m
+  [1m[36mBidding Load (1.0ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` ORDER BY `biddings`.`id` ASC LIMIT 1[0m
+  [1m[36mBidding Load (1.0ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` ORDER BY `biddings`.`id` ASC LIMIT 1[0m
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` ORDER BY `biddings`.`id` ASC LIMIT 1[0m
+  [1m[36mBidding Load (1.0ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` ORDER BY `biddings`.`id` ASC LIMIT 1[0m
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  [1m[36mBidding Load (1.0ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` ORDER BY `biddings`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[36mUserProduct Load (0.2ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (1.1ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  [1m[36mUserProduct Load (0.9ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (0.3ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (1.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m

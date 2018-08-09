@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_products
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   post 'auth_user' => 'authentication#authenticate_user'
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
 
 
   get '/biddings/best' => 'biddings#free_bid_dates'
+  get '/biddings/bid_count' => 'biddings#bid_count'
   resources :biddings
 
   get "/404" => "error#not_found"
