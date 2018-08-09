@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2018_08_09_095453) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "user_id"
     t.bigint "product_id"
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.index ["product_id"], name: "index_biddings_on_product_id"
     t.index ["user_id"], name: "index_biddings_on_user_id"
   end
