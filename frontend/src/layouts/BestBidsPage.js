@@ -58,7 +58,7 @@ class BestBidsPage extends Component{
           this.setState({redirect:true})
       }
   }
- 
+
 
   handleChange = (e) => {
     console.log(e.target)
@@ -147,10 +147,12 @@ class BestBidsPage extends Component{
               )
           }
       }
-    
+
       openModal = (name, id)=> {
         this.getBestBids(id);
-          this.setState({product:name})
+          this.setState({product:name},function(){
+              this.setState({modalIsOpen: true})
+          })
       }
 
       afterOpenModal = () => {

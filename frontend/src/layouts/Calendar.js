@@ -2,31 +2,46 @@ import React, { Component } from 'react'
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-BigCalendar.momentLocalizer(moment);
+import { Button,TextField,Typography} from '@material-ui/core'
+import Close from '@material-ui/icons/Close';
+import Modal from 'react-modal';
+import axios from "axios/index";
 
+BigCalendar.momentLocalizer(moment);
+Modal.setAppElement('#root')
+const customStyles = {
+    content : {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        height: '300px', // <-- This sets the height
+        width:'400px'
+        // overflow: 'scroll' // <-- This tells the modal to scrol
+    }
+}
 class Calendar extends Component{
     constructor(){
         super()
         this.state = {
             event:[
-                {
-                    id: 0,
-                    title: 'All Day Event very long title',
-                    allDay: true,
-                    start: new Date(2015, 3, 0),
-                    end: new Date(2015, 3, 1),
-                    hexColor:'800000'
-                },
-                {
-                    id: 1,
-                    title: 'Long Event',
-                    start: new Date(2015, 3, 7),
-                    end: new Date(2015, 3, 10),
-                    hexColor:'FFFF00'
-                }
-            ]
+            ],
+            modalIsOpen:false,
+            errors:{},
+            startDate:'',
+            endDate:'',
+            discount:''
         }
     }
+    // eventComponent=({event})=>(
+    //     <div>
+    //         <div>{event.title}</div>
+    //         <div>{event.hexColor}</div>
+    //     </div>
+    // )
+
 
     eventStyleGetter =(event, start, end, isSelected)=>{
         console.log(event);
@@ -43,30 +58,114 @@ class Calendar extends Component{
             style: style
         }
     }
+    afterOpenModal = () => {
+        // this.subtitle.style.color = 'blue';
+    }
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
+        this.setState({addItemModel: false});
+        this.setState({discount:''})
+    }
+    renderBidForm = () =>(
+        <form>
+            <Button variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
+                <Close />
+            </Button>
+            <p></p>
+            <p>Start Date: {this.state.startDate}</p>
+            <p>End Date: {this.state.endDate}</p>
+
+            <TextField name='discount' onChange={(e)=>this.handleFormFieldChange(e)} fullWidth type='number' label={'Markup'}/>
+            <p>{this.state.errors['discount']}</p>
+            <div className='center'>
+                <Button color='primary' variant="contained" onClick={(e)=>this.handleBid(e)}>BID</Button>
+            </div>
+        </form>
+    )
+    handleFormFieldChange =(e)=>{
+        let state= this.state
+        state[e.target.name]=e.target.value
+        this.setState(state)
+    }
+    handleValidation() {
+        let fields = this.state
+        let errors = {};
+        let formIsValid = true;
+        if (!fields["discount"]) {
+            formIsValid = false;
+            errors["discount"] = "Markup is required!";
+        }
+        if(fields['discount'] < 1 || fields['discount'] > 99){
+            formIsValid = false
+            errors['discount'] = 'Enter Markup greater than 1 and less than 100'
+        }
+        this.setState({errors:errors})
+        return formIsValid
+    }
+    handleBid(e){
+        e.preventDefault()
+        let state= this.state
+        if(this.handleValidation()){
+            console.log(state.startDate,state.endDate,state.discount,state.startDate-state.endDate,localStorage.getItem('user_id'))
+        }
+        // if(this.handleValidation()) {
+        //     axios.post('http://localhost:3000/biddings', {
+        //         from_date:state.startDate,
+        //         to_date:state.endDate,
+        //         days:state.nights,
+        //         markup:state.discount,
+        //         user_id:localStorage.getItem('user_id'),
+        //         product_id:state.product.id
+        //     }).then(response=>{
+        //         console.log(response)
+        //         // localStorage.setItem('token', response.data.access_token)
+        //     }).catch(function(error){
+        //         console.log(error)
+        //     })
+        // }
+
+    }
+    setFormData = (start,end) =>{
+        this.setState({startDate:start,endDate:end},()=>this.setState({modalIsOpen:true}))
+    }
 
     render(){
         return(
             <div>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    {this.renderBidForm()}
+
+                </Modal>
+
                 <h1>Calendar</h1>
                 <BigCalendar
                 defaultDate={new Date()}
                 defaultView="month"
-                events={this.state.events}
                 style={{ height: "100vh" }}
                 selectable
                 events={this.state.event}
                 eventPropGetter={(this.eventStyleGetter)}
-                defaultView={BigCalendar.Views.WEEK}
+                defaultView={BigCalendar.Views.MONTH}
                 scrollToTime={new Date(1970, 1, 1, 6)}
-                defaultDate={new Date(2015, 3, 12)}
+                defaultDate={new Date()}
                 onSelectEvent={event => alert(event.title)}
-                onSelectSlot={slotInfo =>
-                    alert(
-                        `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-                        `\nend: ${slotInfo.end.toLocaleString()}` +
-                        `\naction: ${slotInfo.action}`
-                    )
+                onSelectSlot={slotInfo => {
+                    this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
+                    // console.log( `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
+                    //     `\nend: ${slotInfo.end.toLocaleString()}` +
+                    //     `\naction: ${slotInfo.action}`)
                 }
+                }
+                // components={{
+                //     event:this.eventComponent
+                // }}
                 />
             </div>
         )
