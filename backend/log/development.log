@@ -11726,3 +11726,108 @@ Processing by BiddingsController#total_bid_count as HTML
 Completed 200 OK in 18ms (Views: 0.7ms | ActiveRecord: 1.2ms)
 
 
+Started GET "/biddings/total_bid" for 192.168.1.19 at 2018-08-09 19:40:27 +0530
+Cannot render console from 192.168.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (0.4ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by BiddingsController#total_bid_count as HTML
+Filter chain halted as :authenticate_request! rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/products" for 192.168.1.23 at 2018-08-09 19:42:11 +0530
+Cannot render console from 192.168.1.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#search as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:10
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/services/bidding_service.rb:70
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 1[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 2[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 3[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 4[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 5[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 12[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 13[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 14[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 15[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE (name LIKE '%%')[0m
+  ↳ app/controllers/products_controller.rb:18
+Completed 200 OK in 29ms (Views: 2.3ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/products" for 192.168.1.23 at 2018-08-09 19:47:26 +0530
+Cannot render console from 192.168.1.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#search as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:10
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/services/bidding_service.rb:70
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 1[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 2[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 3[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 4[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 5[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 12[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 13[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 14[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 15[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE (name LIKE '%%')[0m
+  ↳ app/controllers/products_controller.rb:18
+Completed 200 OK in 30ms (Views: 1.6ms | ActiveRecord: 6.0ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5221015387163053695', 0)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+Migrating to AddDefaultValueBiddings (20180809141817)
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE `biddings` ADD `status` int DEFAULT 0[0m
+  ↳ db/migrate/20180809141817_add_default_value_biddings.rb:3
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('5221015387163053695')[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('5221015387163053695', 0)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+Migrating to AddDefaultValueBiddings (20180809141817)
+  [1m[35m (114.4ms)[0m  [1m[35mALTER TABLE `biddings` CHANGE `status` `status` int DEFAULT 0[0m
+  ↳ db/migrate/20180809141817_add_default_value_biddings.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180809141817')[0m
+  ↳ bin/rails:9
+  [1m[35m (85.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('5221015387163053695')[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
