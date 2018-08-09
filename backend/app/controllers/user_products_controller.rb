@@ -24,6 +24,11 @@ class UserProductsController < ApplicationController
     end
   end
 
+  def user_products
+    products = UserProductService.get_user_products(params)
+    render json: products
+  end
+
   # PATCH/PUT /user_products/1
   # PATCH/PUT /user_products/1.json
   def update

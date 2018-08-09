@@ -8406,3 +8406,1115 @@ Migrating to AddReferenceUserProduct (20180809063818)
   [1m[36mUserProduct Load (0.3ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m
   [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
   [1m[36mUserProduct Load (1.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m
+  [1m[36mUserProduct Load (1.1ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mUserProduct Load (0.2ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` ORDER BY `user_products`.`id` ASC LIMIT 1[0m
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+Started GET "/user_products" for 127.0.0.1 at 2018-08-09 12:56:04 +0530
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by UserProductsController#user_products as HTML
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x00007f0ab8163a18>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/id=1" for 127.0.0.1 at 2018-08-09 12:56:10 +0530
+Processing by UserProductsController#show as HTML
+  Parameters: {"id"=>"id=1"}
+  [1m[36mUserProduct Load (0.3ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`id` = 0 LIMIT 1[0m
+  ↳ app/controllers/user_products_controller.rb:51
+Completed 404 Not Found in 15ms (ActiveRecord: 0.7ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find UserProduct with 'id'=id=1):
+  
+app/controllers/user_products_controller.rb:51:in `set_user_product'
+Processing by ErrorController#not_found as HTML
+  Parameters: {"id"=>"id=1"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/products?q=sh" for 192.168.1.29 at 2018-08-09 12:56:22 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#search as */*
+  Parameters: {"q"=>"sh", "product"=>{}}
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE (name LIKE '%sh%')[0m
+  ↳ app/controllers/products_controller.rb:15
+Completed 200 OK in 7ms (Views: 5.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/userproducts" for 192.168.1.29 at 2018-08-09 12:56:30 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/userproducts"):
+  
+actionpack (5.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.2) lib/rack/cors.rb:97:in `call'
+railties (5.2.0) lib/rails/engine.rb:524:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Processing by ErrorController#not_found as */*
+  Parameters: {"error"=>{}}
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/userproducts/id=1" for 192.168.1.29 at 2018-08-09 12:56:33 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/userproducts/id=1"):
+  
+actionpack (5.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.2) lib/rack/cors.rb:97:in `call'
+railties (5.2.0) lib/rails/engine.rb:524:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Processing by ErrorController#not_found as */*
+  Parameters: {"error"=>{}}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/userproducts/" for 192.168.1.29 at 2018-08-09 12:56:40 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  
+ActionController::RoutingError (No route matches [GET] "/userproducts"):
+  
+actionpack (5.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:22:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.2) lib/rack/cors.rb:97:in `call'
+railties (5.2.0) lib/rails/engine.rb:524:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Processing by ErrorController#not_found as */*
+  Parameters: {"error"=>{}}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products" for 192.168.1.29 at 2018-08-09 12:56:45 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x00007f0ab8163a18>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 45ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/id=1" for 192.168.1.29 at 2018-08-09 12:56:48 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#show as */*
+  Parameters: {"id"=>"id=1", "user_product"=>{}}
+  [1m[36mUserProduct Load (0.4ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`id` = 0 LIMIT 1[0m
+  ↳ app/controllers/user_products_controller.rb:51
+Completed 404 Not Found in 1ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find UserProduct with 'id'=id=1):
+  
+app/controllers/user_products_controller.rb:51:in `set_user_product'
+Processing by ErrorController#not_found as */*
+  Parameters: {"user_product"=>{}, "id"=>"id=1", "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 42ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/id=2" for 192.168.1.29 at 2018-08-09 12:56:49 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#show as */*
+  Parameters: {"id"=>"id=2", "user_product"=>{}}
+  [1m[36mUserProduct Load (1.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`id` = 0 LIMIT 1[0m
+  ↳ app/controllers/user_products_controller.rb:51
+Completed 404 Not Found in 4ms (ActiveRecord: 1.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find UserProduct with 'id'=id=2):
+  
+app/controllers/user_products_controller.rb:51:in `set_user_product'
+Processing by ErrorController#not_found as */*
+  Parameters: {"user_product"=>{}, "id"=>"id=2", "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 50ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products?id=1" for 127.0.0.1 at 2018-08-09 12:56:54 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x00007f0ab8163a18>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:11 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.7ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1decce68>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:18 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.6ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:18 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:20 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:20 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 45ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:21 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:22 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:22 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:22 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 40ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:22 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:23 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:23 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:24 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 41ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:24 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d381810>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:24 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Started GET "/user_products/products" for 192.168.1.29 at 2018-08-09 12:57:25 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Completed 500 Internal Server Error in 16255ms (ActiveRecord: 0.6ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x0000564a1d536d68>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:29:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 0.0ms)
+
+
+Processing by UserProductsController#user_products as */*
+  Parameters: {"user_product"=>{}}
+Completed 500 Internal Server Error in 1346ms (ActiveRecord: 1.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x00007f0ab42ae778>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:29:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?id=1" for 192.168.1.29 at 2018-08-09 12:57:49 +0530
+Cannot render console from 192.168.1.29! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UserProductsController#user_products as */*
+  Parameters: {"id"=>"1", "user_product"=>{}}
+Completed 500 Internal Server Error in 5764ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x00007f0ab42ae778>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:29:in `user_products'
+Processing by ErrorController#exception as */*
+  Parameters: {"user_product"=>{}, "id"=>"1", "error"=>{"user_product"=>{}}}
+Completed 500 Internal Server Error in 37ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products?id=1" for 127.0.0.1 at 2018-08-09 12:58:02 +0530
+Processing by UserProductsController#index as HTML
+  Parameters: {"id"=>"1"}
+Completed 406 Not Acceptable in 21ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::UnknownFormat (UserProductsController#index is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []):
+  
+actionpack (5.2.0) lib/action_controller/metal/implicit_render.rb:42:in `default_render'
+actionpack (5.2.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (5.2.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (5.2.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (5.2.0) lib/abstract_controller/base.rb:194:in `process_action'
+actionpack (5.2.0) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.2.0) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (5.2.0) lib/active_support/callbacks.rb:132:in `run_callbacks'
+actionpack (5.2.0) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (5.2.0) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (5.2.0) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (5.2.0) lib/active_support/notifications.rb:168:in `block in instrument'
+activesupport (5.2.0) lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+activesupport (5.2.0) lib/active_support/notifications.rb:168:in `instrument'
+actionpack (5.2.0) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (5.2.0) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'
+activerecord (5.2.0) lib/active_record/railties/controller_runtime.rb:24:in `process_action'
+actionpack (5.2.0) lib/abstract_controller/base.rb:134:in `process'
+actionview (5.2.0) lib/action_view/rendering.rb:32:in `process'
+actionpack (5.2.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.0) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.0) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.0) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.0) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.0) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.0) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack-pjax (1.0.0) lib/rack/pjax.rb:12:in `call'
+remotipart (1.4.2) lib/remotipart/middleware.rb:32:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+activerecord (5.2.0) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.0) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.2) lib/rack/cors.rb:97:in `call'
+railties (5.2.0) lib/rails/engine.rb:524:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/user_products/products?id=1" for 127.0.0.1 at 2018-08-09 12:58:51 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x00007f0ab40de448>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/product?id=1" for 127.0.0.1 at 2018-08-09 12:59:04 +0530
+Processing by UserProductsController#show as HTML
+  Parameters: {"id"=>"product"}
+  [1m[36mUserProduct Load (0.3ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`id` = 0 LIMIT 1[0m
+  ↳ app/controllers/user_products_controller.rb:52
+Completed 404 Not Found in 2ms (ActiveRecord: 0.7ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find UserProduct with 'id'=product):
+  
+app/controllers/user_products_controller.rb:52:in `set_user_product'
+Processing by ErrorController#not_found as HTML
+  Parameters: {"id"=>"product"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/product?id=1" for 127.0.0.1 at 2018-08-09 12:59:29 +0530
+Processing by UserProductsController#show as HTML
+  Parameters: {"id"=>"product"}
+  [1m[36mUserProduct Load (0.5ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`id` = 0 LIMIT 1[0m
+  ↳ app/controllers/user_products_controller.rb:52
+Completed 404 Not Found in 10ms (ActiveRecord: 1.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find UserProduct with 'id'=product):
+  
+app/controllers/user_products_controller.rb:52:in `set_user_product'
+Processing by ErrorController#not_found as HTML
+  Parameters: {"id"=>"product"}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/product?id=1" for 127.0.0.1 at 2018-08-09 12:59:45 +0530
+Processing by UserProductsController#show as HTML
+  Parameters: {"id"=>"product"}
+  [1m[36mUserProduct Load (0.3ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`id` = 0 LIMIT 1[0m
+  ↳ app/controllers/user_products_controller.rb:52
+Completed 404 Not Found in 4ms (ActiveRecord: 1.1ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find UserProduct with 'id'=product):
+  
+app/controllers/user_products_controller.rb:52:in `set_user_product'
+Processing by ErrorController#not_found as HTML
+  Parameters: {"id"=>"product"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/product?id=1" for 127.0.0.1 at 2018-08-09 13:00:37 +0530
+Processing by UserProductsController#show as HTML
+  Parameters: {"id"=>"product"}
+  [1m[36mUserProduct Load (0.2ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`id` = 0 LIMIT 1[0m
+  ↳ app/controllers/user_products_controller.rb:52
+Completed 404 Not Found in 4ms (ActiveRecord: 1.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find UserProduct with 'id'=product):
+  
+app/controllers/user_products_controller.rb:52:in `set_user_product'
+Processing by ErrorController#not_found as HTML
+  Parameters: {"id"=>"product"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products" for 127.0.0.1 at 2018-08-09 13:00:54 +0530
+Processing by UserProductsController#user_products as HTML
+Started GET "/user_products/products/1" for 127.0.0.1 at 2018-08-09 13:03:11 +0530
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  
+ActionController::RoutingError (No route matches [GET] "/user_products/products/1"):
+  
+actionpack (5.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.2) lib/rack/cors.rb:97:in `call'
+railties (5.2.0) lib/rails/engine.rb:524:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Processing by ErrorController#not_found as HTML
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products/1" for 127.0.0.1 at 2018-08-09 13:03:15 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/user_products/products/1"):
+  
+actionpack (5.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.2) lib/rack/cors.rb:97:in `call'
+railties (5.2.0) lib/rails/engine.rb:524:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Processing by ErrorController#not_found as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products/1" for 127.0.0.1 at 2018-08-09 13:12:13 +0530
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  
+ActionController::RoutingError (No route matches [GET] "/user_products/products/1"):
+  
+actionpack (5.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.2) lib/rack/cors.rb:97:in `call'
+railties (5.2.0) lib/rails/engine.rb:524:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Processing by ErrorController#not_found as HTML
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?pid=1" for 127.0.0.1 at 2018-08-09 13:13:58 +0530
+  [1m[36mUserProduct Load (1.3ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products`[0m
+  ↳ app/controllers/user_products_controller.rb:30
+Completed 200 OK in 806084ms (Views: 13.8ms | ActiveRecord: 1.3ms)
+
+
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"pid"=>"1"}
+  [1m[36mUserProduct Load (0.3ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products`[0m
+  ↳ app/controllers/user_products_controller.rb:29
+Completed 200 OK in 2343ms (Views: 4.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/user_products/products?pid=1" for 127.0.0.1 at 2018-08-09 13:15:10 +0530
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"pid"=>"1"}
+  [1m[36mUserProduct Load (0.7ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products`[0m
+  ↳ app/controllers/user_products_controller.rb:29
+Completed 200 OK in 5469ms (Views: 8.9ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/user_products/products?pid=1" for 127.0.0.1 at 2018-08-09 13:15:34 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"pid"=>"1"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `if' for #<Class:0x000055e36de7d6e0>):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"pid"=>"1"}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?pid=1" for 127.0.0.1 at 2018-08-09 13:15:38 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"pid"=>"1"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `id' for #<Class:0x00007f682c1d3850>
+Did you mean?  ids):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"pid"=>"1"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?pid=1" for 127.0.0.1 at 2018-08-09 13:15:56 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"pid"=>"1"}
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `product_id' for UserProductService:Class
+Did you mean?  products):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"pid"=>"1"}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?pid=1" for 127.0.0.1 at 2018-08-09 13:16:09 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"pid"=>"1"}
+  [1m[36mUserProduct Load (0.2ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` IS NULL LIMIT 1[0m
+  ↳ app/services/user_product_service.rb:5
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.7ms)
+
+
+  
+NoMethodError (undefined method `product' for nil:NilClass):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"pid"=>"1"}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?pid=1" for 127.0.0.1 at 2018-08-09 13:16:14 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"pid"=>"1"}
+  [1m[36mUserProduct Load (0.2ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` IS NULL LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.4ms)
+
+
+  
+  [1m[36mCACHE UserProduct Load (0.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` IS NULL LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `product' for #<ActiveRecord::Relation []>):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"pid"=>"1"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?uid=1" for 127.0.0.1 at 2018-08-09 13:17:15 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mUserProduct Load (0.2ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.4ms)
+
+
+  
+  [1m[36mCACHE UserProduct Load (0.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `product' for #<UserProduct::ActiveRecord_Relation:0x00007f6824559f18>):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"uid"=>"1"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?uid=1" for 127.0.0.1 at 2018-08-09 13:17:29 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mUserProduct Load (0.8ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 8080ms (ActiveRecord: 2.2ms)
+
+
+  
+  [1m[36mCACHE UserProduct Load (0.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `product' for #<UserProduct::ActiveRecord_Relation:0x000055e36b761a20>):
+  
+app/services/user_product_service.rb:6:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"uid"=>"1"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?uid=1" for 127.0.0.1 at 2018-08-09 13:18:04 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mUserProduct Load (0.2ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.4ms)
+
+
+  
+  [1m[36mCACHE UserProduct Load (0.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `product' for #<UserProduct::ActiveRecord_Relation:0x00007f682c2ff328>):
+  
+app/services/user_product_service.rb:5:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"uid"=>"1"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?uid=1" for 127.0.0.1 at 2018-08-09 13:18:14 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mUserProduct Load (0.8ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mUserProduct Load (1.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mUserProduct Load (1.2ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 1[0m
+  ↳ (pry):8
+  [1m[36mUserProduct Load (0.8ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`id` IS NULL LIMIT 1[0m
+  ↳ (pry):9
+DEPRECATION WARNING: Dangerous query method (method whose arguments are used as raw SQL) called with non-attribute argument(s): {:user_id=>1}. Non-attribute arguments will be disallowed in Rails 6.0. This method should not be called with user-provided values, such as request parameters or model attributes. Known-safe values can be passed by wrapping them in Arel.sql(). (called from get_user_products at (pry):10)
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mUserProduct Load (0.3ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` INNER JOIN `products` ON `products`.`id` = `user_products`.`product_id` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` IN (1, 2)[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE Product Load (0.1ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE `products`.`id` IN (1, 2)[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.0ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1 LIMIT 11[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ (pry):20
+  [1m[36mUserProduct Load (2.3ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 3468727ms (ActiveRecord: 10.2ms)
+
+
+  
+  [1m[36mCACHE UserProduct Load (0.1ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `product' for #<UserProduct::ActiveRecord_Relation:0x00007f68245077b8>):
+  
+app/services/user_product_service.rb:6:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"uid"=>"1"}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?uid=1" for 127.0.0.1 at 2018-08-09 14:16:39 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mUserProduct Load (1.2ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1[0m
+  ↳ (pry):23
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ (pry):23
+  [1m[36mUserProduct Load (1.4ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ (pry):24
+  [1m[36mCACHE Product Load (0.1ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ (pry):24
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 2 LIMIT 1[0m
+  ↳ (pry):24
+  [1m[36mUserProduct Load (1.4ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 96867ms (ActiveRecord: 3.9ms)
+
+
+  
+  [1m[36mCACHE UserProduct Load (0.0ms)[0m  [1m[34mSELECT  `user_products`.* FROM `user_products` WHERE `user_products`.`product_id` = 1 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `product' for #<UserProduct::ActiveRecord_Relation:0x000055e36dc467f0>):
+  
+app/services/user_product_service.rb:6:in `get_user_products'
+app/controllers/user_products_controller.rb:28:in `user_products'
+Processing by ErrorController#exception as HTML
+  Parameters: {"uid"=>"1"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/user_products/products?uid=1" for 127.0.0.1 at 2018-08-09 14:18:18 +0530
+Processing by UserProductsController#user_products as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mUserProduct Load (0.2ms)[0m  [1m[34mSELECT `user_products`.* FROM `user_products` WHERE `user_products`.`user_id` = 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/user_product_service.rb:5
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/user_product_service.rb:5
+Completed 200 OK in 19ms (Views: 0.1ms | ActiveRecord: 2.5ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5221015387163053695', 0)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+Migrating to AddColumnProducts (20180809085100)
+  [1m[35m (1196.4ms)[0m  [1m[35mALTER TABLE `user_products` ADD `price` varchar(255)[0m
+  ↳ db/migrate/20180809085100_add_column_products.rb:3
+  [1m[35m (991.2ms)[0m  [1m[35mALTER TABLE `user_products` ADD `image_url` varchar(255)[0m
+  ↳ db/migrate/20180809085100_add_column_products.rb:4
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180809085100')[0m
+  ↳ bin/rails:9
+  [1m[35m (50.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('5221015387163053695')[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
