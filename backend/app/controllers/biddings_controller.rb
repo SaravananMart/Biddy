@@ -1,4 +1,6 @@
 class BiddingsController < ApplicationController
+  before_action :authenticate_request!
+
   before_action :set_bidding, only: [:show, :update, :destroy]
 
   # GET /biddings
