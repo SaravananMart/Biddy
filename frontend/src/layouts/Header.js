@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import { AccountCircle} from '@material-ui/icons';
 import {AppBar,Toolbar,Typography,IconButton,Menu,MenuItem,Button } from '@material-ui/core'
-
 class Header extends Component{
     constructor(){
         super()
@@ -17,12 +16,12 @@ class Header extends Component{
     handleClose = () => {
         this.setState({ anchorEl: null });
     }
-
     render(){
         const {handleClick} = this.props
         const { auth, anchorEl } = this.state;
         const open = Boolean(anchorEl);
         return(
+            <div>
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant={'headline'} color={'inherit'} style={{flexGrow:1}}>
@@ -59,6 +58,7 @@ class Header extends Component{
                     )}
                 </Toolbar>
             </AppBar>
+            </div>
         )
     }
 }
