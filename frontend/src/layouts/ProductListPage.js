@@ -22,7 +22,7 @@ class ProductListPage extends Component{
               })
               .then(function (response) {
                   console.log(response.data)
-                  this.setState({list: response.data});
+                  this.setState({list: response.data.products, count: response.data.count });
               }.bind(this))
               .catch(function (error) {
                   console.log(error);
@@ -38,6 +38,7 @@ class ProductListPage extends Component{
         collapse: false,
         searchValue: '',
         list: [],
+        count: [],
         redirect:false,
         auth: true,
         anchorEl: null,
@@ -70,7 +71,7 @@ class ProductListPage extends Component{
               })
               .then(function (response) {
                   console.log(response.data)
-                  this.setState({list: response.data});
+                  this.setState({list: response.data.products, count: response.data.count });
               }.bind(this))
               .catch(function (error) {
                   console.log(error);
@@ -113,7 +114,7 @@ class ProductListPage extends Component{
             })
             .then(function (response) {
                 console.log(response.data)
-                this.setState({list: response.data});
+                this.setState({list: response.data.products, count: response.data.count });
             }.bind(this))
             .catch(function (error) {
                 console.log(error);
