@@ -5,7 +5,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { Button,TextField,Typography} from '@material-ui/core'
 import Close from '@material-ui/icons/Close';
 import Modal from 'react-modal';
-import axios from "axios/index";
+// import axios from "axios/index";
 
 BigCalendar.momentLocalizer(moment);
 Modal.setAppElement('#root')
@@ -73,9 +73,13 @@ class Calendar extends Component{
                 <Close />
             </Button>
             <p></p>
-            <p>Start Date: {this.state.startDate}</p>
-            <p>End Date: {this.state.endDate}</p>
-
+            <Typography variant="body2" gutterBottom>
+                Start Date: {this.state.startDate}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+                End Date: {this.state.endDate}
+            </Typography>
+            <p></p>
             <TextField name='discount' onChange={(e)=>this.handleFormFieldChange(e)} fullWidth type='number' label={'Markup'}/>
             <p>{this.state.errors['discount']}</p>
             <div className='center'>
@@ -146,8 +150,6 @@ class Calendar extends Component{
 
                 <h1>Calendar</h1>
                 <BigCalendar
-                defaultDate={new Date()}
-                defaultView="month"
                 style={{ height: "100vh" }}
                 selectable
                 events={this.state.event}

@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { Redirect } from 'react-router-dom'
-import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField,Grid,Typography} from '@material-ui/core'
+import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField,Grid} from '@material-ui/core'
 import Close from '@material-ui/icons/Close';
-import Modal from 'react-modal';
 import  './ProductListPage.css';
 import Header from './Header'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css';
-
 class ProductListPage extends Component{
   componentDidMount(){
       if(localStorage.getItem('token')!==null){
@@ -51,7 +49,8 @@ class ProductListPage extends Component{
         errors:{},
         addItemModel: false,
         itemName: '',
-        nights:1
+        nights:1,
+        color:''
     }
   }
 
@@ -95,7 +94,7 @@ class ProductListPage extends Component{
           name: this.state.itemName,
         })
         .then(function (response) {
-         if(response.status == 200){
+         if(response.status === 200){
           this.closeModal();
          }
         }.bind(this))
@@ -148,7 +147,7 @@ class ProductListPage extends Component{
     }
 
     openModal = (n)=> {
-      if(n =="add_item") {
+      if(n ==="add_item") {
         this.setState({addItemModel: true});
         this.setState({modalIsOpen: true});
       }
@@ -247,10 +246,10 @@ class ProductListPage extends Component{
 }
 
 
-const image = {
-  'height' : '100px',
-  'width' : '150px'
-}
+// const image = {
+//   'height' : '100px',
+//   'width' : '150px'
+// }
 
 
 export default ProductListPage;
