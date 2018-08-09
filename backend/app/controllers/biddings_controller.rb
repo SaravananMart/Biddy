@@ -17,6 +17,11 @@ class BiddingsController < ApplicationController
     render json: dates
   end
 
+  def total_bid_count
+    bid_count = BiddingService.total_bid_count
+    render json: bid_count
+  end
+
   # POST /biddings
   # POST /biddings.json
   def create
