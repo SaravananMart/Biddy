@@ -63,6 +63,8 @@ class Login extends Component {
             }).then(response=>{
                 console.log(response)
                 localStorage.setItem('token', response.data.access_token)
+                localStorage.setItem('user_id', response.data.user_id)
+                localStorage.setItem('mail_id', state.username)
                 console.log(localStorage.getItem('token'));
                 if(localStorage.getItem('token')){
                     this.setState({redirect:true})

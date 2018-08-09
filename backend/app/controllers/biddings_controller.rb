@@ -23,7 +23,8 @@ class BiddingsController < ApplicationController
     @bidding = Bidding.new(bidding_params)
 
     if @bidding.save
-      render :show, status: :created, location: @bidding
+      #render :show, status: :created, location: @bidding
+      render json: "success"
     else
       render json: @bidding.errors, status: :unprocessable_entity
     end

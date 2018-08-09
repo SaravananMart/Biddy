@@ -24,6 +24,7 @@ const customStyles = {
         // overflow: 'scroll' // <-- This tells the modal to scrol
     }
 }
+Modal.setAppElement('#root')
 
 class ProductListPage extends Component{
   componentDidMount(){
@@ -63,9 +64,10 @@ class ProductListPage extends Component{
             endDate:moment().add(1, 'days')
         },
         product:'',
+        errors:{},
         addItemModel: false,
-        itemName: ''
-
+        itemName: '',
+        nights:1
     }
   }
 
@@ -144,32 +146,31 @@ class ProductListPage extends Component{
   renderTable() {
       let  list = this.state.list
         if (list !== undefined) {
-          return (
-            <TableBody>
-                {
-                  list.map(n => {
-                    return (
-                      <TableRow key={`${n.name}`}>
-                        <TableCell>{n.name}</TableCell>
-                        <TableCell>
-                          <Button onClick={()=>this.openModal(n.name)}>Bid</Button>
-                        </TableCell>
-                      </TableRow>
-                      );
-                  })
-                }
-            </TableBody>
+            return (
+                <TableBody>
+                    {
+                        list.map(n => {
+                            return (
+                                <TableRow key={`${n.name}`}>
+                                    <TableCell>{n.name}</TableCell>
+                                    <TableCell><Button onClick={()=>this.openModal(n)}>Bid</Button></TableCell>
+                                </TableRow>
+                            );
+                        })
+                    }
+                </TableBody>
             )
         }
     }
-    openModal = (name)=> {
-      if(name =="add_item") {
+
+    openModal = (n)=> {
+      if(n =="add_item") {
         this.setState({addItemModel: true});
         this.setState({modalIsOpen: true});
       }
       else {
         this.setState({modalIsOpen: true});
-        this.setState({product:name})
+        this.setState({product:n})
         // console.log(name)
       }
     }
@@ -181,11 +182,49 @@ class ProductListPage extends Component{
     closeModal = () => {
         this.setState({modalIsOpen: false});
         this.setState({addItemModel: false});
+        this.setState({discount:''})
     }
     handleFormFieldChange =(e)=>{
         let state= this.state.fields
         state[e.target.name]=e.target.value
         this.setState(state)
+    }
+    handleStartDate = (date)=> {
+        var nextDate = moment(date).add(1, 'days')
+        if (this.state.fields['endDate'] < nextDate ){
+            this.setState({
+                // fields['startDate']: date
+                // fields['endDate']: nextDate
+            fields:{
+                'startDate':date,
+                'endDate':nextDate
+            }
+            },function(){this.getDays()});
+        }
+        else{
+            this.setState({
+                fields:{
+                    'startDate':date,
+                    'endDate':this.state.fields['endDate']
+                }
+            },function(){this.getDays()});
+        }
+    }
+    handleEndDate = (date) => {
+        this.setState({
+            fields:{
+                'startDate':this.state.fields['startDate'],
+                'endDate':date
+            }
+        },function(){this.getDays()});
+    }
+    getDays = () =>{
+        var a = this.state.fields['startDate']
+        var b = this.state.fields['endDate']
+        console.log(a.format("MMM Do YY"))
+        console.log(b.format("MMM Do YY"))
+        var c = b.diff(a, 'days')
+        this.setState({nights:c+1},function(){ console.log(this.state.nights);})
     }
 
     renderBidForm = () =>(
@@ -194,22 +233,26 @@ class ProductListPage extends Component{
                 <Close />
             </Button>
             <p></p>
-            <Typography variant="headline" gutterBottom>{this.state.product}</Typography>
+            <Typography variant="headline" gutterBottom>{this.state.product.name}</Typography>
+            <TextField name='discount' onChange={(e)=>this.handleFormFieldChange(e)} fullWidth type='number'/>
+            <p>{this.state.errors['discount']}</p>
             <DatePicker
                 minDate={moment()}
                 selected={this.state.fields['startDate']}
                 onChange={this.handleStartDate}
                 className="form-control"
-            />
+                dateFormat={'DD/MM/YYYY'}
+            /><p></p>
             <DatePicker
                 minDate={moment().add(1, 'days')}
                 selected={this.state.fields['endDate']}
                 onChange={this.handleEndDate}
                 className="form-control"
+                dateFormat={'DD/MM/YYYY'}
             />
             <p></p>
             <div className='center'>
-                <Button color='primary' variant="contained" >BID</Button>
+                <Button color='primary' variant="contained" onClick={(e)=>this.handleBid(e)}>BID</Button>
             </div>
         </form>
     )
@@ -234,38 +277,35 @@ class ProductListPage extends Component{
         let errors = {};
         let formIsValid = true;
 
-        //Name
         if (!fields["discount"]) {
             formIsValid = false;
-            errors["username"] = "Discount is required!";
+            errors["discount"] = "Discount is required!";
         }
-        if (!fields["endDate"]) {
-            formIsValid = false;
-            errors["password"] = "Password is required!";
-        }
-        if (!fields["startDate"]) {
-            formIsValid = false;
-            errors["password"] = "Password is required!";
+        if(fields['discount'] < 1 || fields['discount'] > 99){
+            formIsValid = false
+            errors['discount'] = 'Discount greater than 1 and Less than 100'
         }
         this.setState({errors:errors})
         return formIsValid
     }
 
-    handleLogin(e){
+    handleBid(e){
         e.preventDefault()
         let state= this.state
+        // if(this.handleValidation()) {
+        //     console.log(state.fields,state.product)
+        // }
         if(this.handleValidation()) {
-            console.log(state['username'], state['password'])
-            axios.post('http://localhost:3000/auth_user', {
-                username: state['username'],
-                password: state['password']
+            axios.post('http://localhost:3000/biddings', {
+                from_date:state.fields['startDate'],
+                to_date:state.fields['endDate'],
+                days:state.nights,
+                markup:state.fields['discount'],
+                user_id:localStorage.getItem('user_id'),
+                product_id:state.product.id
             }).then(response=>{
                 console.log(response)
-                localStorage.setItem('token', response.data.access_token)
-                console.log(localStorage.getItem('token'));
-                if(localStorage.getItem('token')){
-                    this.setState({redirect:true})
-                }
+                // localStorage.setItem('token', response.data.access_token)
             }).catch(function(error){
                 console.log(error)
             })
