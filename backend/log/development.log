@@ -11831,3 +11831,446 @@ Migrating to AddDefaultValueBiddings (20180809141817)
   ↳ bin/rails:9
   [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
   ↳ bin/rails:9
+Started GET "/products" for 127.0.0.1 at 2018-08-09 19:53:51 +0530
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by ProductsController#search as HTML
+Filter chain halted as :authenticate_request! rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-09 19:54:01 +0530
+Processing by BiddingsController#total_bid_count as HTML
+Filter chain halted as :authenticate_request! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-09 19:54:15 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:85
+Completed 200 OK in 18ms (Views: 0.8ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-09 19:56:06 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:85
+Completed 200 OK in 21ms (Views: 0.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-09 19:56:21 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:85
+Completed 200 OK in 25ms (Views: 1.2ms | ActiveRecord: 1.5ms)
+
+
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 5 LIMIT 1[0m
+  [1m[36mBidding Load (0.9ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 5 LIMIT 1[0m
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:19:12 +0530
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 5 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:118
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mBidding Create (0.2ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-07 00:00:00', '2018-08-07 00:00:00', 5, 25, '2018-08-09 14:49:12', '2018-08-09 14:49:12', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[35m (203.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mProduct Load (1.7ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mBidding Create (0.9ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-08 00:00:00', '2018-08-08 00:00:00', 5, 25, '2018-08-09 14:49:12', '2018-08-09 14:49:12', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[35m (52.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mProduct Load (1.1ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mBidding Create (1.0ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-09 00:00:00', '2018-08-09 00:00:00', 5, 25, '2018-08-09 14:49:12', '2018-08-09 14:49:12', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[35m (101.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:120
+  [1m[36mBidding Destroy (108.5ms)[0m  [1m[31mDELETE FROM `biddings` WHERE `biddings`.`id` = 5[0m
+  ↳ app/services/bidding_service.rb:122
+Completed 500 Internal Server Error in 570ms (ActiveRecord: 477.9ms)
+
+
+  
+NameError (undefined local variable or method `bidding' for BiddingService:Class
+Did you mean?  binding):
+  
+app/services/bidding_service.rb:123:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:19:44 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 5 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+Completed 404 Not Found in 11ms (ActiveRecord: 1.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Bidding with 'id'=5):
+  
+app/services/bidding_service.rb:119:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#not_found as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:20:06 +0530
+Processing by BiddingsController#bid_approval as HTML
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms)
+
+
+  
+ArgumentError (Unsupported argument type: 5 (Integer)):
+  
+app/services/bidding_service.rb:119:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:20:21 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 5 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.5ms)
+
+
+  
+  [1m[36mCACHE Bidding Load (0.0ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 5 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `days' for #<ActiveRecord::Relation []>):
+  
+app/services/bidding_service.rb:121:in `block in approve_bid_dates'
+app/services/bidding_service.rb:120:in `each'
+app/services/bidding_service.rb:120:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:20:56 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 5[0m
+  ↳ app/services/bidding_service.rb:120
+Completed 500 Internal Server Error in 27201ms (ActiveRecord: 0.8ms)
+
+
+  
+NoMethodError (undefined method `days' for #<ActiveRecord::Relation []>):
+  
+app/services/bidding_service.rb:122:in `block in approve_bid_dates'
+app/services/bidding_service.rb:121:in `each'
+app/services/bidding_service.rb:121:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:21:40 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 6 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.5ms)
+
+
+  
+  [1m[36mCACHE Bidding Load (0.0ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 6 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `days' for #<Bidding::ActiveRecord_Relation:0x00007f8cbc1344a8>):
+  
+app/services/bidding_service.rb:122:in `block in approve_bid_dates'
+app/services/bidding_service.rb:121:in `each'
+app/services/bidding_service.rb:121:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:21:51 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (1.1ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 6 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.0ms)
+
+
+  
+  [1m[36mCACHE Bidding Load (0.1ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 6 LIMIT 11[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+NoMethodError (undefined method `days' for #<Bidding::ActiveRecord_Relation:0x00007f8cbc238db8>):
+  
+app/services/bidding_service.rb:122:in `block in approve_bid_dates'
+app/services/bidding_service.rb:121:in `each'
+app/services/bidding_service.rb:121:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:22:05 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.9ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 6[0m
+  ↳ app/services/bidding_service.rb:120
+Completed 500 Internal Server Error in 85330ms (ActiveRecord: 3.8ms)
+
+
+  
+NoMethodError (undefined method `days' for #<Bidding::ActiveRecord_Relation:0x00007f8cb4145dc8>):
+  
+app/services/bidding_service.rb:122:in `block in approve_bid_dates'
+app/services/bidding_service.rb:121:in `each'
+app/services/bidding_service.rb:121:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:23:33 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` IS NULL LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+Completed 404 Not Found in 6ms (ActiveRecord: 1.5ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Bidding with 'id'={:id=>6}):
+  
+app/services/bidding_service.rb:119:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#not_found as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:23:42 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 6 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mBidding Create (0.2ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-07 00:00:00', '2018-08-07 00:00:00', 4, 30, '2018-08-09 14:54:01', '2018-08-09 14:54:01', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (65.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mBidding Create (1.0ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-08 00:00:00', '2018-08-08 00:00:00', 4, 30, '2018-08-09 14:54:01', '2018-08-09 14:54:01', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (86.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mProduct Load (1.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mBidding Create (2.1ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-09 00:00:00', '2018-08-09 00:00:00', 4, 30, '2018-08-09 14:54:01', '2018-08-09 14:54:01', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (68.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mBidding Destroy (53.9ms)[0m  [1m[31mDELETE FROM `biddings` WHERE `biddings`.`id` = 6[0m
+  ↳ app/services/bidding_service.rb:124
+Completed 200 OK in 18433ms (Views: 0.4ms | ActiveRecord: 288.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:25:12 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 7 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-07 00:00:00', '2018-08-07 00:00:00', 8, 15, '2018-08-09 14:55:18', '2018-08-09 14:55:18', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (116.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mBidding Create (1.0ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-08 00:00:00', '2018-08-08 00:00:00', 8, 15, '2018-08-09 14:55:18', '2018-08-09 14:55:18', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (92.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mBidding Create (1.4ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-09 00:00:00', '2018-08-09 00:00:00', 8, 15, '2018-08-09 14:55:19', '2018-08-09 14:55:19', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[35m (55.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:122
+  [1m[36mBidding Destroy (52.3ms)[0m  [1m[31mDELETE FROM `biddings` WHERE `biddings`.`id` = 7[0m
+  ↳ app/services/bidding_service.rb:125
+Completed 200 OK in 6182ms (Views: 0.7ms | ActiveRecord: 329.4ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:26:38 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 7 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+Completed 500 Internal Server Error in 3013ms (ActiveRecord: 0.6ms)
+
+
+  
+NoMethodError (undefined method `days' for nil:NilClass):
+  
+app/services/bidding_service.rb:122:in `block in approve_bid_dates'
+app/services/bidding_service.rb:121:in `each'
+app/services/bidding_service.rb:121:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:26:55 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 7 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.7ms)
+
+
+  
+NoMethodError (undefined method `days' for nil:NilClass):
+  
+app/services/bidding_service.rb:121:in `block in approve_bid_dates'
+app/services/bidding_service.rb:120:in `each'
+app/services/bidding_service.rb:120:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:26:59 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 7 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.8ms)
+
+
+  
+NoMethodError (undefined method `days' for nil:NilClass):
+  
+app/services/bidding_service.rb:121:in `block in approve_bid_dates'
+app/services/bidding_service.rb:120:in `each'
+app/services/bidding_service.rb:120:in `approve_bid_dates'
+app/controllers/biddings_controller.rb:28:in `bid_approval'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:27:45 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 8 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-07 00:00:00', '2018-08-07 00:00:00', 10, 18, '2018-08-09 14:57:45', '2018-08-09 14:57:45', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (53.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-08 00:00:00', '2018-08-08 00:00:00', 10, 18, '2018-08-09 14:57:45', '2018-08-09 14:57:45', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (39.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mBidding Create (0.6ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-09 00:00:00', '2018-08-09 00:00:00', 10, 18, '2018-08-09 14:57:45', '2018-08-09 14:57:45', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (43.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mBidding Destroy (42.4ms)[0m  [1m[31mDELETE FROM `biddings` WHERE `biddings`.`id` = 8[0m
+  ↳ app/services/bidding_service.rb:124
+Completed 200 OK in 238ms (Views: 0.2ms | ActiveRecord: 185.4ms)
+
+
+Started GET "/biddings/approve" for 127.0.0.1 at 2018-08-09 20:28:12 +0530
+Processing by BiddingsController#bid_approval as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE `biddings`.`id` = 9 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:119
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mBidding Create (0.2ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-07 00:00:00', '2018-08-07 00:00:00', 7, 20, '2018-08-09 14:58:12', '2018-08-09 14:58:12', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (62.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mBidding Create (0.7ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-08 00:00:00', '2018-08-08 00:00:00', 7, 20, '2018-08-09 14:58:12', '2018-08-09 14:58:12', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (42.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mBidding Create (0.7ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`, `status`) VALUES ('2018-08-09 00:00:00', '2018-08-09 00:00:00', 7, 20, '2018-08-09 14:58:12', '2018-08-09 14:58:12', 2, 1, 1)[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[35m (42.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/bidding_service.rb:121
+  [1m[36mBidding Destroy (0.6ms)[0m  [1m[31mDELETE FROM `biddings` WHERE `biddings`.`id` = 65[0m
+  ↳ app/services/bidding_service.rb:124
+Completed 200 OK in 218ms (Views: 0.3ms | ActiveRecord: 156.9ms)
+
+
