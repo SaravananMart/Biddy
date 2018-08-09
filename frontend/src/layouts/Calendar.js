@@ -5,6 +5,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { Button,TextField,Typography} from '@material-ui/core'
 import Close from '@material-ui/icons/Close';
 import Modal from 'react-modal';
+import axios from "axios/index";
 // import axios from "axios/index";
 
 BigCalendar.momentLocalizer(moment);
@@ -19,14 +20,39 @@ const customStyles = {
         transform: 'translate(-50%, -50%)',
         height: '300px', // <-- This sets the height
         width:'400px'
-        // overflow: 'scroll' // <-- This tells the modal to scrol
     }
 }
 class Calendar extends Component{
+    componentDidMount(){
+            axios.get(`http://localhost:3000/biddings/total_bid`,
+                {
+                    headers:{
+                        Authorization: localStorage.getItem('token')
+                    }
+                })
+                .then(function (response) {
+                    // console.log(response.data)
+                    var arr = response.data
+                    for (var i=0;i<arr.length;i++){
+                        arr[i].date = new Date(arr[i].date)
+                        arr[i].end = new Date(arr[i].date)
+                    }
+                    console.log(arr)
+                    this.setState({event: arr});
+                }.bind(this))
+                .catch(function (error) {
+                    console.log(error);
+                })
+    }
     constructor(){
         super()
         this.state = {
             event:[
+                {
+                    title: '5',
+                    start: new Date(),
+                    end: new Date(),
+                }
             ],
             modalIsOpen:false,
             errors:{},
