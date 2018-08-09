@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 2018_08_09_085100) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "price"
+    t.string "image_url"
   end
 
   create_table "user_assets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -75,8 +77,6 @@ ActiveRecord::Schema.define(version: 2018_08_09_085100) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "user_id"
     t.bigint "product_id"
-    t.string "price"
-    t.string "image_url"
     t.index ["product_id"], name: "index_user_products_on_product_id"
     t.index ["user_id"], name: "index_user_products_on_user_id"
   end

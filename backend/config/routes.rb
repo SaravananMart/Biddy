@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
 
   get '/biddings/best' => 'biddings#free_bid_dates'
-  get '/biddings/bid_count' => 'biddings#bid_count'
   resources :biddings
 
 

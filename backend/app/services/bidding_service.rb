@@ -66,4 +66,5 @@ class BiddingService
 		end
 	end
 
+
 end
