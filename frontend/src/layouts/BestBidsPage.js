@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // import { Collapse} from 'reactstrap';
-import logo from '../images/myntra-logo.png';
+// import logo from '../images/myntra-logo.png';
 import { Redirect } from 'react-router-dom'
-import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField,Grid,Typography} from '@material-ui/core'
+import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField,Grid} from '@material-ui/core'
 import Close from '@material-ui/icons/Close';
-import DatePicker from 'react-datepicker';
 import Modal from 'react-modal';
 import  './ProductListPage.css';
 import Header from './Header'
@@ -176,9 +175,9 @@ class BestBidsPage extends Component{
               <p></p>
 
               {
-                this.state.best_bid.map(pdt =>{
+                this.state.best_bid.map(pdt =>
                     <h4>{pdt.from_date}</h4>
-                })
+                )
               }
           </div>
       )
@@ -278,10 +277,10 @@ class BestBidsPage extends Component{
 }
 
 
-const image = {
-  'height' : '100px',
-  'width' : '150px'
-}
+// const image = {
+//   'height' : '100px',
+//   'width' : '150px'
+// }
 
 const customStyles = {
         content : {
