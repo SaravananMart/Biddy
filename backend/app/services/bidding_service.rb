@@ -58,15 +58,19 @@ class BiddingService
 
 		def self.get_bid_count(params)
 
-			count = {}
+			count = []
 			if params
 				id = params[:uid]
 				Product.where(:id => id).each do |bid|
-					count[bid.id] = Bidding.where(:product_id => bid.id).count
+					temp_count = {}
+					temp_count[bid.id] = Bidding.where(:product_id => bid.id).count
+					count << temp_count
 				end
 			elsif
 				Product.all.each do |bid|
-					count[bid.id] =  Bidding.where(:product_id => bid.id).count
+					temp_count = {}
+					temp_count[bid.id] =  Bidding.where(:product_id => bid.id).count
+					count << temp_count
 				end
 			end
 			return count
