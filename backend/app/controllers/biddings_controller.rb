@@ -1,5 +1,5 @@
 class BiddingsController < ApplicationController
-  before_action :authenticate_request!
+  # before_action :authenticate_request!
 
   before_action :set_bidding, only: [:show, :update, :destroy]
 
@@ -22,6 +22,11 @@ class BiddingsController < ApplicationController
   def total_bid_count
     bid_count = BiddingService.total_bid_count
     render json: bid_count
+  end
+
+  def bid_approval
+    approval = BiddingService.approve_bid_dates
+    render json: approval
   end
 
   # POST /biddings

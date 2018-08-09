@@ -81,7 +81,7 @@ class BiddingService
 		dates = Bidding.where('from_date >= ? and to_date <= ? ', Date.today.beginning_of_month - 1.month, Date.today.beginning_of_month + 4.month).order("from_date ASC")
 		temp = []
 		count = {}
-		
+
 		dates.each do |date|
 			unless temp.include? date.from_date.strftime("%m").to_i  
 				temp << date.from_date.strftime("%m").to_i 
@@ -101,8 +101,8 @@ class BiddingService
 		month.each do |key, value|
 			value.each do |key1, value1|
 				temp_data = {}
-				temp_data["date"] = Date.new(2018, key, key1)
-				temp_data["count"] = value1
+				temp_data["start"] = Date.new(2018, key, key1) #date
+				temp_data["title"] = value1 #count
 				data << temp_data
 			end
 		end
@@ -111,5 +111,22 @@ class BiddingService
 
 	end
 
+	def self.approve_bid_dates
+		bid_id = 9
+		user_id = 2
+		bidding = ''
+		dates = ['2018-08-07', '2018-08-08', '2018-08-09']
+		bid_details = Bidding.find_by(:id => bid_id)
+		dates.each do |date|
+			bidding =	Bidding.create(:from_date => date, :to_date => date, :days => bid_details.days, :markup => bid_details.markup, :user_id => user_id, :product_id => bid_details.product_id, :status => 1)
+		end
+		
+		if bidding and Bidding.delete(65)
+			return true
+		else
+			return false
+		end
+
+	end
 
 end
