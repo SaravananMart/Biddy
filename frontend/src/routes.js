@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ProductListPage, Login } from './layouts'
+import { ProductListPage, Login, BestBidsPage } from './layouts'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 class RouterClass extends Component {
@@ -9,6 +9,7 @@ class RouterClass extends Component {
                 <div>
                     <Route exact path = '/' component={Login}/>
                     <Route path='/products' component={ProductListPage}/>
+                    <Route path='/bestbids' component={BestBidsPage}/>
                 </div>
             </BrowserRouter>
         )
