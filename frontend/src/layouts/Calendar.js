@@ -34,8 +34,8 @@ class Calendar extends Component{
                     // console.log(response.data)
                     var arr = response.data
                     for (var i=0;i<arr.length;i++){
-                        arr[i].date = new Date(arr[i].date)
-                        arr[i].end = new Date(arr[i].date)
+                        arr[i].start = new Date(arr[i].start)
+                        arr[i].end = new Date(arr[i].start)
                     }
                     console.log(arr)
                     this.setState({event: arr});
@@ -70,7 +70,7 @@ class Calendar extends Component{
 
 
     eventStyleGetter =(event, start, end, isSelected)=>{
-        console.log(event);
+        // console.log(event);
         var backgroundColor = '#' + event.hexColor;
         var style = {
             backgroundColor: backgroundColor,
