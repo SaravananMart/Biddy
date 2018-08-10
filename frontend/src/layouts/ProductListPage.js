@@ -160,19 +160,14 @@ class ProductListPage extends Component{
 
     openModal = (n)=> {
       if(n ==="add_item") {
-        this.setState({addItemModel: true});
-        this.setState({modalIsOpen: true});
+        this.setState({addItemModel: true, modalIsOpen: true});
       }
       else {
-        this.setState({modalIsOpen: true});
-        this.setState({product:n})
-        // console.log(name)
+        this.setState({modalIsOpen: true, product:n})
       }
     }
 
-    afterOpenModal = () => {
-        // this.subtitle.style.color = 'blue';
-    }
+    afterOpenModal = () => { }
 
     closeModal = () => {
         this.setState({modalIsOpen: false});
@@ -247,12 +242,5 @@ class ProductListPage extends Component{
   }
 
 }
-
-
-// const image = {
-//   'height' : '100px',
-//   'width' : '150px'
-// }
-
 
 export default ProductListPage;

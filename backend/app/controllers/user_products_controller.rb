@@ -1,5 +1,5 @@
 class UserProductsController < ApplicationController
-  before_action :authenticate_request!
+  # before_action :authenticate_request!
 
   before_action :set_user_product, only: [:show, :update, :destroy]
 

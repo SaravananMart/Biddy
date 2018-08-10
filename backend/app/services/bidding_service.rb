@@ -76,9 +76,13 @@ class BiddingService
 		return count
 	end
 
-	def self.total_bid_count
+	def self.total_bid_count(params)
 		month = {}
-		dates = Bidding.where('from_date >= ? and to_date <= ? ', Date.today.beginning_of_month - 1.month, Date.today.beginning_of_month + 4.month).order("from_date ASC")
+		if params[:pid]
+			dates = Bidding.where('from_date >= ? and to_date <= ? and product_id = ?', Date.today.beginning_of_month - 1.month, Date.today.beginning_of_month + 4.month, params[:pid]).order("from_date ASC")
+		else
+			dates = Bidding.where('from_date >= ? and to_date <= ? ', Date.today.beginning_of_month - 1.month, Date.today.beginning_of_month + 4.month).order("from_date ASC")
+		end
 		temp = []
 		count = {}
 
@@ -106,9 +110,7 @@ class BiddingService
 				data << temp_data
 			end
 		end
-
 		return data
-
 	end
 
 	def self.approve_bid_dates
