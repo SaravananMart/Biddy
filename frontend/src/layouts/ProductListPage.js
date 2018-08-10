@@ -219,7 +219,7 @@ class ProductListPage extends Component{
     if(!redirect){
         return(
        <div>
-            <Header handleClick={this.handleLogout}/>
+            
         {/*<img src={logo} style={image} alt={'logo'}/>*/}
            <Grid container spacing={24}>
                <Grid item xs={3} style={{height:500}}>

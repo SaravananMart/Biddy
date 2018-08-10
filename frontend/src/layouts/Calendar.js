@@ -139,22 +139,6 @@ class Calendar extends Component{
         if(this.handleValidation()){
             console.log(state.startDate,state.endDate,state.discount,state.startDate-state.endDate,localStorage.getItem('user_id'))
         }
-        // if(this.handleValidation()) {
-        //     axios.post('http://localhost:3000/biddings', {
-        //         from_date:state.startDate,
-        //         to_date:state.endDate,
-        //         days:state.nights,
-        //         markup:state.discount,
-        //         user_id:localStorage.getItem('user_id'),
-        //         product_id:state.product.id
-        //     }).then(response=>{
-        //         console.log(response)
-        //         // localStorage.setItem('token', response.data.access_token)
-        //     }).catch(function(error){
-        //         console.log(error)
-        //     })
-        // }
-
     }
     setFormData = (start,end) =>{
         this.setState({startDate:start,endDate:end},()=>this.setState({modalIsOpen:true}))
@@ -173,10 +157,8 @@ class Calendar extends Component{
                     {this.renderBidForm()}
 
                 </Modal>
-
-                <h1>Calendar</h1>
                 <BigCalendar
-                style={{ height: "100vh" }}
+                style={{ height: "80vh"}}
                 selectable
                 events={this.state.event}
                 eventPropGetter={(this.eventStyleGetter)}
@@ -186,14 +168,8 @@ class Calendar extends Component{
                 onSelectEvent={event => alert(event.title)}
                 onSelectSlot={slotInfo => {
                     this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
-                    // console.log( `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-                    //     `\nend: ${slotInfo.end.toLocaleString()}` +
-                    //     `\naction: ${slotInfo.action}`)
                 }
                 }
-                // components={{
-                //     event:this.eventComponent
-                // }}
                 />
             </div>
         )
