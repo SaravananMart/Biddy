@@ -20,7 +20,7 @@ class BiddingsController < ApplicationController
   end
 
   def total_bid_count
-    bid_count = BiddingService.total_bid_count
+    bid_count = BiddingService.total_bid_count(params)
     render json: bid_count
   end
 
