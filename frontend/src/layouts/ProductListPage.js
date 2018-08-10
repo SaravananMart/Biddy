@@ -12,7 +12,10 @@ import ProductCard from './ProductCard'
 
 const style = {
     Paper:{
-        height:500
+        height:500,
+        marginTop:20,
+        marginLeft:10,
+
     }
 }
 
@@ -214,21 +217,19 @@ class ProductListPage extends Component{
     render(){
       const { redirect,list} = this.state
     if(!redirect){
-
         return(
        <div>
             <Header handleClick={this.handleLogout}/>
         {/*<img src={logo} style={image} alt={'logo'}/>*/}
-        <div className='content'>
            <Grid container spacing={24}>
-               <Grid item xs={3}>
+               <Grid item xs={3} style={{height:500}}>
                    <Paper style={style.Paper}>
 
                    </Paper>
                    <Button onClick={()=>this.openModal("add_item")}>Add Item</Button>
                </Grid>
-               <Grid item xs={9} style={{height:500}}>
-                   {/*<Paper style={style.Paper}>*/}
+               <Grid item xs={9}>
+                   <Paper style={{height:500,overflowY:'scroll',marginTop:20}}>
                        {(list)?(list.map(l=>
                            <div>
                                {/*<Grid item xs={3}>*/}
@@ -236,10 +237,9 @@ class ProductListPage extends Component{
                                {/*</Grid>*/}
                            </div>))
                            :(<div>loading</div>)}
-                   {/*</Paper>*/}
+                   </Paper>
                 </Grid>
            </Grid>
-        </div>
         </div>
       );
     }

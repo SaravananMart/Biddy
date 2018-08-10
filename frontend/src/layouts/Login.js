@@ -13,8 +13,6 @@ class Login extends Component {
         if(localStorage.getItem('token')===null) {
             this.setState({redirect:false})
         }
-
-
     }
     constructor(props){
         super(props)
