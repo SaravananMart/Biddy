@@ -9,12 +9,12 @@ import Header from './Header'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css';
 import ProductCard from './ProductCard'
-
+import ProductGrid from './ProductGrid'
 const style = {
     Paper:{
         height:500,
         marginTop:20,
-        marginLeft:10,
+        // marginLeft:10,
 
     }
 }
@@ -30,7 +30,7 @@ class ProductListPage extends Component{
                   }
               })
               .then(function (response) {
-                  console.log(response.data)
+                  // console.log(response.data)
                   this.setState({list: response.data.products, count: response.data.count });
               }.bind(this))
               .catch(function (error) {
@@ -226,18 +226,16 @@ class ProductListPage extends Component{
                    <Paper style={style.Paper}>
 
                    </Paper>
-                   <Button onClick={()=>this.openModal("add_item")}>Add Item</Button>
                </Grid>
-               <Grid item xs={9}>
-                   <Paper style={{height:500,overflowY:'scroll',marginTop:20}}>
-                       {(list)?(list.map(l=>
-                           <div>
+               <Grid item xs={9} style={{marginTop:20}}>
+                   {/*<Paper style={{height:500,marginTop:20}}>*/}
+                       {/*{(list)?(list.map(l=>*/}
                                {/*<Grid item xs={3}>*/}
-                                <ProductCard product={l} key={l.id}/>
+                                {/*<ProductCard product={l} key={l.id}/>*/}
                                {/*</Grid>*/}
-                           </div>))
-                           :(<div>loading</div>)}
-                   </Paper>
+                           {/*:(<div>loading</div>)}*/}
+                   {/*</Paper>*/}
+                           <ProductGrid list={list}/>
                 </Grid>
            </Grid>
         </div>
