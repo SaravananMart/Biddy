@@ -40,15 +40,31 @@ FormRow.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
+function chunkArray(myArray, chunk_size){
+    var arrayLength = myArray.length;
+    var tempArray = [];
+    var myChunk = 0
+    for ( var index = 0; index < arrayLength; index += chunk_size) {
+        myChunk = myArray.slice(index, index+chunk_size);
+        tempArray.push(myChunk);
+    }
+
+    return tempArray;
+}
+
 function NestedGrid(props) {
     const { classes,list } = props;
+    var result = chunkArray(list, 3);
+    console.log(result);
 
     return (
         <div className={classes.root}>
             <Grid container spacing={8}>
-                <Grid item xs={12} container spacing={24}>
-                    <FormRow classes={classes} list={list}/>
-                </Grid>
+                {result.map((l,index)=>
+                    <Grid item xs={12} container spacing={24} key={index}>
+                        <FormRow classes={classes} list={l}/>
+                    </Grid>)
+                }
             </Grid>
         </div>
     );
