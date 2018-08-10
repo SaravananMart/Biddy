@@ -129,4 +129,10 @@ class BiddingService
 
 	end
 
+	def self.get_bid_details_for_date
+		date = "2018-9-21"
+		details = Bidding.where("from_date <= ? and to_date >= ?", date, date).to_json(:include => {:product => {}, :user => {} })
+		return details
+	end
+
 end

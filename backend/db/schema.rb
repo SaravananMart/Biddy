@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2018_08_09_141817) do
     t.datetime "to_date"
     t.integer "days"
     t.integer "markup"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "user_id"
     t.bigint "product_id"
     t.integer "status", default: 0
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 2018_08_09_141817) do
   end
 
   create_table "user_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.bigint "user_id"
     t.bigint "product_id"
     t.index ["product_id"], name: "index_user_products_on_product_id"

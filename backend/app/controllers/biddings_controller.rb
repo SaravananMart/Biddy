@@ -29,6 +29,11 @@ class BiddingsController < ApplicationController
     render json: approval
   end
 
+  def get_bid_details
+    details = BiddingService.get_bid_details_for_date
+    render json: details
+  end
+
   # POST /biddings
   # POST /biddings.json
   def create

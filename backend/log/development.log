@@ -12274,3 +12274,92 @@ Processing by BiddingsController#bid_approval as HTML
 Completed 200 OK in 218ms (Views: 0.3ms | ActiveRecord: 156.9ms)
 
 
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5221015387163053695', 0)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5221015387163053695')[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:9
+Started GET "/products" for 127.0.0.1 at 2018-08-10 11:44:55 +0530
+  [1m[35m (0.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by ProductsController#search as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:10
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/services/bidding_service.rb:70
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 1[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 2[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 3[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 4[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 5[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 12[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 13[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 14[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 15[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE (name LIKE '%%')[0m
+  ↳ app/controllers/products_controller.rb:18
+Completed 200 OK in 105ms (Views: 6.1ms | ActiveRecord: 11.0ms)
+
+
+  [1m[35m (0.4ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-9-21' and to_date <= '2018-9-21')[0m
+  [1m[36mBidding Load (1.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date >= '2018-9-21' and to_date <= '2018-9-21') LIMIT 11[0m
+  [1m[36mBidding Load (1.0ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date >= '2018-9-21' and to_date <= '2018-9-21') LIMIT 11[0m
+  [1m[36mBidding Load (1.1ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date >= '2018-9-21' and to_date <= '2018-9-21') LIMIT 11[0m
+  [1m[36mBidding Load (1.1ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date >= '2018-9-21') LIMIT 11[0m
+  [1m[36mBidding Load (1.2ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE (from_date >= '2018-9-21' and to_date <= '2018-9-21') LIMIT 11[0m
+  [1m[36mBidding Load (1.3ms)[0m  [1m[34mSELECT  `biddings`.* FROM `biddings` WHERE ('2018-9-21' >= from_date and '2018-9-21' <= to_date) LIMIT 11[0m
+  [1m[36mBidding Load (1.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date <= '2018-9-21' and to_date >= '2018-9-21')[0m
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  [1m[36mBidding Load (1.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date <= '2018-9-21' and to_date >= '2018-9-21')[0m
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+Started GET "/biddings/bid_details" for 127.0.0.1 at 2018-08-10 12:00:57 +0530
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by BiddingsController#get_bid_details as HTML
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `get_bid_details' for BiddingService:Class
+Did you mean?  get_bid_details_for_date):
+  
+app/controllers/biddings_controller.rb:33:in `get_bid_details'
+Processing by ErrorController#exception as HTML
+Completed 500 Internal Server Error in 70ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/biddings/bid_details" for 127.0.0.1 at 2018-08-10 12:02:04 +0530
+Processing by BiddingsController#get_bid_details as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date <= '2018-9-21' and to_date >= '2018-9-21')[0m
+  ↳ app/services/bidding_service.rb:134
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:134
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 5 LIMIT 1[0m
+  ↳ app/services/bidding_service.rb:134
+Completed 200 OK in 34ms (Views: 0.1ms | ActiveRecord: 2.7ms)
+
+
