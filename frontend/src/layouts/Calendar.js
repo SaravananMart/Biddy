@@ -24,41 +24,45 @@ const customStyles = {
 }
 class Calendar extends Component{
     componentDidMount(){
-            axios.get(`http://localhost:3000/biddings/total_bid`,
-                {
-                    headers:{
-                        Authorization: localStorage.getItem('token')
-                    }
-                })
-                .then(function (response) {
-                    var arr = response.data
-                    for (var i=0;i<arr.length;i++){
-                        arr[i].start = new Date(arr[i].start)
-                        arr[i].end = new Date(arr[i].start)
-                    }
-                    console.log(arr)
-                    this.setState({event: arr});
-                }.bind(this))
-                .catch(function (error) {
-                    console.log(error);
-                })
+      this.getBidData();
     }
     constructor(){
-        super()
-        this.state = {
-            event:[
-                {
-                    title: '5',
-                    start: new Date(),
-                    end: new Date(),
-                }
-            ],
-            modalIsOpen:false,
-            errors:{},
-            startDate:'',
-            endDate:'',
-            discount:''
-        }
+      super()
+      this.state = {
+          event:[
+              {
+                  title: '5',
+                  start: new Date(),
+                  end: new Date(),
+              }
+          ],
+          modalIsOpen:false,
+          errors:{},
+          startDate:'',
+          endDate:'',
+          discount:''
+      }
+    }
+
+    getBidData = (e) =>{
+      axios.get(`http://localhost:3000/biddings/total_bid`,
+        {
+          headers:{
+              Authorization: localStorage.getItem('token')  
+          }
+        })
+        .then(function (response) {
+          var arr = response.data
+          for (var i=0;i<arr.length;i++){
+              arr[i].start = new Date(arr[i].start)
+              arr[i].end = new Date(arr[i].start)
+          }
+          console.log(arr)
+          this.setState({event: arr});
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        })
     }
 
     eventStyleGetter =(event, start, end, isSelected)=>{
@@ -127,7 +131,7 @@ class Calendar extends Component{
         let state= this.state
         if(this.handleValidation()){
             var days = parseInt(((new Date(state.endDate)) - (new Date(state.startDate))) / (1000 * 60 * 60 * 24));
-            console.log(parseInt(((new Date(state.endDate)) - (new Date(state.startDate))) / (1000 * 60 * 60 * 24)))
+            console.log(((state.endDate)))
             axios.post('http://localhost:3000/biddings', {
               from_date: state.startDate,
               to_date: state.endDate,
@@ -140,6 +144,7 @@ class Calendar extends Component{
             .then(function (response) {
              if(response.status === 200){
               this.closeModal();
+              this.getBidData();
              }
             }.bind(this))
             .catch(function (error) {

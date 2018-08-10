@@ -31,7 +31,14 @@ class BiddingsController < ApplicationController
   end
 
   def create
-    @bidding = Bidding.new(bidding_params)
+    from_date = bidding_params[:from_date]
+    to_date = bidding_params[:to_date]
+    days = (Date.parse(to_date).mjd - Date.parse(from_date).mjd).to_i + 1
+    markup = bidding_params[:markup]
+    user_id = bidding_params[:user_id]
+    product_id = bidding_params[:product_id]
+    status = 0
+    @bidding = Bidding.new(:from_date => from_date, :to_date => to_date, :days => days, :markup => markup, :user_id => user_id, :product_id => product_id, :status => status)
 
     if @bidding.save
       render json: "success"
@@ -56,7 +63,7 @@ class BiddingsController < ApplicationController
     def set_bidding
       @bidding = Bidding.find(params[:id])
     end
-    
+
     def bidding_params
       params.require(:bidding).permit(:from_date, :to_date, :days, :markup, :user_id, :product_id, :status)
     end

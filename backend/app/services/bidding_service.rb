@@ -78,6 +78,7 @@ class BiddingService
 
 	def self.total_bid_count(params)
 		month = {}
+		params[:pid] = 1
 		if params[:pid]
 			dates = Bidding.where('from_date >= ? and to_date <= ? and product_id = ?', Date.today.beginning_of_month - 1.month, Date.today.beginning_of_month + 4.month, params[:pid]).order("from_date ASC")
 		else
@@ -102,10 +103,19 @@ class BiddingService
 		end
 		
 		data = []
+		count =0
 		month.each do |key, value|
 			value.each do |key1, value1|
+				count +=1
 				temp_data = {}
 				temp_data["start"] = Date.new(2018, key, key1) #date
+				dates.each do |date|
+					if temp_data["start"] >= date.from_date and temp_data["start"] <= date.to_date and params[:uid]
+						temp_data["hexColor"] = 'F65926'
+					else
+						temp_data["hexColor"] = '2e6da4'
+					end
+				end
 				temp_data["title"] = value1 #count
 				data << temp_data
 			end
