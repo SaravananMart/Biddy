@@ -12363,3 +12363,417 @@ Processing by BiddingsController#get_bid_details as HTML
 Completed 200 OK in 34ms (Views: 0.1ms | ActiveRecord: 2.7ms)
 
 
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:08:52 +0530
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.6ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 38ms (Views: 1.5ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:08:59 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 60ms (Views: 1.3ms | ActiveRecord: 3.9ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:09:11 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"14/08/2018, 00:00:00", "to_date"=>"17/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"14/08/2018, 00:00:00", "to_date"=>"17/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mBidding Create (0.4ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-14 00:00:00', '2018-08-17 00:00:00', 10, '2018-08-10 10:39:11', '2018-08-10 10:39:11', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[35m (60.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:43
+Completed 200 OK in 96ms (Views: 0.7ms | ActiveRecord: 63.0ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:10:05 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"13/08/2018, 00:00:00", "to_date"=>"16/08/2018, 00:00:00", "days"=>nil, "markup"=>55, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"13/08/2018, 00:00:00", "to_date"=>"16/08/2018, 00:00:00", "days"=>nil, "markup"=>55, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-13 00:00:00', '2018-08-16 00:00:00', 55, '2018-08-10 10:45:57', '2018-08-10 10:45:57', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[35m (58.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:43
+Completed 200 OK in 351831ms (Views: 0.2ms | ActiveRecord: 63.7ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:16:04 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 28ms (Views: 1.3ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:16:21 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"27/08/2018, 00:00:00", "to_date"=>"29/08/2018, 00:00:00", "days"=>nil, "markup"=>60, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"27/08/2018, 00:00:00", "to_date"=>"29/08/2018, 00:00:00", "days"=>nil, "markup"=>60, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mBidding Create (0.7ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-27 00:00:00', '2018-08-29 00:00:00', 60, '2018-08-10 10:46:21', '2018-08-10 10:46:21', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[35m (123.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:43
+Completed 200 OK in 153ms (Views: 0.1ms | ActiveRecord: 126.1ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:16:25 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 7ms (Views: 1.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:17:01 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 34ms (Views: 1.5ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:17:08 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"13/08/2018, 00:00:00", "to_date"=>"14/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"13/08/2018, 00:00:00", "to_date"=>"14/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0}}
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:19:10 +0530
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:44
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:44
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:44
+  [1m[36mBidding Create (0.2ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-13 00:00:00', '2018-08-14 00:00:00', 10, '2018-08-10 10:49:28', '2018-08-10 10:49:28', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:44
+  [1m[35m (55.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:44
+Completed 200 OK in 140152ms (Views: 0.2ms | ActiveRecord: 60.8ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:19:28 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 18ms (Views: 0.9ms | ActiveRecord: 1.5ms)
+
+
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 17ms (Views: 1.0ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:19:34 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"13/08/2018, 00:00:00", "to_date"=>"17/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"13/08/2018, 00:00:00", "to_date"=>"17/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:44
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:44
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:44
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-13 00:00:00', '2018-08-17 00:00:00', 10, '2018-08-10 10:50:15', '2018-08-10 10:50:15', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:44
+  [1m[35m (55.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:44
+Completed 200 OK in 40653ms (Views: 0.2ms | ActiveRecord: 60.3ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:22:06 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 30ms (Views: 1.2ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:22:51 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"13/08/2018, 00:00:00", "to_date"=>"14/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"13/08/2018, 00:00:00", "to_date"=>"14/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:42
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:42
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:42
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-13 00:00:00', '2018-08-14 00:00:00', 10, '2018-08-10 10:52:51', '2018-08-10 10:52:51', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:42
+  [1m[35m (131.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:42
+Completed 200 OK in 174ms (Views: 0.3ms | ActiveRecord: 134.3ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:24:03 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 13ms (Views: 1.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:24:22 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 27ms (Views: 1.6ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:24:29 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 10ms (Views: 1.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:24:36 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"06/08/2018, 00:00:00", "to_date"=>"09/08/2018, 00:00:00", "days"=>92, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"06/08/2018, 00:00:00", "to_date"=>"09/08/2018, 00:00:00", "days"=>92, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-06 00:00:00', '2018-08-09 00:00:00', 92, 10, '2018-08-10 10:54:36', '2018-08-10 10:54:36', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[35m (77.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:43
+Completed 200 OK in 147ms (Views: 0.3ms | ActiveRecord: 80.2ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:24:47 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"14/08/2018, 00:00:00", "to_date"=>"18/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"14/08/2018, 00:00:00", "to_date"=>"18/08/2018, 00:00:00", "days"=>nil, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mBidding Create (0.6ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-14 00:00:00', '2018-08-18 00:00:00', 3, 10, '2018-08-10 10:56:05', '2018-08-10 10:56:05', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[35m (71.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:43
+Completed 200 OK in 78782ms (Views: 0.1ms | ActiveRecord: 73.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:26:10 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 37ms (Views: 1.4ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:26:17 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"06/08/2018, 00:00:00", "to_date"=>"09/08/2018, 00:00:00", "days"=>92, "markup"=>90, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"06/08/2018, 00:00:00", "to_date"=>"09/08/2018, 00:00:00", "days"=>92, "markup"=>90, "user_id"=>1, "product_id"=>1, "status"=>0}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/biddings_controller.rb:42:in `create'
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:28:21 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 40ms (Views: 1.5ms | ActiveRecord: 5.2ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:28:26 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"07/08/2018, 00:00:00", "to_date"=>"09/08/2018, 00:00:00", "days"=>62, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"07/08/2018, 00:00:00", "to_date"=>"09/08/2018, 00:00:00", "days"=>62, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-07 00:00:00', '2018-08-09 00:00:00', 62, 10, '2018-08-10 10:59:10', '2018-08-10 10:59:10', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:43
+  [1m[35m (68.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:43
+Completed 200 OK in 44663ms (Views: 0.1ms | ActiveRecord: 70.6ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:29:15 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 22ms (Views: 1.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:30:00 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 38ms (Views: 1.7ms | ActiveRecord: 1.8ms)
+
+
+Started POST "/biddings" for 127.0.0.1 at 2018-08-10 16:30:19 +0530
+Processing by BiddingsController#create as HTML
+  Parameters: {"from_date"=>"05/08/2018, 00:00:00", "to_date"=>"09/08/2018, 00:00:00", "days"=>123, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0, "bidding"=>{"from_date"=>"05/08/2018, 00:00:00", "to_date"=>"09/08/2018, 00:00:00", "days"=>123, "markup"=>10, "user_id"=>1, "product_id"=>1, "status"=>0}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/biddings_controller.rb:36
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:36
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/biddings_controller.rb:36
+  [1m[36mBidding Create (0.3ms)[0m  [1m[32mINSERT INTO `biddings` (`from_date`, `to_date`, `days`, `markup`, `created_at`, `updated_at`, `user_id`, `product_id`) VALUES ('2018-08-05 00:00:00', '2018-08-09 00:00:00', 123, 10, '2018-08-10 11:00:19', '2018-08-10 11:00:19', 1, 1)[0m
+  ↳ app/controllers/biddings_controller.rb:36
+  [1m[35m (92.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/biddings_controller.rb:36
+Completed 200 OK in 128ms (Views: 0.5ms | ActiveRecord: 94.8ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:35:04 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 9ms (Views: 0.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:35:19 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.6ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 11ms (Views: 1.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:35:56 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 9ms (Views: 0.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:38:34 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 11ms (Views: 1.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:45:58 +0530
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/aravind/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 14ms (Views: 1.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:47:06 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 10ms (Views: 1.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:49:28 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 12ms (Views: 2.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:50:36 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 21ms (Views: 1.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:50:48 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 14ms (Views: 1.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:51:10 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 10ms (Views: 1.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:51:57 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 9ms (Views: 1.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:52:36 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 15ms (Views: 1.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:53:07 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 15ms (Views: 1.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:56:35 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.6ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 15ms (Views: 1.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 16:58:01 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 11ms (Views: 1.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 17:03:23 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 21ms (Views: 1.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 17:04:23 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 13ms (Views: 1.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 17:08:16 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 15ms (Views: 1.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-10 17:08:42 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' ) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:89
+Completed 200 OK in 15ms (Views: 1.4ms | ActiveRecord: 0.4ms)
+
+

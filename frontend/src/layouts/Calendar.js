@@ -6,7 +6,7 @@ import { Button,TextField,Typography} from '@material-ui/core'
 import Close from '@material-ui/icons/Close';
 import Modal from 'react-modal';
 import axios from "axios/index";
-// import axios from "axios/index";
+import './Calendar.css'
 
 BigCalendar.momentLocalizer(moment);
 Modal.setAppElement('#root')
@@ -31,7 +31,6 @@ class Calendar extends Component{
                     }
                 })
                 .then(function (response) {
-                    // console.log(response.data)
                     var arr = response.data
                     for (var i=0;i<arr.length;i++){
                         arr[i].start = new Date(arr[i].start)
@@ -61,16 +60,8 @@ class Calendar extends Component{
             discount:''
         }
     }
-    // eventComponent=({event})=>(
-    //     <div>
-    //         <div>{event.title}</div>
-    //         <div>{event.hexColor}</div>
-    //     </div>
-    // )
-
 
     eventStyleGetter =(event, start, end, isSelected)=>{
-        // console.log(event);
         var backgroundColor = '#' + event.hexColor;
         var style = {
             backgroundColor: backgroundColor,
@@ -85,13 +76,10 @@ class Calendar extends Component{
         }
     }
     afterOpenModal = () => {
-        // this.subtitle.style.color = 'blue';
     }
 
     closeModal = () => {
-        this.setState({modalIsOpen: false});
-        this.setState({addItemModel: false});
-        this.setState({discount:''})
+        this.setState({modalIsOpen: false, addItemModel: false, discount:''})
     }
     renderBidForm = () =>(
         <form>
@@ -118,6 +106,7 @@ class Calendar extends Component{
         state[e.target.name]=e.target.value
         this.setState(state)
     }
+
     handleValidation() {
         let fields = this.state
         let errors = {};
@@ -137,8 +126,26 @@ class Calendar extends Component{
         e.preventDefault()
         let state= this.state
         if(this.handleValidation()){
-            console.log(state.startDate,state.endDate,state.discount,state.startDate-state.endDate,localStorage.getItem('user_id'))
-        }
+            var days = parseInt(((new Date(state.endDate)) - (new Date(state.startDate))) / (1000 * 60 * 60 * 24));
+            console.log(parseInt(((new Date(state.endDate)) - (new Date(state.startDate))) / (1000 * 60 * 60 * 24)))
+            axios.post('http://localhost:3000/biddings', {
+              from_date: state.startDate,
+              to_date: state.endDate,
+              days: days, 
+              markup: parseInt(state.discount),
+              user_id: 1,  //localStorage.getItem('user_id'),
+              product_id: 1,
+              status: 0
+            })
+            .then(function (response) {
+             if(response.status === 200){
+              this.closeModal();
+             }
+            }.bind(this))
+            .catch(function (error) {
+              console.log(error);
+            });
+          }
     }
     setFormData = (start,end) =>{
         this.setState({startDate:start,endDate:end},()=>this.setState({modalIsOpen:true}))
@@ -152,13 +159,11 @@ class Calendar extends Component{
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={customStyles}
-                    contentLabel="Example Modal"
-                >
-                    {this.renderBidForm()}
-
+                    contentLabel="Example Modal">
+                  {this.renderBidForm()}
                 </Modal>
                 <BigCalendar
-                style={{ height: "80vh"}}
+                style={{ height: "80vh" }}
                 selectable
                 events={this.state.event}
                 eventPropGetter={(this.eventStyleGetter)}

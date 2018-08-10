@@ -215,8 +215,8 @@ class ProductListPage extends Component{
         return(
        <div>
           <Grid container spacing={24}>
-            <Grid item xs={9}>
-              <Paper style={{marginTop:20}}>
+            <Grid item xs={9} style={{marginRight: -25,paddingRight:15, paddingLeft: 0}}>
+              <Paper>
                 {(list)?(list.map(l=>
                   <div>
                     <ProductCard product={l} key={l.id}/>
