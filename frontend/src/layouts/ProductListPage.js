@@ -160,19 +160,14 @@ class ProductListPage extends Component{
 
     openModal = (n)=> {
       if(n ==="add_item") {
-        this.setState({addItemModel: true});
-        this.setState({modalIsOpen: true});
+        this.setState({addItemModel: true, modalIsOpen: true});
       }
       else {
-        this.setState({modalIsOpen: true});
-        this.setState({product:n})
-        // console.log(name)
+        this.setState({modalIsOpen: true, product:n})
       }
     }
 
-    afterOpenModal = () => {
-        // this.subtitle.style.color = 'blue';
-    }
+    afterOpenModal = () => { }
 
     closeModal = () => {
         this.setState({modalIsOpen: false});
@@ -219,27 +214,17 @@ class ProductListPage extends Component{
     if(!redirect){
         return(
        <div>
-            
-        {/*<img src={logo} style={image} alt={'logo'}/>*/}
-           <Grid container spacing={24}>
-               <Grid item xs={3} style={{height:500}}>
-                   <Paper style={style.Paper}>
-
-                   </Paper>
-                   <Button onClick={()=>this.openModal("add_item")}>Add Item</Button>
-               </Grid>
-               <Grid item xs={9}>
-                   <Paper style={{height:500,overflowY:'scroll',marginTop:20}}>
-                       {(list)?(list.map(l=>
-                           <div>
-                               {/*<Grid item xs={3}>*/}
-                                <ProductCard product={l} key={l.id}/>
-                               {/*</Grid>*/}
-                           </div>))
-                           :(<div>loading</div>)}
-                   </Paper>
-                </Grid>
-           </Grid>
+          <Grid container spacing={24}>
+            <Grid item xs={9}>
+              <Paper style={{marginTop:20}}>
+                {(list)?(list.map(l=>
+                  <div>
+                    <ProductCard product={l} key={l.id}/>
+                  </div>))
+                :(<div>loading</div>)}
+              </Paper>
+            </Grid>
+          </Grid>
         </div>
       );
     }
@@ -249,12 +234,5 @@ class ProductListPage extends Component{
   }
 
 }
-
-
-// const image = {
-//   'height' : '100px',
-//   'width' : '150px'
-// }
-
 
 export default ProductListPage;
