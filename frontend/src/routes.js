@@ -48,8 +48,6 @@ class RouterClass extends Component {
                       <Nav id='calendar'>
                         <NavText> Calendar </NavText>
                       </Nav>
-
-
                     </SideNav>
                    </Paper>
               </Grid>
