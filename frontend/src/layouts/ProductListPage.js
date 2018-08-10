@@ -8,6 +8,14 @@ import  './ProductListPage.css';
 import Header from './Header'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css';
+import ProductCard from './ProductCard'
+
+const style = {
+    Paper:{
+        height:500
+    }
+}
+
 class ProductListPage extends Component{
   componentDidMount(){
       if(localStorage.getItem('token')!==null){
@@ -203,11 +211,9 @@ class ProductListPage extends Component{
         this.setState({errors:errors})
         return formIsValid
     }
-
-
-
     render(){
-    if(!this.state.redirect){
+      const { redirect,list} = this.state
+    if(!redirect){
 
         return(
        <div>
@@ -216,24 +222,22 @@ class ProductListPage extends Component{
         <div className='content'>
            <Grid container spacing={24}>
                <Grid item xs={3}>
-                   <Paper>
-                       <TextField name='searchValue' label={'Enter Product'} onChange={(e)=>this.handleChange(e)} fullWidth /><br/><br/>
+                   <Paper style={style.Paper}>
+
                    </Paper>
                    <Button onClick={()=>this.openModal("add_item")}>Add Item</Button>
                </Grid>
-               <Grid item xs={9}>
-                   <Paper>
-                       <Table >
-                           <TableHead>
-                               <TableRow>
-                                   <TableCell><b>PRODUCT</b></TableCell>
-                                   <TableCell><b>BID</b></TableCell>
-                               </TableRow>
-                           </TableHead>
-                           {this.renderTable()}
-                       </Table>
-                   </Paper>
-               </Grid>
+               <Grid item xs={9} style={{height:500}}>
+                   {/*<Paper style={style.Paper}>*/}
+                       {(list)?(list.map(l=>
+                           <div>
+                               {/*<Grid item xs={3}>*/}
+                                <ProductCard product={l} key={l.id}/>
+                               {/*</Grid>*/}
+                           </div>))
+                           :(<div>loading</div>)}
+                   {/*</Paper>*/}
+                </Grid>
            </Grid>
         </div>
         </div>
