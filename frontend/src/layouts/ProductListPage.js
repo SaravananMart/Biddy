@@ -9,12 +9,12 @@ import Header from './Header'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css';
 import ProductCard from './ProductCard'
-
+import ProductGrid from './ProductGrid'
 const style = {
     Paper:{
         height:500,
         marginTop:20,
-        marginLeft:10,
+        // marginLeft:10,
 
     }
 }
@@ -30,7 +30,7 @@ class ProductListPage extends Component{
                   }
               })
               .then(function (response) {
-                  console.log(response.data)
+                  // console.log(response.data)
                   this.setState({list: response.data.products, count: response.data.count });
               }.bind(this))
               .catch(function (error) {
@@ -213,19 +213,10 @@ class ProductListPage extends Component{
       const { redirect,list} = this.state
     if(!redirect){
         return(
-       <div>
-          <Grid container spacing={24}>
-            <Grid item xs={9} style={{marginRight: -25,paddingRight:15, paddingLeft: 0}}>
-              <Paper>
-                {(list)?(list.map(l=>
-                  <div>
-                    <ProductCard product={l} key={l.id}/>
-                  </div>))
-                :(<div>loading</div>)}
-              </Paper>
-            </Grid>
-          </Grid>
-        </div>
+           <Grid item xs={9} style={{marginRight: -25,paddingRight:15, paddingLeft: 0}}>
+               <ProductGrid list={list}/>
+           </Grid>
+    
       );
     }
     if(this.state.redirect){

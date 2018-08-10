@@ -42,21 +42,26 @@ class RouterClass extends Component {
                       <Nav id='home'>
                         <NavText  >  Home </NavText>
                       </Nav>
+                        <Nav id='products'>
+                            <NavText> Product </NavText>
+                        </Nav>
                       <Nav id='calendar'>
                         <NavText> Calendar </NavText>
                       </Nav>
+
+
                     </SideNav>
                    </Paper>
               </Grid>
               <Grid item xs={10} style={{marginRight: -25, marginTop: 20,paddingRight:15, paddingLeft: 0}}>
-               
+
                     <div style={{padding: 10}} >
                       <Route exact path = '/' component={Login}/>
                         <Route path='/products' component={ProductListPage}/>
                         <Route path='/calendar' component={Calendar}/>
                         <Route path='/bestbids' component={BestBidsPage}/>
                     </div>
-              
+
                </Grid>
               </Grid>
             </div>
