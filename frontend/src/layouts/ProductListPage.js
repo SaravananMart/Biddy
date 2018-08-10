@@ -214,26 +214,10 @@ class ProductListPage extends Component{
     if(!redirect){
         return(
        <div>
-            <Header handleClick={this.handleLogout}/>
-        {/*<img src={logo} style={image} alt={'logo'}/>*/}
-           <Grid container spacing={24}>
-               <Grid item xs={3} style={{height:500}}>
-                   <Paper style={style.Paper}>
-
-                   </Paper>
-               </Grid>
-               <Grid item xs={9} style={{marginTop:20}}>
-                   {/*<Paper style={{height:500,marginTop:20}}>*/}
-                       {/*{(list)?(list.map(l=>*/}
-                               {/*<Grid item xs={3}>*/}
-                                {/*<ProductCard product={l} key={l.id}/>*/}
-                               {/*</Grid>*/}
-                           {/*:(<div>loading</div>)}*/}
-                   {/*</Paper>*/}
-                           <ProductGrid list={list}/>
-                </Grid>
+           <Grid item xs={9} style={{marginTop:20}}>
+               <ProductGrid list={list}/>
            </Grid>
-        </div>
+       </div>
       );
     }
     if(this.state.redirect){
