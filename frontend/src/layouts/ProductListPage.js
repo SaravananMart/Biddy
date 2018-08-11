@@ -2,23 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { Redirect } from 'react-router-dom'
-import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField,Grid} from '@material-ui/core'
+import { Button,TextField,Grid} from '@material-ui/core'
 import Close from '@material-ui/icons/Close';
 import  './ProductListPage.css';
 import Header from './Header'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css';
 import SideBar from './SideBar'
-import ProductCard from './ProductCard'
-import ProductGrid from './ProductGrid'
-const style = {
-    Paper:{
-        height:500,
-        marginTop:20,
-        // marginLeft:10,
-
-    }
-}
+import NestedGrid from './NestedGrid'
 
 class ProductListPage extends Component{
   componentDidMount(){
@@ -139,26 +130,6 @@ class ProductListPage extends Component{
     this.setState({redirect:true})
     }
 
-  renderTable() {
-      let  list = this.state.list
-        if (list !== undefined) {
-            return (
-                <TableBody>
-                    {
-                        list.map(n => {
-                            return (
-                                <TableRow key={`${n.name}`}>
-                                    <TableCell>{n.name}</TableCell>
-                                    <TableCell><Button onClick={()=>this.openModal(n)}>Bid</Button></TableCell>
-                                </TableRow>
-                            );
-                        })
-                    }
-                </TableBody>
-            )
-        }
-    }
-
     openModal = (n)=> {
       if(n ==="add_item") {
         this.setState({addItemModel: true, modalIsOpen: true});
@@ -217,9 +188,11 @@ class ProductListPage extends Component{
             <div>
                 <Header handleClick={this.handleLogout}/>
                     <Grid container>
-                        <SideBar/>
-                        <Grid item xs={9} style={{marginRight: -25,paddingRight:15, paddingLeft: 0}}>
-                            <ProductGrid list={list}/>
+                        <Grid item xs={2} style={{marginTop:30,marginLeft:10}}>
+                            <SideBar/>
+                        </Grid>
+                        <Grid item xs={9} style={{marginLeft:80,marginTop:30}}>
+                        <NestedGrid list={list}/>
                         </Grid>
                     </Grid>
             </div>

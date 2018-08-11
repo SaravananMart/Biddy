@@ -182,7 +182,7 @@ class Calendar extends Component{
 
                     <Grid container>
                         <SideBar/>
-                        <Grid item xs={9} style={{marginRight: -25, paddingRight: 15, paddingLeft: 0}}>
+                        <Grid item xs={10}>
                             <BigCalendar
                                 style={{height: "80vh"}}
                                 selectable
