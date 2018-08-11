@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ProductCard from './ProductCard'
+
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -12,26 +12,21 @@ const styles = theme => ({
         padding: theme.spacing.unit,
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        height:150
     },
 });
 
 function FormRow(props) {
-    const { classes,list } = props;
-    console.log(list)
+    const { list } = props;
+
     return (
         <React.Fragment>
-            {/*<Grid item xs={4}>*/}
-                {/*<Paper className={classes.paper}>item</Paper>*/}
-            {/*</Grid>*/}
             {
                 (list)?(list.map((l,index)=>
-                <Grid item xs={4} key={index}>
-                    <ProductCard product={l} key={l.id}/>
-                </Grid>
+                    <Grid item xs={4} key={index}>
+                        <ProductCard product={l} key={l.id}/>
+                    </Grid>
                 )):(<div>loading</div>)
             }
-
         </React.Fragment>
     );
 }
@@ -39,7 +34,6 @@ function FormRow(props) {
 FormRow.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-
 function chunkArray(myArray, chunk_size){
     var arrayLength = myArray.length;
     var tempArray = [];
@@ -51,15 +45,13 @@ function chunkArray(myArray, chunk_size){
 
     return tempArray;
 }
-
 function NestedGrid(props) {
     const { classes,list } = props;
-    var result = chunkArray(list, 3);
-    console.log(result);
+    var result = chunkArray(list, 3)
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={8}>
+            <Grid container spacing={24}>
                 {result.map((l,index)=>
                     <Grid item xs={12} container spacing={24} key={index}>
                         <FormRow classes={classes} list={l}/>

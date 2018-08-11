@@ -7,19 +7,20 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 // import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import image from '../images/shirt.jpeg'
 const styles = {
     card: {
-        minWidth: 200,
-        marginTop:5,
-        marginLeft:20,
+        maxWidth: 250,
+        // marginTop:5,
+        // marginLeft:20,
         // border:' 1px solid',
         // display:'inline-block'
         // minHeight:500,
+        height:300,
     },
     media: {
         height: 80,
-        // width:250,
+        width:250,
         paddingTop: '56.25%', // 16:9
     }
 };
@@ -31,11 +32,11 @@ function ProductCard(props) {
     return (
         <div>
             <Card className={classes.card}>
-                {/*<CardMedia*/}
-                    {/*className={classes.media}*/}
-                    {/*image={product.imageUrls[0]}*/}
-                    {/*title={product.productName}*/}
-                {/*/>*/}
+                <CardMedia
+                    className={classes.media}
+                    image={image}
+                    title={product.productName}
+                />
                 <CardContent>
                     <Typography gutterBottom variant="headline" component="h2">
                         {product.name}
