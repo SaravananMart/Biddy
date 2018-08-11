@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/biddings/total_bid' => 'biddings#total_bid_count'
   get '/biddings/approve' => 'biddings#bid_approval'
   get 'biddings/bid_details' => 'biddings#get_bid_details'
+  get 'biddings/approved_dates' => 'biddings#get_approved_dates'
   resources :biddings
 
 

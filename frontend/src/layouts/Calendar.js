@@ -12,22 +12,8 @@ import Header from './Header'
 import { Redirect } from 'react-router-dom'
 BigCalendar.momentLocalizer(moment);
 Modal.setAppElement('#root')
-const customStyles = {
-    content : {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        height: '300px', // <-- This sets the height
-        width:'400px'
-    }
-}
+
 class Calendar extends Component{
-    componentDidMount(){
-      this.getBidData();
-    }
     constructor(){
       super()
       this.state = {
@@ -47,8 +33,12 @@ class Calendar extends Component{
       }
     }
 
+    componentDidMount(){
+      this.getBidData();
+    }
+
     getBidData = (e) =>{
-      axios.get(`http://localhost:3000/biddings/total_bid`,
+      axios.get(`http://localhost:3000/biddings/total_bid?uid=1`,
         {
           headers:{
               Authorization: localStorage.getItem('token')
@@ -94,26 +84,7 @@ class Calendar extends Component{
     closeModal = () => {
         this.setState({modalIsOpen: false, addItemModel: false, discount:''})
     }
-    renderBidForm = () =>(
-        <form>
-            <Button variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
-                <Close />
-            </Button>
-            <p></p>
-            <Typography variant="body2" gutterBottom>
-                Start Date: {this.state.startDate}
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-                End Date: {this.state.endDate}
-            </Typography>
-            <p></p>
-            <TextField name='discount' onChange={(e)=>this.handleFormFieldChange(e)} fullWidth type='number' label={'Markup'}/>
-            <p>{this.state.errors['discount']}</p>
-            <div className='center'>
-                <Button color='primary' variant="contained" onClick={(e)=>this.handleBid(e)}>BID</Button>
-            </div>
-        </form>
-    )
+
     handleFormFieldChange =(e)=>{
         let state= this.state
         state[e.target.name]=e.target.value
@@ -139,16 +110,14 @@ class Calendar extends Component{
         e.preventDefault()
         let state= this.state
         if(this.handleValidation()){
-            var days = parseInt(((new Date(state.endDate)) - (new Date(state.startDate))) / (1000 * 60 * 60 * 24),10);
-            console.log(((state.endDate)))
             axios.post('http://localhost:3000/biddings', {
-              from_date: state.startDate,
-              to_date: state.endDate,
-              days: days,
-              markup: parseInt(state.discount,10),
-              user_id: 1,  //localStorage.getItem('user_id'),
-              product_id: 1,
-              status: 0
+                from_date: state.startDate,
+                to_date: state.endDate,
+                days: 1,
+                markup: parseInt(state.discount,10),
+                user_id: 1,  //localStorage.getItem('user_id'),
+                product_id: 1,
+                status: 0
             })
             .then(function (response) {
              if(response.status === 200){
@@ -164,6 +133,27 @@ class Calendar extends Component{
     setFormData = (start,end) =>{
         this.setState({startDate:start,endDate:end},()=>this.setState({modalIsOpen:true}))
     }
+
+     renderBidForm = () =>(
+        <form>
+            <Button style={customStyles.buttonStyle} variant="fab" mini color="secondary" aria-label="Add" onClick={()=>this.closeModal()}>
+                <Close />
+            </Button>
+            <p></p>
+            <Typography variant="body2" gutterBottom>
+                Start Date: {this.state.startDate}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+                End Date: {this.state.endDate}
+            </Typography>
+            <p></p>
+            <TextField name='discount' onChange={(e)=>this.handleFormFieldChange(e)} fullWidth type='number' label={'Markup'}/>
+            <p>{this.state.errors['discount']}</p>
+            <div className='center'>
+                <Button color='primary' variant="contained" onClick={(e)=>this.handleBid(e)}>BID</Button>
+            </div>
+        </form>
+    )
 
     render(){
         const { redirect } = this.state
@@ -205,6 +195,24 @@ class Calendar extends Component{
         if(redirect){
             return <Redirect to={'/'}/>
         }
+    }
+}
+
+const customStyles = {
+    content : {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        height: '300px', // <-- This sets the height
+        width:'400px',
+        borderRadius: '15px',
+    },
+    buttonStyle: {
+      marginLeft: '-15px',
+      marginTop: '-15px'
     }
 }
 

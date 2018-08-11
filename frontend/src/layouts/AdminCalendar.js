@@ -1,0 +1,185 @@
+import React, { Component } from 'react'
+import BigCalendar from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import { Button,TextField,Typography} from '@material-ui/core'
+import Close from '@material-ui/icons/Close';
+import Modal from 'react-modal';
+import axios from "axios/index";
+import './Calendar.css'
+
+BigCalendar.momentLocalizer(moment);
+Modal.setAppElement('#root')
+
+class AdminCalendar extends Component{
+    constructor(){
+      super()
+      this.state = {
+          event:[
+              {
+                title: '5',
+                start: new Date(),
+                end: new Date(),
+              }
+          ],
+          modalIsOpen:false,
+          errors:{},
+          startDate:'',
+          endDate:'',
+          discount:''
+      }
+    }
+
+    componentDidMount(){
+      this.getBidData();
+    }
+    
+    getBidData = (e) =>{
+      axios.get(`http://localhost:3000/biddings/total_bid`,
+        {
+          headers:{
+              Authorization: localStorage.getItem('token')  
+          }
+        })
+        .then(function (response) {
+          var arr = response.data
+          for (var i=0;i<arr.length;i++){
+              arr[i].start = new Date(arr[i].start)
+              arr[i].end = new Date(arr[i].start)
+          }
+          console.log(arr)
+          this.setState({event: arr});
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        })
+    }
+
+    eventStyleGetter =(event, start, end, isSelected)=>{
+        var backgroundColor = '#' + event.hexColor;
+        var style = {
+            backgroundColor: backgroundColor,
+            borderRadius: '0px',
+            opacity: 0.8,
+            color: 'white',
+            border: '0px',
+            display: 'block'
+        }
+        return {
+            style: style
+        }
+    }
+    afterOpenModal = () => {
+    }
+
+    closeModal = () => {
+        this.setState({modalIsOpen: false, addItemModel: false, discount:''})
+    }
+    renderBidForm = () =>(
+          <div>
+            <Button style={customStyles.buttonStyle} variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
+                <Close />
+            </Button>
+            <p></p>
+          </div>
+        
+    )
+    handleFormFieldChange =(e)=>{
+        let state= this.state
+        state[e.target.name]=e.target.value
+        this.setState(state)
+    }
+
+    handleValidation() {
+        let fields = this.state
+        let errors = {};
+        let formIsValid = true;
+        if (!fields["discount"]) {
+            formIsValid = false;
+            errors["discount"] = "Markup is required!";
+        }
+        if(fields['discount'] < 1 || fields['discount'] > 99){
+            formIsValid = false
+            errors['discount'] = 'Enter Markup greater than 1 and less than 100'
+        }
+        this.setState({errors:errors})
+        return formIsValid
+    }
+    handleBid(e){
+        e.preventDefault()
+        let state= this.state
+        if(this.handleValidation()){
+            axios.post('http://localhost:3000/biddings', {
+              from_date: state.startDate,
+              to_date: state.endDate,
+              days: 0, 
+              markup: parseInt(state.discount),
+              user_id: 1,  //localStorage.getItem('user_id'),
+              product_id: 1,
+              status: 0
+            })
+            .then(function (response) {
+             if(response.status === 200){
+              this.closeModal();
+              this.getBidData();
+             }
+            }.bind(this))
+            .catch(function (error) {
+              console.log(error);
+            });
+          }
+    }
+    setFormData = (start,end) =>{
+        this.setState({startDate:start,endDate:end},()=>this.setState({modalIsOpen:true}))
+    }
+
+    render(){
+        return(
+            <div>
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal">
+                  {this.renderBidForm()}
+                </Modal>
+                <BigCalendar
+                  style={{ height: "80vh" }}
+                  selectable
+                  events={this.state.event}
+                  eventPropGetter={(this.eventStyleGetter)}
+                  defaultView={BigCalendar.Views.MONTH}
+                  scrollToTime={new Date(1970, 1, 1, 6)}
+                  defaultDate={new Date()}
+                  onSelectEvent={event => alert(event.title)}
+                  onSelectSlot={slotInfo => {
+                      this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
+                    }
+                  }
+                />
+            </div>
+        )
+    }
+}
+
+const customStyles = {
+    content : {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        height: '300px', // <-- This sets the height
+        width:'400px',
+        borderRadius: '15px',
+    },
+    buttonStyle: {
+      marginLeft: '-15px',
+      marginTop: '-15px'
+    }
+  }
+
+
+export default AdminCalendar;

@@ -103,22 +103,45 @@ class BiddingService
 		end
 		
 		data = []
-		count =0
 		month.each do |key, value|
 			value.each do |key1, value1|
-				count +=1
 				temp_data = {}
 				temp_data["start"] = Date.new(2018, key, key1) #date
 				dates.each do |date|
 					if temp_data["start"] >= date.from_date and temp_data["start"] <= date.to_date and params[:uid]
-						temp_data["hexColor"] = 'F65926'
+						temp_data["hexColor"] = 'F65926' #red
 					else
-						temp_data["hexColor"] = '2e6da4'
+						temp_data["hexColor"] = '79D207' #green
 					end
 				end
 				temp_data["title"] = value1 #count
 				data << temp_data
 			end
+		end
+		return data
+	end
+
+
+	def self.get_approved_dates(params)
+		uid = params[:uid]
+		pid = params[:pid]
+		data = []
+		dates = Bidding.where('user_id = ? and product_id = ?', uid, pid).order("from_date ASC")
+		dates.each do |date|
+			temp_data = {}
+			temp_data["start"] = date.from_date 
+			temp_data["end"] = date.to_date
+			if date.status == 0
+				temp_data["hexColor"] = 'DE0101' #rejected
+				temp_data["title"] = 'R'
+			elsif date.status == 1
+				temp_data["hexColor"] = 'FF7000' #partially approved
+				temp_data["title"] = 'P'
+			elsif date.status == 2
+				temp_data["hexColor"] = '227C00' #approved
+				temp_data["title"] = 'A'
+			end
+			data << temp_data
 		end
 		return data
 	end
