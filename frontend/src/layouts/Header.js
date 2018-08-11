@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { AccountCircle} from '@material-ui/icons';
-import {AppBar,Toolbar,Typography,IconButton,Menu,MenuItem,Button } from '@material-ui/core'
+import {AppBar,Toolbar,Typography,IconButton,Menu,MenuItem } from '@material-ui/core'
 
 class Header extends Component{
     constructor(){
@@ -53,7 +53,7 @@ class Header extends Component{
                                 onClose={this.handleClose}
                             >
                                 <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={this.handleClose}><Button color='inherit' onClick={(e)=>handleClick(e)}>Logout</Button></MenuItem>
+                                <MenuItem onClick={(e)=>{this.handleClose();handleClick(e)}}>Logout</MenuItem>
                             </Menu>
                         </div>
                     )}

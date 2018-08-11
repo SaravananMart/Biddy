@@ -84,7 +84,7 @@ class Calendar extends Component{
     closeModal = () => {
         this.setState({modalIsOpen: false, addItemModel: false, discount:''})
     }
-   
+
     handleFormFieldChange =(e)=>{
         let state= this.state
         state[e.target.name]=e.target.value
@@ -111,13 +111,13 @@ class Calendar extends Component{
         let state= this.state
         if(this.handleValidation()){
             axios.post('http://localhost:3000/biddings', {
-              from_date: state.startDate,
-              to_date: state.endDate,
-              days: 1, 
-              markup: parseInt(state.discount),
-              user_id: 1,  //localStorage.getItem('user_id'),
-              product_id: 1,
-              status: 0
+                from_date: state.startDate,
+                to_date: state.endDate,
+                days: 1,
+                markup: parseInt(state.discount,10),
+                user_id: 1,  //localStorage.getItem('user_id'),
+                product_id: 1,
+                status: 0
             })
             .then(function (response) {
              if(response.status === 200){
@@ -140,7 +140,7 @@ class Calendar extends Component{
                 <Close />
             </Button>
             <p></p>
-            <Typography variant="body2" gutterBottom> 
+            <Typography variant="body2" gutterBottom>
                 Start Date: {this.state.startDate}
             </Typography>
             <Typography variant="body2" gutterBottom>

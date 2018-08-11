@@ -16068,3 +16068,69 @@ Processing by BiddingsController#total_bid_count as HTML
 Completed 200 OK in 7ms (Views: 0.8ms | ActiveRecord: 0.4ms)
 
 
+Started GET "/biddings/total_bid?uid=1" for 127.0.0.1 at 2018-08-11 20:22:44 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' and product_id = 1) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:90
+Completed 200 OK in 30ms (Views: 1.4ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/biddings/total_bid?uid=1" for 127.0.0.1 at 2018-08-11 20:22:49 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' and product_id = 1) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:90
+Completed 200 OK in 6ms (Views: 0.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2018-08-11 20:22:53 +0530
+Processing by ProductsController#search as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/services/bidding_service.rb:70
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 1[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 2[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 3[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 4[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `biddings` WHERE `biddings`.`product_id` = 5[0m
+  ↳ app/services/bidding_service.rb:72
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products` WHERE (name LIKE '%%')[0m
+  ↳ app/controllers/products_controller.rb:18
+Completed 200 OK in 23ms (Views: 2.4ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/biddings/total_bid?uid=1" for 127.0.0.1 at 2018-08-11 20:22:59 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mBidding Load (0.3ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' and product_id = 1) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:90
+Completed 200 OK in 12ms (Views: 5.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/biddings/approved_dates?uid=1&pid=1" for 127.0.0.1 at 2018-08-11 20:23:01 +0530
+Processing by BiddingsController#get_approved_dates as HTML
+  Parameters: {"uid"=>"1", "pid"=>"1"}
+  [1m[36mBidding Load (0.5ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (user_id = '1' and product_id = '1') ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:130
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/biddings/total_bid?uid=1" for 127.0.0.1 at 2018-08-11 20:23:06 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  Parameters: {"uid"=>"1"}
+  [1m[36mBidding Load (0.4ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' and product_id = 1) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:90
+Completed 200 OK in 9ms (Views: 1.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/biddings/total_bid" for 127.0.0.1 at 2018-08-11 20:23:08 +0530
+Processing by BiddingsController#total_bid_count as HTML
+  [1m[36mBidding Load (0.6ms)[0m  [1m[34mSELECT `biddings`.* FROM `biddings` WHERE (from_date >= '2018-07-01' and to_date <= '2018-12-01' and product_id = 1) ORDER BY from_date ASC[0m
+  ↳ app/services/bidding_service.rb:90
+Completed 200 OK in 8ms (Views: 1.3ms | ActiveRecord: 0.6ms)
+
+
