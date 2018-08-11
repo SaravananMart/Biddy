@@ -1,4 +1,4 @@
-import {  Paper, Grid } from '@material-ui/core'
+import {  Paper } from '@material-ui/core'
 import React from "react";
 import { withRR4, Nav, NavText } from 'react-sidenav';
 const SideNav = withRR4();
@@ -13,7 +13,7 @@ class SideBar extends React.Component {
     render() {
         return (
             <Paper style={style.Paper}>
-                <SideNav default='dashboard' highlightBgColor='lightgrey' highlightColor='black'>
+                <SideNav default='products' highlightBgColor='lightgrey' highlightColor='black'>
                     {/*<Nav id='home'>*/}
                     {/*<NavText  >  Home </NavText>*/}
                     {/*</Nav>*/}

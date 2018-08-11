@@ -139,13 +139,13 @@ class Calendar extends Component{
         e.preventDefault()
         let state= this.state
         if(this.handleValidation()){
-            var days = parseInt(((new Date(state.endDate)) - (new Date(state.startDate))) / (1000 * 60 * 60 * 24));
+            var days = parseInt(((new Date(state.endDate)) - (new Date(state.startDate))) / (1000 * 60 * 60 * 24),10);
             console.log(((state.endDate)))
             axios.post('http://localhost:3000/biddings', {
               from_date: state.startDate,
               to_date: state.endDate,
               days: days,
-              markup: parseInt(state.discount),
+              markup: parseInt(state.discount,10),
               user_id: 1,  //localStorage.getItem('user_id'),
               product_id: 1,
               status: 0
