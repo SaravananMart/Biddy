@@ -8,6 +8,7 @@ import  './ProductListPage.css';
 import Header from './Header'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker.css';
+import SideBar from './SideBar'
 import ProductCard from './ProductCard'
 import ProductGrid from './ProductGrid'
 const style = {
@@ -213,10 +214,16 @@ class ProductListPage extends Component{
       const { redirect,list} = this.state
     if(!redirect){
         return(
-           <Grid item xs={9} style={{marginRight: -25,paddingRight:15, paddingLeft: 0}}>
-               <ProductGrid list={list}/>
-           </Grid>
-    
+            <div>
+                <Header handleClick={this.handleLogout}/>
+                    <Grid container>
+                        <SideBar/>
+                        <Grid item xs={9} style={{marginRight: -25,paddingRight:15, paddingLeft: 0}}>
+                            <ProductGrid list={list}/>
+                        </Grid>
+                    </Grid>
+            </div>
+
       );
     }
     if(this.state.redirect){

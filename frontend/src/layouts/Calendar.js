@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { Button,TextField,Typography} from '@material-ui/core'
+import { Button,TextField,Typography,Grid} from '@material-ui/core'
+import SideBar from './SideBar'
 import Close from '@material-ui/icons/Close';
 import Modal from 'react-modal';
 import axios from "axios/index";
 import './Calendar.css'
-
+import Header from './Header'
+import { Redirect } from 'react-router-dom'
 BigCalendar.momentLocalizer(moment);
 Modal.setAppElement('#root')
 const customStyles = {
@@ -40,7 +42,8 @@ class Calendar extends Component{
           errors:{},
           startDate:'',
           endDate:'',
-          discount:''
+          discount:'',
+          redirect:false
       }
     }
 
@@ -48,7 +51,7 @@ class Calendar extends Component{
       axios.get(`http://localhost:3000/biddings/total_bid`,
         {
           headers:{
-              Authorization: localStorage.getItem('token')  
+              Authorization: localStorage.getItem('token')
           }
         })
         .then(function (response) {
@@ -63,6 +66,12 @@ class Calendar extends Component{
         .catch(function (error) {
           console.log(error);
         })
+    }
+
+    handleLogout = (e)=>{
+        e.preventDefault()
+        localStorage.removeItem('token')
+        this.setState({redirect:true})
     }
 
     eventStyleGetter =(event, start, end, isSelected)=>{
@@ -135,7 +144,7 @@ class Calendar extends Component{
             axios.post('http://localhost:3000/biddings', {
               from_date: state.startDate,
               to_date: state.endDate,
-              days: days, 
+              days: days,
               markup: parseInt(state.discount),
               user_id: 1,  //localStorage.getItem('user_id'),
               product_id: 1,
@@ -157,32 +166,45 @@ class Calendar extends Component{
     }
 
     render(){
-        return(
-            <div>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal">
-                  {this.renderBidForm()}
-                </Modal>
-                <BigCalendar
-                style={{ height: "80vh" }}
-                selectable
-                events={this.state.event}
-                eventPropGetter={(this.eventStyleGetter)}
-                defaultView={BigCalendar.Views.MONTH}
-                scrollToTime={new Date(1970, 1, 1, 6)}
-                defaultDate={new Date()}
-                onSelectEvent={event => alert(event.title)}
-                onSelectSlot={slotInfo => {
-                    this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
-                }
-                }
-                />
-            </div>
-        )
+        const { redirect } = this.state
+        if(!redirect) {
+            return (
+                <div>
+                    <Header handleClick={this.handleLogout}/>
+                    <Modal
+                        isOpen={this.state.modalIsOpen}
+                        onAfterOpen={this.afterOpenModal}
+                        onRequestClose={this.closeModal}
+                        style={customStyles}
+                        contentLabel="Example Modal">
+                        {this.renderBidForm()}
+                    </Modal>
+
+                    <Grid container>
+                        <SideBar/>
+                        <Grid item xs={9} style={{marginRight: -25, paddingRight: 15, paddingLeft: 0}}>
+                            <BigCalendar
+                                style={{height: "80vh"}}
+                                selectable
+                                events={this.state.event}
+                                eventPropGetter={(this.eventStyleGetter)}
+                                defaultView={BigCalendar.Views.MONTH}
+                                scrollToTime={new Date(1970, 1, 1, 6)}
+                                defaultDate={new Date()}
+                                onSelectEvent={event => alert(event.title)}
+                                onSelectSlot={slotInfo => {
+                                    this.setFormData(slotInfo.start.toLocaleString(), slotInfo.end.toLocaleString())
+                                }
+                                }
+                            />
+                        </Grid>
+                    </Grid>
+                </div>
+            )
+        }
+        if(redirect){
+            return <Redirect to={'/'}/>
+        }
     }
 }
 
