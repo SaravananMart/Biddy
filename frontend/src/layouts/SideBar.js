@@ -13,17 +13,23 @@ class SideBar extends React.Component {
     render() {
         return (
             <Paper style={style.Paper}>
-                <SideNav default='dashboard' highlightBgColor='lightgrey' highlightColor='black'>
-                    {/*<Nav id='home'>*/}
-                    {/*<NavText  >  Home </NavText>*/}
-                    {/*</Nav>*/}
-                    <Nav id='products'>
-                        <NavText> Products </NavText>
-                    </Nav>
-                    <Nav id='calendar'>
-                        <NavText> Calendar </NavText>
-                    </Nav>
-                </SideNav>
+              <SideNav default='dashboard' highlightBgColor='lightgrey' highlightColor='black'>
+                <Nav id='products'>
+                  <NavText>Products</NavText>
+                </Nav>
+                <Nav id='calendar'>
+                  <NavText>Calendar</NavText>
+                </Nav>
+                <Nav id='bestbids'>
+                  <NavText>Best Bids</NavText>
+                </Nav>
+                <Nav id='admin'>
+                  <NavText>Admin</NavText>
+                </Nav>
+                <Nav id='approved'>
+                  <NavText>Approved</NavText>
+                </Nav>
+              </SideNav>
             </Paper>
         );
     }
