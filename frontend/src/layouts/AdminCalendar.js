@@ -11,15 +11,15 @@ import './Calendar.css'
 BigCalendar.momentLocalizer(moment);
 Modal.setAppElement('#root')
 
-class Calendar extends Component{
+class AdminCalendar extends Component{
     constructor(){
       super()
       this.state = {
           event:[
               {
-                  title: '5',
-                  start: new Date(),
-                  end: new Date(),
+                title: '5',
+                start: new Date(),
+                end: new Date(),
               }
           ],
           modalIsOpen:false,
@@ -33,9 +33,9 @@ class Calendar extends Component{
     componentDidMount(){
       this.getBidData();
     }
-
+    
     getBidData = (e) =>{
-      axios.get(`http://localhost:3000/biddings/total_bid?uid=1`,
+      axios.get(`http://localhost:3000/biddings/total_bid`,
         {
           headers:{
               Authorization: localStorage.getItem('token')  
@@ -75,7 +75,15 @@ class Calendar extends Component{
     closeModal = () => {
         this.setState({modalIsOpen: false, addItemModel: false, discount:''})
     }
-   
+    renderBidForm = () =>(
+          <div>
+            <Button style={customStyles.buttonStyle} variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
+                <Close />
+            </Button>
+            <p></p>
+          </div>
+        
+    )
     handleFormFieldChange =(e)=>{
         let state= this.state
         state[e.target.name]=e.target.value
@@ -104,7 +112,7 @@ class Calendar extends Component{
             axios.post('http://localhost:3000/biddings', {
               from_date: state.startDate,
               to_date: state.endDate,
-              days: 1, 
+              days: 0, 
               markup: parseInt(state.discount),
               user_id: 1,  //localStorage.getItem('user_id'),
               product_id: 1,
@@ -125,27 +133,6 @@ class Calendar extends Component{
         this.setState({startDate:start,endDate:end},()=>this.setState({modalIsOpen:true}))
     }
 
-     renderBidForm = () =>(
-        <form>
-            <Button style={customStyles.buttonStyle} variant="fab" mini color="secondary" aria-label="Add" onClick={()=>this.closeModal()}>
-                <Close />
-            </Button>
-            <p></p>
-            <Typography variant="body2" gutterBottom> 
-                Start Date: {this.state.startDate}
-            </Typography>
-            <Typography variant="body2" gutterBottom>
-                End Date: {this.state.endDate}
-            </Typography>
-            <p></p>
-            <TextField name='discount' onChange={(e)=>this.handleFormFieldChange(e)} fullWidth type='number' label={'Markup'}/>
-            <p>{this.state.errors['discount']}</p>
-            <div className='center'>
-                <Button color='primary' variant="contained" onClick={(e)=>this.handleBid(e)}>BID</Button>
-            </div>
-        </form>
-    )
-
     render(){
         return(
             <div>
@@ -158,18 +145,18 @@ class Calendar extends Component{
                   {this.renderBidForm()}
                 </Modal>
                 <BigCalendar
-                style={{ height: "80vh" }}
-                selectable
-                events={this.state.event}
-                eventPropGetter={(this.eventStyleGetter)}
-                defaultView={BigCalendar.Views.MONTH}
-                scrollToTime={new Date(1970, 1, 1, 6)}
-                defaultDate={new Date()}
-                onSelectEvent={event => alert(event.title)}
-                onSelectSlot={slotInfo => {
-                    this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
-                }
-                }
+                  style={{ height: "80vh" }}
+                  selectable
+                  events={this.state.event}
+                  eventPropGetter={(this.eventStyleGetter)}
+                  defaultView={BigCalendar.Views.MONTH}
+                  scrollToTime={new Date(1970, 1, 1, 6)}
+                  defaultDate={new Date()}
+                  onSelectEvent={event => alert(event.title)}
+                  onSelectSlot={slotInfo => {
+                      this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
+                    }
+                  }
                 />
             </div>
         )
@@ -192,6 +179,7 @@ const customStyles = {
       marginLeft: '-15px',
       marginTop: '-15px'
     }
-}
+  }
 
-export default Calendar
+
+export default AdminCalendar;

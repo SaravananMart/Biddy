@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ProductListPage, Login, Calendar, BestBidsPage } from './layouts'
+import { ProductListPage, Login, Calendar, BestBidsPage, AdminCalendar, ApprovedCalendar } from './layouts'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { withRR4, Nav, NavText } from 'react-sidenav';
+import Header from './layouts/Header'
 import {  Paper,
           Table,
           TableHead,
@@ -11,8 +12,7 @@ import {  Paper,
           Button,
           TextField,
           Grid
-} from '@material-ui/core'
-import Header from './layouts/Header'
+        } from '@material-ui/core'
 
 const SideNav = withRR4();
 
@@ -40,13 +40,19 @@ class RouterClass extends Component {
                   <Paper style={style.Paper}>
                     <SideNav default='dashboard' highlightBgColor='grey' highlightColor='white'>
                       <Nav id='home'>
-                        <NavText  >  Home </NavText>
+                        <NavText>Home</NavText>
                       </Nav>
                         <Nav id='products'>
-                            <NavText> Product </NavText>
+                            <NavText>Product</NavText>
                         </Nav>
                       <Nav id='calendar'>
-                        <NavText> Calendar </NavText>
+                        <NavText>Calendar</NavText>
+                      </Nav>
+                      <Nav id='admin'>
+                        <NavText>Admin</NavText>
+                      </Nav>
+                       <Nav id='approved'>
+                        <NavText>Approved Calendar</NavText>
                       </Nav>
                     </SideNav>
                    </Paper>
@@ -58,6 +64,8 @@ class RouterClass extends Component {
                         <Route path='/products' component={ProductListPage}/>
                         <Route path='/calendar' component={Calendar}/>
                         <Route path='/bestbids' component={BestBidsPage}/>
+                        <Route path='/admin' component={AdminCalendar}/>
+                         <Route path='/approved' component={ApprovedCalendar}/>
                     </div>
 
                </Grid>
