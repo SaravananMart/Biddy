@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import { Collapse} from 'reactstrap';
-// import logo from '../images/myntra-logo.png';
 import { Redirect } from 'react-router-dom'
 import { Paper,Table,TableHead,TableBody,TableRow,TableCell, Button,TextField,Grid} from '@material-ui/core'
 import Close from '@material-ui/icons/Close';
@@ -30,8 +28,7 @@ class BestBidsPage extends Component{
             startDate:moment(),
             endDate:moment().add(1, 'days')
         },
-        product:'',
-
+        product:''
     }
   }
 
@@ -87,6 +84,7 @@ class BestBidsPage extends Component{
     }
 
     getProduct(){
+      let url = `http://localhost:3000/products`;
       axios.get(`http://localhost:3000/products?q=${this.state.searchValue}`,
           {
               headers:{
@@ -103,7 +101,6 @@ class BestBidsPage extends Component{
     }
 
     getBestBids = (e) =>{
-      console.log(e)
         axios.get(`http://localhost:3000/biddings/best?pid=1`,
           {
               headers:{
@@ -276,11 +273,6 @@ class BestBidsPage extends Component{
 
 }
 
-
-// const image = {
-//   'height' : '100px',
-//   'width' : '150px'
-// }
 
 const customStyles = {
         content : {
