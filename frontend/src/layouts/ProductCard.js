@@ -28,7 +28,7 @@ const styles = {
 const ButtonLink = ({id}) =>   {
     return (
         <Route render={({history})=> (
-            <Button size="small" color="secondary" variant={'contained'} style={{marginRight:10}}
+            <Button size="small" color="secondary" variant={'contained'} style={{marginRight:15}}
             onClick = {()=>{history.push(`/admin/${id}`)}}
             >Bid</Button>
         )}/>
@@ -46,14 +46,13 @@ function ProductCard(props) {
                     title={product.productName}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="headline" component="h2">
+                    <Typography variant="title" >
                         <div className={'center'}>
-                        {product.name}
-
+                        {product.name.toUpperCase()}
                         </div>
                     </Typography>
                 </CardContent>
-                <div className={'center'}>
+                <div className={'centerBottomMargin'}>
                 <CardActions>
                     <ButtonLink id={product.id}/>
                     <Button size="small" color="secondary" variant={'contained'}>
