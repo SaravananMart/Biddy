@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { Button,TextField,Typography,Grid} from '@material-ui/core'
 import SideBar from './SideBar'
 import Close from '@material-ui/icons/Close';
 import Modal from 'react-modal';
 import axios from "axios/index";
-import './Calendar.css'
 import Header from './Header'
 import { Redirect } from 'react-router-dom'
+
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+// import './Calendar.css'
+
 BigCalendar.momentLocalizer(moment);
 Modal.setAppElement('#root')
 
@@ -38,7 +40,7 @@ class Calendar extends Component{
     }
 
     getBidData = (e) =>{
-      axios.get(`http://localhost:3000/biddings/total_bid?uid=1`,
+      axios.get(`http://localhost:3000/biddings/total_bid?pid=1`,
         {
           headers:{
               Authorization: localStorage.getItem('token')

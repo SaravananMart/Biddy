@@ -10,6 +10,11 @@ class BiddingsController < ApplicationController
   def show
   end
 
+  def get_all_bid_dates
+    dates = BiddingService.get_all_bid_dates(params)
+    render json: dates
+  end
+
   def free_bid_dates
     dates = BiddingService.get_free_bid_dates(params)
     render json: dates
@@ -21,12 +26,12 @@ class BiddingsController < ApplicationController
   end
 
   def bid_approval
-    approval = BiddingService.approve_bid_dates
+    approval = BiddingService.approve_bid_dates(params)
     render json: approval
   end
 
-  def get_bid_details
-    details = BiddingService.get_bid_details_for_date
+  def get_bid_details_for_date
+    details = BiddingService.get_bid_details_for_date(params)
     render json: details
   end
 
@@ -36,10 +41,18 @@ class BiddingsController < ApplicationController
   end
 
   def create
+    count = 0
     days = ((Date.parse(bidding_params[:to_date]).mjd - (Date.parse(bidding_params[:from_date])).mjd)).to_i + 1
-    @bidding = Bidding.new(:from_date => bidding_params[:from_date], :to_date => bidding_params[:to_date], :days => days, :markup => bidding_params[:markup], :user_id => bidding_params[:user_id], :product_id => bidding_params[:product_id], :status => 0)
+    date = Date.parse(bidding_params[:from_date])
+    (1..days).each do |d|
+      @bidding = Bidding.new(:from_date => date, :to_date => date, :days => days, :markup => bidding_params[:markup], :user_id => bidding_params[:user_id], :product_id => bidding_params[:product_id], :status => 0)
+       date = date + 1.days
+      if @bidding.save
+        count = count + 1
+      end
+    end
 
-    if @bidding.save
+    if count == days
       render json: "success"
     else
       render json: @bidding.errors, status: :unprocessable_entity

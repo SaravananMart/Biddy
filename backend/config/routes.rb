@@ -12,12 +12,12 @@ Rails.application.routes.draw do
   get '/products' => 'products#search'
   resources :products
 
-
+  get '/biddings/admin' => 'biddings#get_all_bid_dates'
   get '/biddings/best' => 'biddings#free_bid_dates'
   get '/biddings/total_bid' => 'biddings#total_bid_count'
-  get '/biddings/approve' => 'biddings#bid_approval'
-  get 'biddings/bid_details' => 'biddings#get_bid_details'
+  get 'biddings/bid_details' => 'biddings#get_bid_details_for_date'
   get 'biddings/approved_dates' => 'biddings#get_approved_dates'
+  post '/biddings/approve_bid' => 'biddings#bid_approval'
   resources :biddings
 
 
