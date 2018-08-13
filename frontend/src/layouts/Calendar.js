@@ -118,14 +118,16 @@ class Calendar extends Component{
                 to_date: state.endDate,
                 days: 1,
                 markup: parseInt(state.discount,10),
-                user_id: 1,  //localStorage.getItem('user_id'),
-                product_id: 1,
+                user_id: localStorage.getItem('user_id'),
+                product_id:this.props.match.params.id,
                 status: 0
             })
             .then(function (response) {
+                console.log(response)
              if(response.status === 200){
               this.closeModal();
               this.getBidData();
+
              }
             }.bind(this))
             .catch(function (error) {

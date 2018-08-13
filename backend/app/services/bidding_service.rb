@@ -16,7 +16,7 @@ class BiddingService
 			bids.each_with_index do |bid1, index2|
 				if (bid.from_date..bid.to_date).overlaps?(bid1.from_date..bid1.to_date) && index1 != index2
 					unless removed_dates.include? bid1.id
-						temp_dates.push(bid1.id) 
+						temp_dates.push(bid1.id)
 						temp_best_bids.push( 1000 * (bid1.markup.to_f / 100) * bid1.days )
 					end
 				end
@@ -37,7 +37,7 @@ class BiddingService
 		remaining_dates = bid_ids - removed_dates
 		count = 0
 		(1..30).each do |d|
-			remaining_dates.each do |date|	
+			remaining_dates.each do |date|
 				unless d > bids.find(date).from_date.strftime("%d").to_i && d < bids.find(date).to_date.strftime("%d").to_i
 					count+=1
 				end
@@ -77,8 +77,8 @@ class BiddingService
 
 	def self.total_bid_count(params)
 		month = {}
-		params[:pid] = 1
-		if params[:pid]
+		id = params[:pid] 
+		if (id)
 			dates = Bidding.where('from_date >= ? and to_date <= ? and product_id = ?', Date.today.beginning_of_month - 1.month, Date.today.beginning_of_month + 4.month, params[:pid]).order("from_date ASC")
 		else
 			dates = Bidding.where('from_date >= ? and to_date <= ? ', Date.today.beginning_of_month - 1.month, Date.today.beginning_of_month + 4.month).order("from_date ASC")
@@ -87,22 +87,22 @@ class BiddingService
 		count = {}
 
 		dates.each do |date|
-			unless temp.include? date.from_date.strftime("%m").to_i  
-				temp << date.from_date.strftime("%m").to_i 
+			unless temp.include? date.from_date.strftime("%m").to_i
+				temp << date.from_date.strftime("%m").to_i
 				count = {}
-			end				
+			end
 
 			(1..31).each do |d|
 				if date.from_date.strftime("%d").to_i <= d and date.to_date.strftime("%d").to_i >= d
 					count[d] = count[d].to_i + 1
-				end					
-				
+				end
+
 			end
 			month[date.from_date.strftime("%m").to_i] = count
 		end
-		
+
 		data = []
-		
+
 		month.each do |key, value|
 			value.each do |key1, value1|
 				temp_data = {}
@@ -139,7 +139,7 @@ class BiddingService
 		dates = Bidding.where('user_id = ? and product_id = ?', uid, pid).order("from_date ASC")
 		dates.each do |date|
 			temp_data = {}
-			temp_data["start"] = date.from_date 
+			temp_data["start"] = date.from_date
 			temp_data["end"] = date.to_date
 			if date.status == 0
 				temp_data["hexColor"] = 'E3D309' #Not approved
@@ -165,7 +165,7 @@ class BiddingService
 		dates = Bidding.where('product_id = ?', pid).order("from_date ASC")
 		dates.each do |date|
 			temp_data = {}
-			temp_data["start"] = date.from_date 
+			temp_data["start"] = date.from_date
 			temp_data["end"] = date.to_date
 			if date.status == 0
 				temp_data["hexColor"] = 'E3D309' #Not approved
@@ -191,9 +191,9 @@ class BiddingService
 		pid = params[:pid]
 		details = []
 		biddings = Bidding.where("from_date <= ? and to_date >= ? and product_id = ?", date, date, pid)
-	
+
 		to_date = (Bidding.first.from_date + (Bidding.first.days).days).strftime("%d/%m/%Y")
-		
+
 		biddings.each_with_index do |d, index|
 			temp = {}
 			temp["id"] = d.id
@@ -212,8 +212,8 @@ class BiddingService
 			else
 				temp["status"] = "Rejected"
 			end
-								
-			temp["profit"] =  (1000 * (d.markup.to_f / 100) * d.days) 
+
+			temp["profit"] =  (1000 * (d.markup.to_f / 100) * d.days)
 			details << temp
 		end
 		return details
@@ -228,7 +228,7 @@ class BiddingService
 		days = params[:days]
 
 		status = Bidding.find(id).update(:status => 1)
-		
+
 		status_count = Bidding.where("product_id = ? and user_id = ? and status = ? and (from_date >= ? or from_date <= ?) ", product_id, user_id, 1, from_date, to_date).count
 
 		if status_count == days
@@ -237,7 +237,7 @@ class BiddingService
 			end
 		end
 
-		
+
 		if status
 			return true
 		else
