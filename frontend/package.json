@@ -7,6 +7,7 @@
     "@material-ui/icons": "^2.0.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
+    "material-colors": "^1.2.6",
     "moment": "^2.22.2",
     "randomcolor": "^0.5.3",
     "react": "^16.4.2",
