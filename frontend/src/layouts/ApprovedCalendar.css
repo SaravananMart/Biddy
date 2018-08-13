@@ -16,6 +16,12 @@
 .rbc-day-bg{
 	align-items: center;
 }
+
+.rbc-show-more{
+	font-size: 0px;
+}
+
+
 /*
 h4{
 	margin-left: 30px;

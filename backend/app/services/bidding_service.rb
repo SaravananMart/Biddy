@@ -102,18 +102,29 @@ class BiddingService
 		end
 		
 		data = []
+		
 		month.each do |key, value|
 			value.each do |key1, value1|
 				temp_data = {}
 				temp_data["start"] = Date.new(2018, key, key1) #date
 				dates.each do |date|
-					if temp_data["start"] >= date.from_date and temp_data["start"] <= date.to_date and params[:uid]
-						temp_data["hexColor"] = 'F65926' #red
-					else
-						temp_data["hexColor"] = '79D207' #green
+					if temp_data["start"] >= date.from_date and temp_data["start"] <= date.to_date
+						if date.status == 0
+							temp_data["hexColor"] = 'E3D309' #yellow
+						else
+							temp_data["hexColor"] = '79D207' #green
+						end
+						temp_data["status"] = date.status
 					end
 				end
 				temp_data["title"] = value1 #count
+				if value1 >= 1
+					if Bidding.where("from_date = ? and status >= ?", temp_data["start"], 1).count > 0
+						temp_data["hexColor"] = '79D207'
+					end
+				end
+
+
 				data << temp_data
 			end
 		end
@@ -180,11 +191,14 @@ class BiddingService
 		pid = params[:pid]
 		details = []
 		biddings = Bidding.where("from_date <= ? and to_date >= ? and product_id = ?", date, date, pid)
-		biddings.each do |d|
+	
+		to_date = (Bidding.first.from_date + (Bidding.first.days).days).strftime("%d/%m/%Y")
+		
+		biddings.each_with_index do |d, index|
 			temp = {}
 			temp["id"] = d.id
 			temp["from_date"] = d.from_date.strftime("%d/%m/%Y")
-			temp["to_date"] = (d.to_date + d.days.days).strftime("%d/%m/%Y")
+			temp["to_date"] = to_date
 			temp["days"] = d.days
     	temp["markup"] = d.markup
 			temp["product_id"] = d.product_id
@@ -198,8 +212,7 @@ class BiddingService
 			else
 				temp["status"] = "Rejected"
 			end
-				
-				
+								
 			temp["profit"] =  (1000 * (d.markup.to_f / 100) * d.days) 
 			details << temp
 		end
@@ -207,24 +220,29 @@ class BiddingService
 	end
 
 	def self.approve_bid_dates(params)
-		# id = params[:id]
-		# user_id = params[:user_id]
-		# product_id = params[:product_id]
-		# from_date = Date.parse(params[:from_date])
-		# to_date = Date.parse(params[:to_date])
-		# status = Bidding.find(id).update(:status => 1)
-		
-		# status_count = Bidding.where("product_id = ? and user_id = ? and status = ? and from_date <= ? and to_date >= ?", product_id, user_id, 1, from_date, to_date).count
+		id = params[:id]
+		user_id = params[:user_id]
+		product_id = params[:product_id]
+		from_date = Date.parse(params[:from_date])
+		to_date = Date.parse(params[:to_date])
+		days = params[:days]
 
-				#if count == days change all status to 2 -> approved 
-				# (1..days).each do |d|
-				# 	Bidding.where("product_id = ? and user_id = ? and status = ? and from_date <= ? and to_date >= ?", product_id, user_id, 1, from_date, to_date).update(:status => 2)
-				# end
-		# if status
-		# 	return true
-		# else
-		# 	return false
-		# end
+		status = Bidding.find(id).update(:status => 1)
+		
+		status_count = Bidding.where("product_id = ? and user_id = ? and status = ? and (from_date >= ? or from_date <= ?) ", product_id, user_id, 1, from_date, to_date).count
+
+		if status_count == days
+			(1..days).each do |d|
+				Bidding.where("product_id = ? and user_id = ? and status = ? and (from_date >= ? or from_date <= ?)", product_id, user_id, 1, from_date, to_date).update(:status => 2)
+			end
+		end
+
+		
+		if status
+			return true
+		else
+			return false
+		end
 	end
 
 

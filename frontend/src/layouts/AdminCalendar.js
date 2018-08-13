@@ -46,7 +46,8 @@ class AdminCalendar extends Component{
       axios.get(url, {
           headers:{ Authorization: localStorage.getItem('token') }
         })
-        .then(function (response) {      
+        .then(function (response) { 
+        console.log(response.data)     
           if(date == 0){
           var arr = response.data  
             for (var i=0;i<arr.length;i++){
@@ -66,19 +67,24 @@ class AdminCalendar extends Component{
     }
 
     approveBid = (e) =>{
-      console.log(this.state.list[e])
-      // axios.post('http://localhost:3000/', {
-      //     id: e
-      // })
-      // .then(function (response) {
-      //  if(response.status === 200){
-      //   this.closeModal();
-      //   this.getBidData();
-      //  }
-      // }.bind(this))
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
+      console.log(e)
+      axios.post('http://localhost:3000/biddings/approve_bid', {
+          id: this.state.list[e].id,
+          user_id: this.state.list[e].user_id,
+          product_id: this.state.list[e].product_id,
+          from_date: this.state.list[e].from_date,
+          to_date: this.state.list[e].to_date,
+          days: this.state.list[e].days
+      })
+      .then(function (response) {
+       if(response.status === 200){
+        this.closeModal();
+        this.getBidData(0);
+       }
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error);
+      });
     }
 
     handleLogout = (e)=>{
@@ -121,8 +127,7 @@ class AdminCalendar extends Component{
                 <Grid item xs={2} style={{marginTop:30,marginLeft:10}}>
                     <SideBar/>
                 </Grid>
-                <Grid item xs={9} style={{marginLeft:80,marginTop:30,paddingLeft:0}}>
-                
+                <Grid item xs={9} style={{marginLeft:80,marginTop:30,paddingLeft:0}}>                
                   <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -162,7 +167,7 @@ class AdminCalendar extends Component{
                               <td>{vendor.profit}</td>
                               <th>{vendor.status}</th>
                               <td>
-                                <Approve outline color="success" onClick={this.approveBid(index)} >Approve</Approve>
+                                <Approve outline color="success" onClick={() => this.approveBid(index)} >Approve</Approve>
                               </td>
                             </tr>   
                             )

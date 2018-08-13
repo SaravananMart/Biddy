@@ -97,31 +97,33 @@ class ApprovedCalendar extends Component{
         return(
             <div>
               <Header handleClick={this.handleLogout}/>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal">
-                  {this.renderBidForm()}
-                </Modal>
                 <Grid container>
-                  <SideBar/>
-                  <Grid item xs={10}>
-                    <BigCalendar
-                      style={{ height: "80vh" }}
-                      events={this.state.event}
-                      eventPropGetter={(this.eventStyleGetter)}
-                      defaultView={BigCalendar.Views.MONTH}
-                      scrollToTime={new Date(1970, 1, 1, 6)}
-                      defaultDate={new Date()}
-                      onSelectEvent={event => this.setFormData(event.title)}
-                      onSelectSlot={slotInfo => {
-                          this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
-                        }
-                      }
-                    />
+                  <Grid item xs={2} style={{marginTop:30,marginLeft:10}}>
+                    <SideBar/>
                   </Grid>
+                    <Grid item xs={9} style={{marginLeft:80,marginTop:30,paddingLeft:0}}>
+                      <Modal
+                        isOpen={this.state.modalIsOpen}
+                        onAfterOpen={this.afterOpenModal}
+                        onRequestClose={this.closeModal}
+                        style={customStyles}
+                        contentLabel="Example Modal">
+                          {this.renderBidForm()}
+                      </Modal>
+                      <BigCalendar
+                        style={{ height: "80vh" }}
+                        events={this.state.event}
+                        eventPropGetter={(this.eventStyleGetter)}
+                        defaultView={BigCalendar.Views.MONTH}
+                        scrollToTime={new Date(1970, 1, 1, 6)}
+                        defaultDate={new Date()}
+                        onSelectEvent={event => this.setFormData(event.title)}
+                        onSelectSlot={slotInfo => {
+                            this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
+                          }
+                        }
+                      />
+                    </Grid>
                 </Grid>
             </div>
         )
