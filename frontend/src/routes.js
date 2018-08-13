@@ -11,7 +11,7 @@ class RouterClass extends Component {
               <Route path='/products' component={ProductListPage}/>
               <Route path='/calendar' component={Calendar}/>
               <Route path='/bestbids' component={BestBidsPage}/>
-              <Route path='/admin' component={AdminCalendar}/>
+              <Route path='/admin/:id' component={AdminCalendar}/>
               <Route path='/approved' component={ApprovedCalendar}/>
             </div>
           </Router>
