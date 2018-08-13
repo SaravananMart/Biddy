@@ -24,7 +24,7 @@ function FormRow(props) {
                 (list)?(list.map((l,index)=>
                     <Grid item xs={4} key={index}>
                         {
-                            (localStorage.getItem('user_type'==='VENDOR'))?
+                            (localStorage.getItem('user_type')==='VENDOR')?
                             (<ProductCard product={l} key={l.id}/>):(<ProductCardAdmin product={l} key={l.id}/>)
                         }
                     </Grid>
