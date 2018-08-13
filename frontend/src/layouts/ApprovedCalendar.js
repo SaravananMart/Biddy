@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import BigCalendar from 'react-big-calendar';
+import Header from './Header'
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { Button,TextField,Typography} from '@material-ui/core'
-import Close from '@material-ui/icons/Close';
+import SideBar from './SideBar'
 import Modal from 'react-modal';
 import axios from "axios/index";
+import BigCalendar from 'react-big-calendar';
+import Close from '@material-ui/icons/Close';
+import { Button,TextField,Typography, Grid} from '@material-ui/core'
 
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './ApprovedCalendar.css'
 
 BigCalendar.momentLocalizer(moment);
@@ -94,6 +96,7 @@ class ApprovedCalendar extends Component{
     render(){
         return(
             <div>
+              <Header handleClick={this.handleLogout}/>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -102,19 +105,24 @@ class ApprovedCalendar extends Component{
                     contentLabel="Example Modal">
                   {this.renderBidForm()}
                 </Modal>
-                <BigCalendar
-                  style={{ height: "80vh" }}
-                  events={this.state.event}
-                  eventPropGetter={(this.eventStyleGetter)}
-                  defaultView={BigCalendar.Views.MONTH}
-                  scrollToTime={new Date(1970, 1, 1, 6)}
-                  defaultDate={new Date()}
-                  onSelectEvent={event => this.setFormData(event.title)}
-                  onSelectSlot={slotInfo => {
-                      this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
-                    }
-                  }
-                />
+                <Grid container>
+                  <SideBar/>
+                  <Grid item xs={10}>
+                    <BigCalendar
+                      style={{ height: "80vh" }}
+                      events={this.state.event}
+                      eventPropGetter={(this.eventStyleGetter)}
+                      defaultView={BigCalendar.Views.MONTH}
+                      scrollToTime={new Date(1970, 1, 1, 6)}
+                      defaultDate={new Date()}
+                      onSelectEvent={event => this.setFormData(event.title)}
+                      onSelectSlot={slotInfo => {
+                          this.setFormData(slotInfo.start.toLocaleString(),slotInfo.end.toLocaleString())
+                        }
+                      }
+                    />
+                  </Grid>
+                </Grid>
             </div>
         )
     }

@@ -1,6 +1,5 @@
 class BiddingService
 
-
 	def self.get_free_bid_dates(params)
 		bid_values = []
 		remaining_dates = []
@@ -132,42 +131,101 @@ class BiddingService
 			temp_data["start"] = date.from_date 
 			temp_data["end"] = date.to_date
 			if date.status == 0
-				temp_data["hexColor"] = 'DE0101' #rejected
-				temp_data["title"] = 'R'
+				temp_data["hexColor"] = 'E3D309' #Not approved
+				temp_data["title"] = 'NA'
 			elsif date.status == 1
 				temp_data["hexColor"] = 'FF7000' #partially approved
-				temp_data["title"] = 'P'
+				temp_data["title"] = 'PA'
 			elsif date.status == 2
 				temp_data["hexColor"] = '227C00' #approved
 				temp_data["title"] = 'A'
+			else
+				temp_data["hexColor"] = 'F1140D' #rejected
+				temp_data["title"] = 'R'
 			end
 			data << temp_data
 		end
 		return data
 	end
 
-	def self.approve_bid_dates
-		bid_id = 9
-		user_id = 2
-		bidding = ''
-		dates = ['2018-08-07', '2018-08-08', '2018-08-09']
-		bid_details = Bidding.find_by(:id => bid_id)
+	def self.get_all_bid_dates(params)
+		pid = params[:pid]
+		data = []
+		dates = Bidding.where('product_id = ?', pid).order("from_date ASC")
 		dates.each do |date|
-			bidding =	Bidding.create(:from_date => date, :to_date => date, :days => bid_details.days, :markup => bid_details.markup, :user_id => user_id, :product_id => bid_details.product_id, :status => 1)
+			temp_data = {}
+			temp_data["start"] = date.from_date 
+			temp_data["end"] = date.to_date
+			if date.status == 0
+				temp_data["hexColor"] = 'E3D309' #Not approved
+				temp_data["title"] = 'NA'
+			elsif date.status == 1
+				temp_data["hexColor"] = 'FF7000' #partially approved
+				temp_data["title"] = 'PA'
+			elsif date.status == 2
+				temp_data["hexColor"] = '227C00' #approved
+				temp_data["title"] = 'A'
+			else
+				temp_data["hexColor"] = 'F1140D' #rejected
+				temp_data["title"] = 'R'
+			end
+			data << temp_data
 		end
-		
-		if bidding and Bidding.delete(65)
-			return true
-		else
-			return false
-		end
-
+		return data
 	end
 
-	def self.get_bid_details_for_date
-		date = "2018-9-21"
-		details = Bidding.where("from_date <= ? and to_date >= ?", date, date).to_json(:include => {:product => {}, :user => {} })
+
+	def self.get_bid_details_for_date(params)
+		date = Date.parse(params[:date])
+		pid = params[:pid]
+		details = []
+		biddings = Bidding.where("from_date <= ? and to_date >= ? and product_id = ?", date, date, pid)
+		biddings.each do |d|
+			temp = {}
+			temp["id"] = d.id
+			temp["from_date"] = d.from_date.strftime("%d/%m/%Y")
+			temp["to_date"] = (d.to_date + d.days.days).strftime("%d/%m/%Y")
+			temp["days"] = d.days
+    	temp["markup"] = d.markup
+			temp["product_id"] = d.product_id
+			temp["user_id"] = d.user_id
+			if d.status == 0
+				temp["status"] = "Not approved"
+			elsif d.status == 1
+				temp["status"] = "Partially approved"
+			elsif d.status == 2
+				temp["status"] = "Approved"
+			else
+				temp["status"] = "Rejected"
+			end
+				
+				
+			temp["profit"] =  (1000 * (d.markup.to_f / 100) * d.days) 
+			details << temp
+		end
 		return details
 	end
+
+	def self.approve_bid_dates(params)
+		# id = params[:id]
+		# user_id = params[:user_id]
+		# product_id = params[:product_id]
+		# from_date = Date.parse(params[:from_date])
+		# to_date = Date.parse(params[:to_date])
+		# status = Bidding.find(id).update(:status => 1)
+		
+		# status_count = Bidding.where("product_id = ? and user_id = ? and status = ? and from_date <= ? and to_date >= ?", product_id, user_id, 1, from_date, to_date).count
+
+				#if count == days change all status to 2 -> approved 
+				# (1..days).each do |d|
+				# 	Bidding.where("product_id = ? and user_id = ? and status = ? and from_date <= ? and to_date >= ?", product_id, user_id, 1, from_date, to_date).update(:status => 2)
+				# end
+		# if status
+		# 	return true
+		# else
+		# 	return false
+		# end
+	end
+
 
 end
