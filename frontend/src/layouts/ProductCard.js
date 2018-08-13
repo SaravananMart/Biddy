@@ -43,16 +43,6 @@ const VendorButtonLink = ({id}) =>   {
         )}/>
     )
 }
-const AdminButtonLink = ({id}) => {
-    return(
-        <Route render={({history})=> (
-            <Button  size="small" color="secondary" variant={'contained'}
-                     onClick = {()=>{history.push(`/admin/${id}`)}}
-            > Bid Status</Button>
-        )}/>
-    )
-}
-
 function ProductCard(props) {
     const { classes,product } = props;
     return (
@@ -72,10 +62,8 @@ function ProductCard(props) {
                 </CardContent>
                 <div className={'centerBottomMargin'}>
                 <CardActions>
-                    {(localStorage.getItem('user_type')==='VENDOR')?
-                        (<div><VendorButtonLink id={product.product.id}/>
-                            <ApprovedButtonLink id={product.product.id}/></div>):(<AdminButtonLink id={product.product.id}/>)
-                    }
+                    <VendorButtonLink id={product.product.id}/>
+                    <ApprovedButtonLink id={product.product.id}/>
                 </CardActions>
                 </div>
             </Card>
