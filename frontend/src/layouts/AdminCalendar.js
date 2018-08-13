@@ -8,7 +8,7 @@ import axios from "axios/index";
 import { Button,TextField,Grid, Typography} from '@material-ui/core'
 import SideBar from './SideBar'
 import { Table, Button as Approve } from 'reactstrap';
-
+import { Redirect } from 'react-router-dom'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './Calendar.css'
 
@@ -27,15 +27,16 @@ class AdminCalendar extends Component{
               }
           ],
           list: [],
-          modalIsOpen:false,        
-          date:'',         
+          modalIsOpen:false,
+          date:'',
+          redirect:false
       }
     }
 
     componentDidMount(){
       this.getBidData(0);
     }
-    
+
     getBidData = (date) =>{
       var url = '';
       if(date != 0){
@@ -46,10 +47,10 @@ class AdminCalendar extends Component{
       axios.get(url, {
           headers:{ Authorization: localStorage.getItem('token') }
         })
-        .then(function (response) { 
-        console.log(response.data)     
+        .then(function (response) {
+        console.log(response.data)
           if(date == 0){
-          var arr = response.data  
+          var arr = response.data
             for (var i=0;i<arr.length;i++){
               arr[i].start = new Date(arr[i].start)
               arr[i].end = new Date(arr[i].start)
@@ -112,14 +113,21 @@ class AdminCalendar extends Component{
     closeModal = () => {
         this.setState({modalIsOpen: false})
     }
-    
+
     handleFormFieldChange =(e)=>{
         let state= this.state
         state[e.target.name]=e.target.value
         this.setState(state)
     }
+    handleLogout = (e)=>{
+        e.preventDefault()
+        localStorage.removeItem('token')
+        this.setState({redirect:true})
+    }
 
     render(){
+        const { redirect} = this.state
+        if(!redirect){
         return(
             <div>
               <Header handleClick={this.handleLogout}/>
@@ -127,7 +135,7 @@ class AdminCalendar extends Component{
                 <Grid item xs={2} style={{marginTop:30,marginLeft:10}}>
                     <SideBar/>
                 </Grid>
-                <Grid item xs={9} style={{marginLeft:80,marginTop:30,paddingLeft:0}}>                
+                <Grid item xs={9} style={{marginLeft:80,marginTop:30,paddingLeft:0}}>
                   <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -156,7 +164,7 @@ class AdminCalendar extends Component{
                           </thead>
                           <tbody>
                           {
-                            this.state.list.map((vendor, index) => 
+                            this.state.list.map((vendor, index) =>
                             <tr key={index}>
                               <th scope="row">{index + 1}</th>
                               <td>{vendor.id}</td>
@@ -169,7 +177,7 @@ class AdminCalendar extends Component{
                               <td>
                                 <Approve outline color="success" onClick={() => this.approveBid(index)} >Approve</Approve>
                               </td>
-                            </tr>   
+                            </tr>
                             )
                           }
                           </tbody>
@@ -195,6 +203,10 @@ class AdminCalendar extends Component{
               </Grid>
             </div>
          )
+        }
+        if(redirect){
+            return <Redirect to={'/'}/>
+        }
     }
 
 }

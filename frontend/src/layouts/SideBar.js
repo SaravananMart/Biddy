@@ -17,13 +17,14 @@ class SideBar extends React.Component {
                 <Nav id='products'>
                   <NavText>Products</NavText>
                 </Nav>
-                <Nav id='calendar'>
-                  <NavText>Calendar</NavText>
-                </Nav>
-                <Nav id='admin/0'>
-                  <NavText>Admin</NavText>
-                </Nav>
-                <Nav id='approved'>
+                {/*<Nav id='calendar'>*/}
+                  {/*<NavText>Calendar</NavText>*/}
+                {/*</Nav>*/}
+                  {(localStorage.getItem('user_type')!=='VENDOR') &&
+                  <Nav id='admin/0'>
+                    <NavText>Admin</NavText>
+                  </Nav>}
+                <Nav id='approved/0'>
                   <NavText>Approved</NavText>
                 </Nav>
               </SideNav>

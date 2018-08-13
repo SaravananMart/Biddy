@@ -9,9 +9,9 @@ class RouterClass extends Component {
             <div>
               <Route exact path = '/' component={Login}/>
               <Route path='/products' component={ProductListPage}/>
-              <Route path='/calendar' component={Calendar}/>
+              <Route path='/calendar/:id' component={Calendar}/>
               <Route path='/admin/:id' component={AdminCalendar}/>
-              <Route path='/approved' component={ApprovedCalendar}/>
+              <Route path='/approved/:id' component={ApprovedCalendar}/>
             </div>
           </Router>
         )

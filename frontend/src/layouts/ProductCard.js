@@ -25,15 +25,36 @@ const styles = {
     }
 };
 
-const ButtonLink = ({id}) =>   {
+const ApprovedButtonLink = ({id}) =>   {
+    return (
+        <Route render={({history})=> (
+            <Button size="small" color="secondary" variant={'contained'}
+                    onClick = {()=>{history.push(`/approved/${id}`)}}
+            >Status</Button>
+        )}/>
+    )
+}
+const VendorButtonLink = ({id}) =>   {
     return (
         <Route render={({history})=> (
             <Button size="small" color="secondary" variant={'contained'} style={{marginRight:15}}
-            onClick = {()=>{history.push(`/admin/${id}`)}}
+            onClick = {()=>{history.push(`/calendar/${id}`)}}
             >Bid</Button>
         )}/>
     )
 }
+const AdminButtonLink = ({id}) => {
+    return(
+        <Route render={({history})=> (
+            <Button  size="small" color="secondary" variant={'contained'}
+                     onClick = {()=>{history.push(`/admin/${id}`)}}
+            > Bid Status</Button>
+        )}/>
+    )
+}
+
+
+
 
 function ProductCard(props) {
     const { classes,product } = props;
@@ -54,10 +75,10 @@ function ProductCard(props) {
                 </CardContent>
                 <div className={'centerBottomMargin'}>
                 <CardActions>
-                    <ButtonLink id={product.id}/>
-                    <Button size="small" color="secondary" variant={'contained'}>
-                        Status
-                    </Button>
+                    {(localStorage.getItem('user_type')==='VENDOR')?
+                        (<div><VendorButtonLink id={product.id}/>
+                            <ApprovedButtonLink id={product.id}/></div>):(<AdminButtonLink id={product.id}/>)
+                    }
                 </CardActions>
                 </div>
             </Card>

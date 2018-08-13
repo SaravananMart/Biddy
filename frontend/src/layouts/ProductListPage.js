@@ -12,22 +12,26 @@ import SideBar from './SideBar'
 import NestedGrid from './NestedGrid'
 
 class ProductListPage extends Component{
+
+    getProducts(){
+        axios.get(`http://localhost:3000/products`,
+            {
+                headers:{
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            .then(function (response) {
+                console.log(response.data)
+                this.setState({list: response.data.products, count: response.data.count });
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
   componentDidMount(){
       if(localStorage.getItem('token')!==null){
           this.setState({redirect:false})
-          axios.get(`http://localhost:3000/products`,
-              {
-                  headers:{
-                      Authorization: localStorage.getItem('token')
-                  }
-              })
-              .then(function (response) {
-                  // console.log(response.data)
-                  this.setState({list: response.data.products, count: response.data.count });
-              }.bind(this))
-              .catch(function (error) {
-                  console.log(error);
-              })
+          this.getProducts()
       }
       if(localStorage.getItem('token')===null) {
           this.setState({redirect:true})
@@ -58,33 +62,6 @@ class ProductListPage extends Component{
     }
   }
 
-  handleChange = (e) => {
-    console.log(e.target)
-    e.preventDefault()
-        this.setState({
-        searchValue: e.target.value,
-      });
-      if(this.state.searchValue.length < 2){
-          axios.get(`http://localhost:3000/products`,
-              {
-                  headers:{
-                      Authorization: localStorage.getItem('token')
-                  }
-              })
-              .then(function (response) {
-                  console.log(response.data)
-                  this.setState({list: response.data.products, count: response.data.count });
-              }.bind(this))
-              .catch(function (error) {
-                  console.log(error);
-              })
-      }
-      else {
-          this.getProduct()
-      }
-
-    }
-
     handleChangeAdd = (e) => {
       e.preventDefault()
       this.setState({
@@ -107,49 +84,10 @@ class ProductListPage extends Component{
         });
     }
 
-    getProduct(){
-        axios.get(`http://localhost:3000/products?q=${this.state.searchValue}`,
-            {
-                headers:{
-                    Authorization: localStorage.getItem('token')
-                }
-            })
-            .then(function (response) {
-                console.log(response.data)
-                this.setState({list: response.data.products, count: response.data.count });
-            }.bind(this))
-            .catch(function (error) {
-                console.log(error);
-            })
-  }
-
-
   handleLogout = (e)=>{
     e.preventDefault()
     localStorage.removeItem('token')
     this.setState({redirect:true})
-    }
-
-    openModal = (n)=> {
-      if(n ==="add_item") {
-        this.setState({addItemModel: true, modalIsOpen: true});
-      }
-      else {
-        this.setState({modalIsOpen: true, product:n})
-      }
-    }
-
-    afterOpenModal = () => { }
-
-    closeModal = () => {
-        this.setState({modalIsOpen: false});
-        this.setState({addItemModel: false});
-        this.setState({discount:''})
-    }
-    handleFormFieldChange =(e)=>{
-        let state= this.state.fields
-        state[e.target.name]=e.target.value
-        this.setState(state)
     }
 
     renderAddItemForm = () =>(

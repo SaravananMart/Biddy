@@ -7,6 +7,7 @@ import axios from "axios/index";
 import BigCalendar from 'react-big-calendar';
 import Close from '@material-ui/icons/Close';
 import { Button,TextField,Typography, Grid} from '@material-ui/core'
+import { Redirect} from 'react-router-dom'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './ApprovedCalendar.css'
@@ -29,7 +30,8 @@ class ApprovedCalendar extends Component{
               }
           ],
           modalIsOpen:false,
-          status: ''
+          status: '',
+          redirect:false
       }
     }
 
@@ -92,8 +94,15 @@ class ApprovedCalendar extends Component{
         (event == 'R') ? event = "Rejected" : (event == 'P') ? event = "Partially Approved" : event = "Approved"
         this.setState({modalIsOpen:true, status:event})
     }
+    handleLogout = (e)=>{
+        e.preventDefault()
+        localStorage.removeItem('token')
+        this.setState({redirect:true})
+    }
 
     render(){
+        const { redirect} = this.state
+        if(!redirect){
         return(
             <div>
               <Header handleClick={this.handleLogout}/>
@@ -127,6 +136,10 @@ class ApprovedCalendar extends Component{
                 </Grid>
             </div>
         )
+        }
+        if(redirect){
+            return <Redirect to={'/'}/>
+        }
     }
 }
 
