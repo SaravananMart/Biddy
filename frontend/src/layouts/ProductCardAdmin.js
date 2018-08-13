@@ -38,7 +38,7 @@ const VendorButtonLink = ({id}) =>   {
     return (
         <Route render={({history})=> (
             <Button size="small" color="secondary" variant={'contained'} style={{marginRight:15}}
-            onClick = {()=>{history.push(`/calendar/${id}`)}}
+                    onClick = {()=>{history.push(`/calendar/${id}`)}}
             >Bid</Button>
         )}/>
     )
@@ -53,7 +53,7 @@ const AdminButtonLink = ({id}) => {
     )
 }
 
-function ProductCard(props) {
+function ProductCardAdmin(props){
     const { classes,product } = props;
     return (
         <div>
@@ -61,26 +61,25 @@ function ProductCard(props) {
                 <CardMedia
                     className={classes.media}
                     image={image}
-                    title={product.product.name}
+                    title={product.name}
                 />
                 <CardContent>
                     <Typography variant="title" >
                         <div className={'center'}>
-                        {product.product.name.toUpperCase()}
+                            {product.name.toUpperCase()}
                         </div>
                     </Typography>
                 </CardContent>
                 <div className={'centerBottomMargin'}>
-                <CardActions>
-                    {(localStorage.getItem('user_type')==='VENDOR')?
-                        (<div><VendorButtonLink id={product.product.id}/>
-                            <ApprovedButtonLink id={product.product.id}/></div>):(<AdminButtonLink id={product.product.id}/>)
-                    }
-                </CardActions>
+                    <CardActions>
+                        {(localStorage.getItem('user_type')==='VENDOR')?
+                            (<div><VendorButtonLink id={product.id}/>
+                                <ApprovedButtonLink id={product.id}/></div>):(<AdminButtonLink id={product.id}/>)
+                        }
+                    </CardActions>
                 </div>
             </Card>
         </div>
     );
 }
-
-export default withStyles(styles)(ProductCard);
+export default withStyles(styles)(ProductCardAdmin);

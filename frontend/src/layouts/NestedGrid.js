@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ProductCard from './ProductCard'
-
+import ProductCardAdmin from './ProductCardAdmin'
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -23,7 +23,10 @@ function FormRow(props) {
             {
                 (list)?(list.map((l,index)=>
                     <Grid item xs={4} key={index}>
-                        <ProductCard product={l} key={l.id}/>
+                        {
+                            (localStorage.getItem('user_type'==='VENDOR'))?
+                            (<ProductCard product={l} key={l.id}/>):(<ProductCardAdmin product={l} key={l.id}/>)
+                        }
                     </Grid>
                 )):(<div>loading</div>)
             }
@@ -47,6 +50,7 @@ function chunkArray(myArray, chunk_size){
 }
 function NestedGrid(props) {
     const { classes,list } = props;
+
     var result = chunkArray(list, 3)
 
     return (

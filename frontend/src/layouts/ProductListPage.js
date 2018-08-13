@@ -28,10 +28,30 @@ class ProductListPage extends Component{
                 console.log(error);
             })
     }
+    getVendorProducts(){
+        axios.get(`http://localhost:3000//user_products/products?uid=${localStorage.getItem('user_id')}`,
+            {
+                headers:{
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            .then(function (response) {
+                console.log(response.data)
+                this.setState({list: response.data.products, count: response.data.count });
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
   componentDidMount(){
       if(localStorage.getItem('token')!==null){
           this.setState({redirect:false})
-          this.getProducts()
+          if(localStorage.getItem('user_type')==='VENDOR'){
+              this.getVendorProducts()
+          }
+          else {
+              this.getProducts()
+          }
       }
       if(localStorage.getItem('token')===null) {
           this.setState({redirect:true})
@@ -90,35 +110,6 @@ class ProductListPage extends Component{
     this.setState({redirect:true})
     }
 
-    renderAddItemForm = () =>(
-        <form>
-            <Button variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
-                <Close />
-            </Button>
-            <p></p>
-            <TextField name='searchValue' label={'Enter Product Name'} onChange={(e)=>this.handleChangeAdd(e)} /><br/><br/>
-             <p></p>
-             <div className='center'>
-                <Button color='primary' variant="contained" onClick={(e)=>this.addItem(e)} >Add</Button>
-            </div>
-        </form>
-    )
-    handleValidation() {
-        let fields = this.state.fields;
-        let errors = {};
-        let formIsValid = true;
-
-        if (!fields["discount"]) {
-            formIsValid = false;
-            errors["discount"] = "Discount is required!";
-        }
-        if(fields['discount'] < 1 || fields['discount'] > 99){
-            formIsValid = false
-            errors['discount'] = 'Discount greater than 1 and Less than 100'
-        }
-        this.setState({errors:errors})
-        return formIsValid
-    }
     render(){
       const { redirect,list} = this.state
     if(!redirect){
