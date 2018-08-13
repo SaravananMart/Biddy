@@ -52,6 +52,8 @@ class Calendar extends Component{
           for (var i=0;i<arr.length;i++){
               arr[i].start = new Date(arr[i].start)
               arr[i].end = new Date(arr[i].start)
+              // arr[i].hexColor = '79D207'
+              // arr[i].hexColor = "E3D309"
           }
           console.log(arr)
           this.setState({event: arr});
