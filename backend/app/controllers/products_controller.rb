@@ -1,31 +1,35 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :update, :destroy]
+  # before_action :authenticate_request!
 
-  # GET /products
-  # GET /products.json
+  before_action :set_product, only: [:show, :update, :destroy]
+  
   def index
     @products = Product.all
   end
 
-  # GET /products/1
-  # GET /products/1.json
+  
   def show
   end
 
-  # POST /products
-  # POST /products.json
+  def search
+    search_key = params[:q]
+    count = BiddingService.get_bid_count(nil)
+    products = Product.where("name LIKE '%#{search_key}%'")
+    render json: {"products" => products, "count" => count}
+  end
+  
   def create
     @product = Product.new(product_params)
-
+    status = ''
     if @product.save
-      render :show, status: :created, location: @product
+      status = "true"
     else
-      render json: @product.errors, status: :unprocessable_entity
+      status = "false"
     end
+    render json: status
   end
 
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
+  
   def update
     if @product.update(product_params)
       render :show, status: :ok, location: @product
@@ -34,20 +38,19 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1
-  # DELETE /products/1.json
+  
   def destroy
     @product.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:name)
-    end
+  
+  def product_params
+    params.require(:product).permit(:name)
+  end
 end

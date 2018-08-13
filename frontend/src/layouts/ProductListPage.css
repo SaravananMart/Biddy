@@ -37,20 +37,17 @@
     position: relative;
 }
 
-.searchBar{
-  width: 200px;
-  height: 100%;
-}
 
-input[type="text"] {
-  height: 40px;
-  font-size: 25px;
-  font-weight: 100;
-  color: #555;
-  padding: 3px;
-  background: none;
-  transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
-}
+
+/*input[type="text"] {*/
+  /*height: 40px;*/
+  /*font-size: 25px;*/
+  /*font-weight: 100;*/
+  /*color: #555;*/
+  /*padding: 3px;*/
+  /*background: none;*/
+  /*transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);*/
+/*}*/
 
 
 /*

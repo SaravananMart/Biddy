@@ -1,0 +1,7 @@
+# Ignore all logfiles and tempfiles.
+backend/log/*
+backend/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+/config/database.yml

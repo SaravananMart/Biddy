@@ -33,3 +33,36 @@
   transform: translateX(-50%) translateY(-50%);
   /*border: 1px solid black;*/
 }
+
+.background{
+  display: flex;
+  min-height: 100vh;
+  background: url(https://source.unsplash.com/random/1600x900);
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.centerMargin{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+.center{
+  display: flex;
+  justify-content: center;
+}
+.centerBottomMargin{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.content{
+  margin-top: 20px;
+  margin-left:10px;
+  margin-right:10px;
+}
+div.rbc-row-content{
+  z-index:0
+}

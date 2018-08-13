@@ -1,106 +1,138 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Collapse} from 'reactstrap';
-import logo from '../images/myntra-logo.png';
 
+import { Redirect } from 'react-router-dom'
+import { Button,TextField,Grid} from '@material-ui/core'
+import Close from '@material-ui/icons/Close';
 import  './ProductListPage.css';
+import Header from './Header'
+import moment from 'moment'
+import 'react-datepicker/dist/react-datepicker.css';
+import SideBar from './SideBar'
+import NestedGrid from './NestedGrid'
 
 class ProductListPage extends Component{
+
+    getProducts(){
+        axios.get(`http://localhost:3000/products`,
+            {
+                headers:{
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            .then(function (response) {
+                console.log(response.data)
+                this.setState({list: response.data.products, count: response.data.count });
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+    getVendorProducts(){
+        axios.get(`http://localhost:3000//user_products/products?uid=${localStorage.getItem('user_id')}`,
+            {
+                headers:{
+                    Authorization: localStorage.getItem('token')
+                }
+            })
+            .then(function (response) {
+                console.log(response.data)
+                this.setState({list: response.data.products, count: response.data.count });
+            }.bind(this))
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+  componentDidMount(){
+      if(localStorage.getItem('token')!==null){
+          this.setState({redirect:false})
+          if(localStorage.getItem('user_type')==='VENDOR'){
+              this.getVendorProducts()
+          }
+          else {
+              this.getProducts()
+          }
+      }
+      if(localStorage.getItem('token')===null) {
+          this.setState({redirect:true})
+      }
+  }
   constructor () {
     super()
     this.state = {
-      collapse: false,
-      collapsed: true,
-      searchValue: '',
-      list: []
+        collapse: false,
+        searchValue: '',
+        list: [],
+        count: [],
+        redirect:false,
+        auth: true,
+        anchorEl: null,
+        modalIsOpen: false,
+        fields:{
+            discount:'',
+            startDate:moment(),
+            endDate:moment().add(1, 'days')
+        },
+        product:'',
+        errors:{},
+        addItemModel: false,
+        itemName: '',
+        nights:1,
+        color:''
     }
   }
 
-  getMovieNames = (e) => {
-    if ((this.state.searchValue.length) - 1) {
-      this.setState({ collapse: true });
-      axios.get('https://api.themoviedb.org/3/search/movie', {
-        params: {
-          api_key:'52ee9d5c12f1a8dba9590b47ffe68904',
-          language:'en-US',
-          query:e,
-          page: 1,
-          include_adult:false
-        }
-      })
-      .then(function (response) {
-        this.setState({list: response.data.results});
-      }.bind(this))
-      .catch(function (error) {
-        console.log(error);
-      })
-      .then(function () {
+    handleChangeAdd = (e) => {
+      e.preventDefault()
+      this.setState({
+        itemName: e.target.value,
       });
-    }
-    else
-    {
-      this.setState({ collapse: false });
-    }
-  }
 
-  handleSearch = (e) => {
-    this.setState({ searchValue: e.target.value });
-    this.state.searchValue.length <=2 ? this.setState({ collapse: false }) : this.setState({ collapse: true });
-    if(this.state.searchValue.length >= 2)
-    {
-      this.getMovieNames(this.state.searchValue);
-    }
-  }
-
-  closeSuggest = (e) => {
-    this.setState({ collapse: false });
-  }
-
-  handleClick = (e) => {
-        this.setState({
-        searchValue: e.currentTarget.dataset.id,
-        collapse: false
-      });
     }
 
-   toggleNavbar = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
+    addItem = (e) => {
+      axios.post('http://localhost:3000/products', {
+          name: this.state.itemName,
+        })
+        .then(function (response) {
+         if(response.status === 200){
+          this.closeModal();
+         }
+        }.bind(this))
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
 
+  handleLogout = (e)=>{
+    e.preventDefault()
+    localStorage.removeItem('token')
+    this.setState({redirect:true})
+    }
 
-  render(){
-    return(
-      <div className="container" >
-        <img src={logo} style={image} alt={'logo'}/>
-      <div className="form-group">
-        <input id="search_submit" type="text" className="form-control" placeholder="Search products..." style={searchBar} onChange={this.handleSearch}  onBlur={this.closeSuggest} value={this.state.searchValue} />
-        <Collapse isOpen={this.state.collapse} >
-        <ul className="suggestions">
-        {
-          this.state.list.slice(0, 10).map((movie, index) =>
-              <li  key={index} className="list" onClick={this.handleClick} data-id={movie.title} >
-                {movie.title}
-              </li>
-          )
-        }
-        </ul>
-        </Collapse>
-        </div>
-      </div>
+    render(){
+      const { redirect,list} = this.state
+    if(!redirect){
+        return(
+            <div>
+                <Header handleClick={this.handleLogout}/>
+                    <Grid container>
+                        <Grid item xs={2} style={{marginTop:30,marginLeft:10}}>
+                            <SideBar/>
+                        </Grid>
+                        <Grid item xs={9} style={{marginLeft:80,marginTop:30}}>
+                        <NestedGrid list={list}/>
+                        </Grid>
+                    </Grid>
+            </div>
+
       );
+    }
+    if(this.state.redirect){
+        return <Redirect to={'/'}/>
+      }
   }
-}
 
-const searchBar ={
-  'width' : '400px'
 }
-
-const image = {
-  'height' : '100px',
-  'width' : '150px'
-}
-
 
 export default ProductListPage;
