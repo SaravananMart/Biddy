@@ -5,7 +5,7 @@ import Close from '@material-ui/icons/Close';
 import Modal from 'react-modal';
 import Header from './Header'
 import axios from "axios/index";
-import { Button,TextField,Grid, Typography} from '@material-ui/core'
+import { Button,Grid} from '@material-ui/core'
 import SideBar from './SideBar'
 import { Table, Button as Approve } from 'reactstrap';
 import { Redirect } from 'react-router-dom'
@@ -38,11 +38,12 @@ class AdminCalendar extends Component{
     }
 
     getBidData = (date) =>{
+        console.log(this.props.match.params.id)
       var url = '';
       if(date != 0){
-        url = `http://localhost:3000/biddings/bid_details?date=${date}&pid=${1}`;
+        url = `http://localhost:3000/biddings/bid_details?date=${date}&pid=${this.props.match.params.id}`;
       }else{
-        url = `http://localhost:3000/biddings/total_bid?pid=${1}`;
+        url = `http://localhost:3000/biddings/total_bid?pid=${this.props.match.params.id}`;
       }
       axios.get(url, {
           headers:{ Authorization: localStorage.getItem('token') }

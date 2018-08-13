@@ -40,7 +40,8 @@ class Calendar extends Component{
     }
 
     getBidData = (e) =>{
-      axios.get(`http://localhost:3000/biddings/total_bid?pid=1`,
+        // console.log(this.props.match.params.id)
+      axios.get(`http://localhost:3000/biddings/total_bid?pid=${this.props.match.params.id}`,
         {
           headers:{
               Authorization: localStorage.getItem('token')
