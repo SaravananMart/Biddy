@@ -23,7 +23,7 @@ class SideBar extends React.Component {
                 <Nav id='bestbids'>
                   <NavText>Best Bids</NavText>
                 </Nav>
-                <Nav id='admin'>
+                <Nav id='admin/0'>
                   <NavText>Admin</NavText>
                 </Nav>
                 <Nav id='approved'>
