@@ -37,7 +37,7 @@ class ApprovedCalendar extends Component{
       axios.get(`http://localhost:3000/biddings/approved_dates?uid=1&pid=1`,
         {
           headers:{
-              Authorization: localStorage.getItem('token')  
+              Authorization: localStorage.getItem('token')
           }
         })
         .then(function (response) {
@@ -79,15 +79,15 @@ class ApprovedCalendar extends Component{
           <Button style={customStyles.buttonStyle} variant="fab" mini color="secondary" aria-label="Add"  onClick={()=>this.closeModal()}>
               <Close />
           </Button>
-          
+
             <p></p>
             <div style={{textAlign: 'center'}}>
               <h4>{this.state.status}</h4>
             </div>
-          </div>       
+          </div>
     )
-  
-  
+
+
     setFormData = (event) =>{
         (event == 'R') ? event = "Rejected" : (event == 'P') ? event = "Partially Approved" : event = "Approved"
         this.setState({modalIsOpen:true, status:event})
@@ -106,8 +106,10 @@ class ApprovedCalendar extends Component{
                   {this.renderBidForm()}
                 </Modal>
                 <Grid container>
-                  <SideBar/>
-                  <Grid item xs={10}>
+                    <Grid item xs={2} style={{marginTop:30,marginLeft:10}}>
+                        <SideBar/>
+                    </Grid>
+                    <Grid item xs={9} style={{marginLeft:80,marginTop:30,paddingLeft:0}}>
                     <BigCalendar
                       style={{ height: "80vh" }}
                       events={this.state.event}

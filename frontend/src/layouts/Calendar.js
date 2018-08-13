@@ -173,8 +173,10 @@ class Calendar extends Component{
                     </Modal>
 
                     <Grid container>
+                        <Grid item xs={2} style={{marginTop:30,marginLeft:10}}>
                         <SideBar/>
-                        <Grid item xs={10}>
+                        </Grid>
+                        <Grid item xs={9} style={{marginLeft:80,marginTop:30,paddingLeft:0}}>
                             <BigCalendar
                                 style={{height: "80vh"}}
                                 selectable
