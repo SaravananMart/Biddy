@@ -190,32 +190,34 @@ class BiddingService
 		date = Date.parse(params[:date])
 		pid = params[:pid]
 		details = []
-		biddings = Bidding.where("from_date <= ? and to_date >= ? and product_id = ?", date, date, pid)
+		biddings = Bidding.where("from_date <= ? and to_date >= ? and product_id = ?", date, date, pid).to_json(:include => {:user => {:only => :name}})
 
 		to_date = (Bidding.first.from_date + (Bidding.first.days).days).strftime("%d/%m/%Y")
-
-		biddings.each_with_index do |d, index|
+		JSON.parse(biddings).each_with_index do |d, index|
 			temp = {}
-			temp["id"] = d.id
-			temp["from_date"] = d.from_date.strftime("%d/%m/%Y")
-			temp["to_date"] = to_date
-			temp["days"] = d.days
-    	temp["markup"] = d.markup
-			temp["product_id"] = d.product_id
-			temp["user_id"] = d.user_id
-			if d.status == 0
+			temp["id"] = d['id']
+			from_date = d['from_date']
+			temp["from_date"] = Date.parse(from_date).strftime("%d/%m/%Y")
+			temp["to_date"] = (Date.parse(to_date) - 1.days).strftime("%d/%m/%Y")
+			temp["days"] = d['days']
+    		temp["markup"] = d['markup']
+			temp["product_id"] = d['product_id']
+			temp["user_id"] = d['user_id']
+			temp["name"] = d["user"]["name"]
+			if d['status'] == 0
 				temp["status"] = "Not approved"
-			elsif d.status == 1
+			elsif d['status'] == 1
 				temp["status"] = "Partially approved"
-			elsif d.status == 2
+			elsif d['status'] == 2
 				temp["status"] = "Approved"
 			else
 				temp["status"] = "Rejected"
 			end
 
-			temp["profit"] =  (1000 * (d.markup.to_f / 100) * d.days)
+			temp["profit"] =  (1000 * (d['markup'].to_f / 100) * 1)
 			details << temp
 		end
+		
 		return details
 	end
 
