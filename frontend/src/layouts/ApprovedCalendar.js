@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 import axios from "axios/index";
 import BigCalendar from 'react-big-calendar';
 import Close from '@material-ui/icons/Close';
-import { Button,TextField,Typography, Grid} from '@material-ui/core'
+import { Button,Grid} from '@material-ui/core'
 import { Redirect} from 'react-router-dom'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
@@ -36,7 +36,8 @@ class ApprovedCalendar extends Component{
     }
 
     getBidData = (e) =>{
-      axios.get(`http://localhost:3000/biddings/approved_dates?uid=1&pid=1`,
+        console.log(this.props.match.params.id)
+        axios.get(`http://localhost:3000/biddings/approved_dates?uid=${localStorage.getItem('user_id')}&pid=${this.props.match.params.id}`,
         {
           headers:{
               Authorization: localStorage.getItem('token')

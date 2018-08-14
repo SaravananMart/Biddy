@@ -11,7 +11,7 @@ import { Table, Button as Approve } from 'reactstrap';
 import { Redirect } from 'react-router-dom'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './Calendar.css'
-
+import CustomTable from './CustomTable'
 BigCalendar.momentLocalizer(moment);
 Modal.setAppElement('#root')
 
@@ -29,7 +29,8 @@ class AdminCalendar extends Component{
           list: [],
           modalIsOpen:false,
           date:'',
-          redirect:false
+          redirect:false,
+          index:''
       }
     }
 
@@ -125,6 +126,18 @@ class AdminCalendar extends Component{
         localStorage.removeItem('token')
         this.setState({redirect:true})
     }
+    checkStatus = ()=>{
+        const { list } = this.state
+        let bool = true
+        let index
+        for (var i = 0;i <list.length;i++){
+            var listStatus = list[i]
+            if(listStatus['status']==='Approved' || listStatus['status']==='Partially approved'){
+                bool = false
+            }
+        }
+        return bool
+    }
 
     render(){
         const { redirect} = this.state
@@ -149,40 +162,7 @@ class AdminCalendar extends Component{
                         </Button>
                         <p></p>
                         <div>
-                         <Table hover>
-                          <thead>
-                            <tr>
-                              <th>Id</th>
-                              <th>Bidder</th>
-                              <th>Markup</th>
-                              <th>From</th>
-                              <th>To</th>
-                              <th>Days</th>
-                              <th>Profit</th>
-                              <th>Status</th>
-                              <th>Approve</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          {
-                            this.state.list.map((vendor, index) =>
-                            <tr key={index}>
-                              <th scope="row">{index + 1}</th>
-                              <td>{vendor.id}</td>
-                              <td>{vendor.markup}</td>
-                              <td>{vendor.from_date}</td>
-                              <td>{vendor.to_date}</td>
-                              <td>{vendor.days}</td>
-                              <td>{vendor.profit}</td>
-                              <th>{vendor.status}</th>
-                              <td>
-                                <Approve outline color="success" onClick={() => this.approveBid(index)} >Approve</Approve>
-                              </td>
-                            </tr>
-                            )
-                          }
-                          </tbody>
-                        </Table>
+                            <CustomTable list={this.state.list} checkStatus = {this.checkStatus} approveBid={this.approveBid}/>
                         </div>
                       </div>
                   </Modal>
@@ -221,7 +201,7 @@ const customStyles = {
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         height: '500px', // <-- This sets the height
-        width:'700px',
+        width:'1200px',
         borderRadius: '15px',
     },
     buttonStyle: {

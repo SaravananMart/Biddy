@@ -66,3 +66,17 @@
 div.rbc-row-content{
   z-index:0
 }
+th.MuiTableCell-numeric-229 {
+  text-align: left;
+  flex-direction: row-reverse;
+}
+
+td.MuiTableCell-numeric-229
+{
+  text-align: left;
+  flex-direction: row-reverse;
+}
+td.MuiTableCell-numeric-319 {
+  text-align: left;
+  flex-direction: row-reverse;
+}
