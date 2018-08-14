@@ -42,7 +42,7 @@ function ProductCardAdmin(props){
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.media}
-                    image={image}
+                    image={product.image_url}
                     title={product.name}
                 />
                 <CardContent>

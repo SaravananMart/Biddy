@@ -191,18 +191,20 @@ class BiddingService
 		details = []
 		biddings = Bidding.where("from_date <= ? and to_date >= ? and product_id = ?", date, date, pid).to_json(:include => {:user => {:only => :name}})
 
-		to_date = (Bidding.first.from_date + (Bidding.first.days).days).strftime("%d/%m/%Y")
 		JSON.parse(biddings).each_with_index do |d, index|
 			temp = {}
 			temp["id"] = d['id']
 			from_date = d['from_date']
+			to_date = d['to']
 			temp["from_date"] = Date.parse(from_date).strftime("%d/%m/%Y")
-			temp["to_date"] = (Date.parse(to_date) - 1.days).strftime("%d/%m/%Y")
+			temp["to_date"] = Date.parse(to_date).strftime("%d/%m/%Y")
 			temp["days"] = d['days']
     		temp["markup"] = d['markup']
 			temp["product_id"] = d['product_id']
 			temp["user_id"] = d['user_id']
 			temp["name"] = d["user"]["name"]
+			temp["from"] = Date.parse(d['from']).strftime("%d/%m/%Y")
+			temp["to"] = Date.parse(d['to']).strftime("%d/%m/%Y")
 			if d['status'] == 0
 				temp["status"] = "Not approved"
 			elsif d['status'] == 1
@@ -224,18 +226,21 @@ class BiddingService
 		id = params[:id]
 		user_id = params[:user_id]
 		product_id = params[:product_id]
-		from_date = Date.parse(params[:from_date])
-		to_date = Date.parse(params[:to_date])
+		from_date = params[:from_date]
+		to_date = params[:to_date]
 		days = params[:days]
-
+		from = params[:from]
+		to = params[:to]
 		status = Bidding.find(id).update(:status => 1)
 
-		status_count = Bidding.where("product_id = ? and user_id = ? and status = ? and (from_date >= ? or from_date <= ?) ", product_id, user_id, 1, from_date, to_date).count
+
+		status_count = Bidding.where(:product_id => product_id, :user_id =>user_id, :status => status, :from => from, :to => to).count
 
 		if status_count == days
-			(1..days).each do |d|
-				Bidding.where("product_id = ? and user_id = ? and status = ? and (from_date >= ? or from_date <= ?)", product_id, user_id, 1, from_date, to_date).update(:status => 2)
-			end
+			# (1..days).each do |d|
+			# 	Bidding.where("product_id = ? and user_id = ? and status = ? and from >= ? and to <= ?", product_id, user_id, 1, Time.parse(params[:from_date].to_date.to_s).utc.to_s, Time.parse(params[:to_date].to_date.to_s).utc.to_s).update(:status => 2)
+			# end
+			Bidding.where(:product_id => product_id, :user_id =>user_id, :status => 1, :from => from, :to => to).update(:status => 2)
 		end
 
 

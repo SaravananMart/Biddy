@@ -50,7 +50,7 @@ function ProductCard(props) {
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.media}
-                    image={image}
+                    image={product.product.image_url}
                     title={product.product.name}
                 />
                 <CardContent>

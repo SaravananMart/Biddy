@@ -77,6 +77,8 @@ class AdminCalendar extends Component{
           product_id: this.state.list[e].product_id,
           from_date: this.state.list[e].from_date,
           to_date: this.state.list[e].to_date,
+          from: this.state.list[e].from,
+          to: this.state.list[e].to,
           days: this.state.list[e].days
       })
       .then(function (response) {

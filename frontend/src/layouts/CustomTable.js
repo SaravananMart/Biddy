@@ -55,6 +55,7 @@ function CustomizedTable(props) {
                 <TableHead>
                     <TableRow>
                         <CustomTableCell>Id</CustomTableCell>
+                        <CustomTableCell>Name</CustomTableCell>
                         <CustomTableCell numeric>Markup</CustomTableCell>
                         <CustomTableCell>From</CustomTableCell>
                         <CustomTableCell>To</CustomTableCell>
@@ -73,6 +74,7 @@ function CustomizedTable(props) {
                                 <CustomTableCell component="th" scope="row">
                                     {l.id}
                                 </CustomTableCell>
+                                <CustomTableCell numeric>{l.name}</CustomTableCell>
                                 <CustomTableCell numeric>{l.markup}</CustomTableCell>
                                 <CustomTableCell numeric>{l.from_date}</CustomTableCell>
                                 <CustomTableCell numeric>{l.to_date}</CustomTableCell>
@@ -81,7 +83,6 @@ function CustomizedTable(props) {
                                 <CustomTableCell numeric>{l.status}</CustomTableCell>
                                 {checkStatus()&&<CustomTableCell ><Button outline color="primary" onClick={() => approveBid(index)} >Approve</Button>
                                 </CustomTableCell>}
-
 
                             </TableRow>
                         );

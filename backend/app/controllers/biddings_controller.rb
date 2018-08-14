@@ -45,7 +45,7 @@ class BiddingsController < ApplicationController
     days = ((Date.parse(bidding_params[:to_date]).mjd - (Date.parse(bidding_params[:from_date])).mjd)).to_i + 1
     date = Date.parse(bidding_params[:from_date])
     (1..days).each do |d|
-      @bidding = Bidding.new(:from_date => date, :to_date => date, :days => days, :markup => bidding_params[:markup], :user_id => bidding_params[:user_id], :product_id => bidding_params[:product_id], :status => 0)
+      @bidding = Bidding.new(:from_date => date, :to_date => date, :days => days, :markup => bidding_params[:markup], :user_id => bidding_params[:user_id], :product_id => bidding_params[:product_id], :status => 0, :from => bidding_params[:from_date], :to => bidding_params[:to_date])
        date = date + 1.days
       if @bidding.save
         count = count + 1
