@@ -7,7 +7,9 @@ import Close from '@material-ui/icons/Close';
 import Modal from 'react-modal';
 import axios from "axios/index";
 import Header from './Header'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 // import './Calendar.css'
@@ -31,7 +33,10 @@ class Calendar extends Component{
           startDate:'',
           endDate:'',
           discount:'',
-          redirect:false
+          redirect:false,
+          open: false,
+          vertical: 'top',
+          horizontal: 'center',
       }
     }
 
@@ -129,7 +134,8 @@ class Calendar extends Component{
              if(response.status === 200){
               this.closeModal();
               this.getBidData();
-
+              this.setState({open: true})
+              this.handleClick({ vertical: 'top', horizontal: 'right' })
              }
             }.bind(this))
             .catch(function (error) {
@@ -137,12 +143,22 @@ class Calendar extends Component{
             });
           }
     }
+
+     handleClick = state => () => {
+        this.setState({ open: true, ...state });
+      };
+
+      handleClose = () => {
+        this.setState({ open: false });
+      };
+
+
     setFormData = (start,end) =>{
         this.setState({startDate:start,endDate:end},()=>this.setState({modalIsOpen:true}))
     }
 
      renderBidForm = () =>(
-        <form>
+        <form onSubmit={(e)=>this.handleBid(e)}>
             <Button style={customStyles.buttonStyle} variant="fab" mini color="secondary" aria-label="Add" onClick={()=>this.closeModal()}>
                 <Close />
             </Button>
@@ -164,6 +180,7 @@ class Calendar extends Component{
 
     render(){
         const { redirect } = this.state
+        const { vertical, horizontal, open } = this.state;
         if(!redirect) {
             return (
                 <div>
@@ -172,6 +189,16 @@ class Calendar extends Component{
                       <Grid item xs={2} style={{marginTop:30,marginLeft:10}}>
                         <SideBar/>
                       </Grid>
+                        
+                        <Snackbar
+                          anchorOrigin={{ vertical, horizontal }}
+                          open={open}
+                          onClose={this.handleClose}
+                          ContentProps={{
+                            'aria-describedby': 'message-id',
+                          }}
+                          message={<span id="message-id">Bidded successfully.</span>}
+                        />
                         <Grid item xs={9} style={{marginLeft:80,marginTop:30,paddingLeft:0}}>
                           <Modal
                               isOpen={this.state.modalIsOpen}
