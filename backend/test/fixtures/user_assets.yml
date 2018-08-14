@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  asset_name: MyString
+  count: 1
+  status: 1
+  returned: 1
+  user: one
+
+two:
+  asset_name: MyString
+  count: 1
+  status: 1
+  returned: 1
+  user: two

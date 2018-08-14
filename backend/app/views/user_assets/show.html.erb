@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Asset name:</strong>
+  <%= @user_asset.asset_name %>
+</p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @user_asset.count %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @user_asset.status %>
+</p>
+
+<p>
+  <strong>Returned:</strong>
+  <%= @user_asset.returned %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_asset.user %>
+</p>
+
+<%= link_to 'Edit', edit_user_asset_path(@user_asset) %> |
+<%= link_to 'Back', user_assets_path %>
