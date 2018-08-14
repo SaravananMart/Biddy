@@ -7,7 +7,9 @@ import Close from '@material-ui/icons/Close';
 import Modal from 'react-modal';
 import axios from "axios/index";
 import Header from './Header'
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 // import './Calendar.css'
@@ -142,7 +144,7 @@ class Calendar extends Component{
     }
 
      renderBidForm = () =>(
-        <form>
+        <form onSubmit={(e)=>this.handleBid(e)}>
             <Button style={customStyles.buttonStyle} variant="fab" mini color="secondary" aria-label="Add" onClick={()=>this.closeModal()}>
                 <Close />
             </Button>
